@@ -9,6 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     helix.url = "github:helix-editor/helix";
+    fonts.url = "git+ssh://git@github.com/tobiaskohlbau/fonts-nix";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -17,6 +18,7 @@
       overlays = [
         (final: prev: { helixpkgs = inputs.helix.packages.${prev.system}; })
         (final: prev: { cue = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.cue; })
+        inputs.fonts.overlays.default
       ];
     in
     {

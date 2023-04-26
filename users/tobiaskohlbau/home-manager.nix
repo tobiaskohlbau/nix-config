@@ -1,30 +1,70 @@
 { config, lib, pkgs, ... }:
 
+let
+  isLinux = pkgs.stdenv.isLinux;
+in
 {
   # Homemanager needs this in order to work. Otherwise errors are thrown.
   home.stateVersion = "22.11";
+
+  xdg.enable = true;
 
   home.packages = [
     pkgs.jq
     pkgs.fzf
     pkgs.htop
     pkgs.cue
-  ];
+    pkgs.kubectl
+    pkgs.kube3d
+  ] ++ (lib.optionals isLinux [
+    pkgs.firefox
+    pkgs.rofi
+  ]);
+
+  xdg.configFile."i3/config".text = builtins.readFile ./i3;
 
   programs.fish = {
     enable = true;
 
+    shellAbbrs = {
+      k = "kubectl";
+    };
     plugins = [
       {
-        name = "fzf";
+        name = "fzf.fish";
         src = pkgs.fetchFromGitHub {
-          owner = "jethrokuan";
-          repo = "fzf";
-          rev = "24f4739fc1dffafcc0da3ccfbbd14d9c7d31827a";
-          sha256 = "0kz057nr07ybh0y06ww3p424rgk8pi84pnch9jzb040qqn9a8823";
+          owner = "PatrickF1";
+          repo = "fzf.fish";
+          rev = "63c8f8e65761295da51029c5b6c9e601571837a1";
+          hash = "sha256-i9FcuQdmNlJnMWQp7myF3N0tMD/2I0CaMs/PlD8o1gw=";
         };
       }
     ];
+
+    functions = 
+      {
+        kubectl = {
+          body = ''
+          function kubectl
+            if test "$argv[1]" = "switch";
+              if test -n "$argv[2]";
+                set -g kns_namespace "$argv[2]"
+                return 0	
+              else
+                set -e kns_namespace
+                return 0
+              end
+            end
+
+          	if test -n "$kns_namespace";
+          		command kubectl -n $kns_namespace $argv
+          	else
+          		command kubectl $argv
+          	end
+          end
+          '';
+        };
+      };
   };
 
   programs.git = {
@@ -40,11 +80,92 @@
     };
   };
 
+  programs.tmux = {
+    enable = true;
+    extraConfig = ''
+    #set -g default-terminal "tmux-256color"
+    set -ga terminal-overrides ",xterm-256color*:Tc"
+
+    set -g base-index 1
+    set -g pane-base-index 1
+
+    set -g renumber-windows on
+
+    set -s escape-time 50
+
+    set -g history-limit 10000
+
+    is_hx="ps -o state= -o comm= -t '#{pane_tty}' \
+        | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?(hx)$'"
+    bind-key -n 'C-h' if-shell "$is_hx" 'send-keys Space w h' 'select-pane -L'
+    bind-key -n 'C-j' if-shell "$is_hx" 'send-keys Space w j' 'select-pane -D'
+    bind-key -n 'C-k' if-shell "$is_hx" 'send-keys Space w k' 'select-pane -U'
+    bind-key -n 'C-l' if-shell "$is_hx" 'send-keys Space w l' 'select-pane -R'
+
+    bind-key h select-pane -L
+    bind-key j select-pane -D
+    bind-key k select-pane -U
+    bind-key l select-pane -R
+
+    bind Up resize-pane -U 5
+    bind Down resize-pane -D 5
+    bind Left resize-pane -L 5
+    bind Right resize-pane -R 5
+
+    # Style status bar
+    set -g status-style fg=white,bg=black
+    set -g window-status-current-style fg=green,bg=black
+    set -g pane-active-border-style fg=green,bg=black
+    set -g window-status-format " #I:#W#F "
+    set -g window-status-current-format " #I:#W#F "
+    set -g window-status-current-style bg=green,fg=black
+    set -g window-status-activity-style bg=black,fg=yellow
+    set -g window-status-separator ""
+    set -g status-justify centre
+
+    bind r source-file ~/.tmux.conf
+
+    bind '"' split-window -c "#{pane_current_path}"
+    bind % split-window -h -c "#{pane_current_path}"
+    bind c new-window -c "#{pane_current_path}"
+
+    bind -n C-s \
+      split-window -l 10 'session=$(tmux list-sessions -F "#{session_name}" | fzf --query="$1" --select-1 --exit-0) && tmux switch-client -t "$session"' \;
+
+    # Use vim keybindings in copy mode
+    setw -g mode-keys vi
+    # Setup 'v' to begin selection as in Vim
+    bind-key -T copy-mode-vi v send -X begin-selection
+    # Setup 'y' to copy selection as in Vim
+    # Use reattach-to-user-namespace with pbcopy on OS X
+    # Use xclip on Linux
+    set -g set-clipboard off
+    set -s copy-command 'pbcopy 2> /dev/null'
+    bind-key -T copy-mode-vi y send -X copy-pipe-and-cancel
+
+    # Mousemode
+    # Toggle mouse on with ^B m
+    bind m \
+      set -g mouse on \;\
+      display 'Mouse Mode: ON'
+
+    # Toggle mouse off with ^B M
+    bind M \
+      set -g mouse off \;\
+      display 'Mouse Mode: OFF'
+
+    # Move current window to the left with Ctrl-Shift-Left
+    bind-key -n C-S-Left swap-window -t -1
+    # Move current window to the right with Ctrl-Shift-Right
+    bind-key -n C-S-Right swap-window -t +1
+    '';
+  };
+
   programs.helix = {
     enable = true;
     package = pkgs.helixpkgs.helix;
     settings = {
-      theme = "gruvbox_light_hard";
+      theme = "gruvbox_light";
       editor = {
         whitespace = {
           render = "all";
@@ -90,5 +211,22 @@
         };
       };
     };
+  };
+
+  programs.java = {
+    enable = true;
+  };
+
+  programs.go = {
+    enable = true;
+  };
+
+  programs.direnv = {
+    enable = true;
+  };
+
+  programs.kitty = {
+    enable = true;
+    extraConfig = builtins.readFile ./kitty;
   };
 }

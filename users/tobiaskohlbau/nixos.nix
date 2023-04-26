@@ -2,6 +2,7 @@
 
 {
   users.users.tobiaskohlbau = {
+    shell = pkgs.fish;
     isNormalUser = true;
     home = "/home/tobiaskohlbau";
     extraGroups = [ "docker" "wheel" ];

@@ -1,7 +1,7 @@
 set $mod Mod4
 
-font pango:Berkeley Mono Regular 8
-font pango:Berkeley Mono Regular 8
+font pango:Berkeley Mono Regular 6
+font pango:Berkeley Mono Regular 6
 
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork

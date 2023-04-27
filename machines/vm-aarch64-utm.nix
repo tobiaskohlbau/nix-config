@@ -63,16 +63,17 @@
     gnumake
   ];
 
-    systemd.user.services.spice-agent = { 
+  systemd.user.services.spice-agent = {
     enable = true;
-    wantedBy = ["graphical-session.target"]; 
-    serviceConfig = { ExecStart = "${pkgs.spice-vdagent}/bin/spice-vdagent -x"; }; 
-    unitConfig = { ConditionVirtualization = "vm"; 
-        Description = "Spice guest session agent"; 
-        After = ["graphical-session-pre.target"];
-        PartOf = ["graphical-session.target"];
-    }; 
-};
+    wantedBy = [ "graphical-session.target" ];
+    serviceConfig = { ExecStart = "${pkgs.spice-vdagent}/bin/spice-vdagent -x"; };
+    unitConfig = {
+      ConditionVirtualization = "vm";
+      Description = "Spice guest session agent";
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+  };
 
 
   nixpkgs.config.allowUnfree = true;

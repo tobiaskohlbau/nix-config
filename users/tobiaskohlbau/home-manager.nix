@@ -49,6 +49,14 @@ in
 
     functions =
       {
+        jdt-language-server = {
+          body = ''
+            function jdt-language-server
+              command jdt-language-server -data $HOME/.cache/jdt.ls/data/$PWD > ~/.cache/jdt.ls/ls.log 2>&1
+            end
+          '';
+        };
+
         kubectl = {
           body = ''
             function kubectl
@@ -216,10 +224,18 @@ in
         };
       };
     };
-  };
 
-  programs.java = {
-    enable = true;
+    languages = [{
+      name = "java";
+      language-server = {
+        command = "jdt-language-server";
+      };
+      formatter = {
+        command = "google-java-format";
+        args = ["-"];
+      };
+      auto-format = true;
+    }];
   };
 
   programs.go = {

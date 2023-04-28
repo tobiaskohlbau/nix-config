@@ -13,9 +13,7 @@ in
     pkgs.jq
     pkgs.fzf
     pkgs.htop
-    pkgs.cue
     pkgs.kubectl
-    pkgs.kube3d
   ] ++ (lib.optionals isLinux [
     pkgs.firefox
     pkgs.rofi
@@ -171,7 +169,6 @@ in
 
   programs.helix = {
     enable = true;
-    package = pkgs.helixpkgs.helix;
     settings = {
       theme = "gruvbox_light";
       editor = {

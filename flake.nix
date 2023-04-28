@@ -16,8 +16,7 @@
     let
       mkVM = import ./lib/mkvm.nix;
       overlays = [
-        (final: prev: { helixpkgs = inputs.helix.packages.${prev.system}; })
-        (final: prev: { cue = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.cue; })
+        (final: prev: { helix = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.helix; })
         inputs.fonts.overlays.default
       ];
     in

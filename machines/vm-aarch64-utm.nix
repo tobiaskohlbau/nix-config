@@ -64,6 +64,7 @@
 
   environment.systemPackages = with pkgs; [
     gnumake
+    xclip
   ];
 
   systemd.user.services.spice-agent = {

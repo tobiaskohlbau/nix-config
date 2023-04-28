@@ -88,10 +88,27 @@ in
     extraConfig = {
       color.ui = true;
       github.user = "tobiaskohlbau";
-      push.default = "tracking";
+      push = {
+        default = "upstream";
+        autoSetupRemote = true;
+      };
       init.defaultBranch = "main";
       core.editor = "hx";
     };
+    includes = [
+      {
+        condition = "gitdir:~/src/github.com/myopenfactory/**/*.git";
+        contents = {
+          user = {
+            email = "t.kohlbau@myopenfactory.com";
+          };
+        };
+      }
+    ];
+  };
+
+  programs.gh = {
+    enable = true;
   };
 
   programs.tmux = {

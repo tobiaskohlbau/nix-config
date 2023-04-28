@@ -6,6 +6,9 @@ MAKEFILE_DIR := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 switch:
 	sudo nixos-rebuild switch --flake ".#vm-aarch64-utm"
 
+test:
+	sudo nixos-rebuild test --flake ".#vm-aarch64-utm"
+
 vm/bootstrap:
 	NIXUSER=root $(MAKE) vm/copy
 	NIXUSER=root $(MAKE) vm/switch

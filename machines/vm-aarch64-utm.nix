@@ -14,6 +14,7 @@
 
   networking.hostName = "dev";
   networking.interfaces.enp0s1.useDHCP = true;
+  networking.nameservers = [ "9.9.9.9" ];
 
   time.timeZone = "Europe/Berlin";
   services.spice-vdagentd.enable = true;

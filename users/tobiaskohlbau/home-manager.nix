@@ -14,6 +14,7 @@ in
     pkgs.fzf
     pkgs.htop
     pkgs.kubectl
+    pkgs.ripgrep
   ] ++ (lib.optionals isLinux [
     pkgs.firefox
     pkgs.rofi
@@ -78,7 +79,53 @@ in
             end
           '';
         };
+
+      cdr = {
+        body = ''
+          function cdr --wraps='cd (git rev-parse --show-toplevel)' --description 'alias cdr=cd (git rev-parse --show-toplevel)'
+            cd (git rev-parse --show-toplevel) $argv;
+          end
+        '';
       };
+
+      f = {
+        body = ''
+          function f
+            set INITIAL_QUERY ""
+            if test -z $argv[1]
+              set RG_PREFIX "rg --column --line-number --no-heading --color=always --smart-case --no-ignore-vcs"
+            else
+              set RG_PREFIX "rg --column --line-number --no-heading --color=always --smart-case -g '$argv[1]' --no-ignore-vcs"
+            end
+            echo $RG_PREFIX
+
+          	FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
+          	fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+                --ansi --disabled --query "$INITIAL_QUERY" \
+                --height=50% --layout=reverse
+          end
+        '';
+      };
+
+      fh = {
+        body = ''
+          function fh
+            set INITIAL_QUERY ""
+            if test -z $argv[1]
+              set RG_PREFIX "rg --column --line-number --no-heading --color=always --smart-case --hidden"
+            else
+              set RG_PREFIX "rg --column --line-number --no-heading --color=always --smart-case -g '$argv[1]' --hidden"
+            end
+            echo $RG_PREFIX
+
+          	FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
+          	fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+                --ansi --disabled --query "$INITIAL_QUERY" \
+                --height=50% --layout=reverse
+          end
+        '';
+      };
+    };
   };
 
   programs.git = {

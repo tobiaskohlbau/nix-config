@@ -2,6 +2,9 @@
 
 let
   isLinux = pkgs.stdenv.isLinux;
+  jdtls = pkgs.writeShellScriptBin "jdtls" ''
+    jdt-language-server -data $HOME/.cache/jdt.ls/data$(pwd)
+  '';
 in
 {
   # Homemanager needs this in order to work. Otherwise errors are thrown.
@@ -18,6 +21,7 @@ in
     pkgs.kubelogin
     pkgs.ripgrep
     pkgs.xcwd
+    jdtls
   ] ++ (lib.optionals isLinux [
     pkgs.firefox
     pkgs.rofi
@@ -291,9 +295,6 @@ in
 
     languages = [{
       name = "java";
-      language-server = {
-        command = "jdt-language-server";
-      };
       formatter = {
         command = "google-java-format";
         args = ["-"];

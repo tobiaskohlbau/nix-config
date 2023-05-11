@@ -58,7 +58,6 @@ in
       {
         kubectl = {
           body = ''
-            function kubectl
               if test "$argv[1]" = "switch";
                 if test -n "$argv[2]";
                   set -g kns_namespace "$argv[2]"
@@ -74,21 +73,18 @@ in
             	else
             		command kubectl $argv
             	end
-            end
           '';
         };
 
       cdr = {
+        wraps = "cd (git rev-parse --show-toplevel)";
         body = ''
-          function cdr --wraps='cd (git rev-parse --show-toplevel)' --description 'alias cdr=cd (git rev-parse --show-toplevel)'
             cd (git rev-parse --show-toplevel) $argv;
-          end
         '';
       };
 
       f = {
         body = ''
-          function f
             set INITIAL_QUERY ""
             if test -z $argv[1]
               set RG_PREFIX "rg --column --line-number --no-heading --color=always --smart-case --no-ignore-vcs"
@@ -101,13 +97,11 @@ in
           	fzf --bind "change:reload:$RG_PREFIX {q} || true" \
                 --ansi --disabled --query "$INITIAL_QUERY" \
                 --height=50% --layout=reverse
-          end
         '';
       };
 
       fh = {
         body = ''
-          function fh
             set INITIAL_QUERY ""
             if test -z $argv[1]
               set RG_PREFIX "rg --column --line-number --no-heading --color=always --smart-case --hidden"
@@ -120,7 +114,6 @@ in
           	fzf --bind "change:reload:$RG_PREFIX {q} || true" \
                 --ansi --disabled --query "$INITIAL_QUERY" \
                 --height=50% --layout=reverse
-          end
         '';
       };
     };

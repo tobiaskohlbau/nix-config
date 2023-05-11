@@ -12,6 +12,7 @@ in
   home.packages = [
     pkgs.jq
     pkgs.fzf
+    pkgs.fd
     pkgs.htop
     pkgs.kubectl
     pkgs.kubelogin
@@ -27,6 +28,13 @@ in
   home.file.".npmrc".text = ''
     prefix = ''${HOME}/.npm;
   '';
+
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "gruvbox-light";
+    };
+  };
 
   programs.fish = {
     enable = true;
@@ -54,8 +62,12 @@ in
       }
     ];
 
-    functions =
-      {
+    functions = {
+        fish_user_key_bindings = {
+          body = ''
+            bind \e\cB f;
+          '';
+        };
         kubectl = {
           body = ''
               if test "$argv[1]" = "switch";
@@ -86,17 +98,14 @@ in
       f = {
         body = ''
             set INITIAL_QUERY ""
-            if test -z $argv[1]
-              set RG_PREFIX "rg --column --line-number --no-heading --color=always --smart-case --no-ignore-vcs"
-            else
-              set RG_PREFIX "rg --column --line-number --no-heading --color=always --smart-case -g '$argv[1]' --no-ignore-vcs"
-            end
-            echo $RG_PREFIX
+            set RG_PREFIX "rg --line-number --no-heading --color=always --smart-case --no-ignore-vcs"
 
-          	FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
-          	fzf --bind "change:reload:$RG_PREFIX {q} || true" \
-                --ansi --disabled --query "$INITIAL_QUERY" \
-                --height=50% --layout=reverse
+            FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
+            fzf --delimiter=":" --nth=2.. --bind "change:reload:$RG_PREFIX {q} || true" \
+                --ansi --query "$INITIAL_QUERY" \
+                --no-sort --preview-window 'down:40%:+{2}' \
+                --preview 'bat --style=numbers --color=always --highlight-line {2} {1}'
+
         '';
       };
 

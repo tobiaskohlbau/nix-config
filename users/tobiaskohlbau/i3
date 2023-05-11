@@ -3,6 +3,10 @@ set $mod Mod4
 font pango:Berkeley Mono Regular 6
 font pango:Berkeley Mono Regular 6
 
+new_window pixel 2
+new_float pixel 2
+focus_follows_mouse no
+
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet

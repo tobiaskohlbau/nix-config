@@ -16,8 +16,8 @@ tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $mod+Return exec kitty -d $(xcwd 2>/dev/null || echo $HOME)
-bindsym $mod+d split h
-bindsym $mod+Shift+d split v
+bindsym $mod+h split h
+bindsym $mod+v split v
 
 # kill focused window
 bindsym $mod+q kill

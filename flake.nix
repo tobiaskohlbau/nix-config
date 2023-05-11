@@ -16,7 +16,7 @@
     let
       mkVM = import ./lib/mkvm.nix;
       overlays = [
-        (final: prev: { helix = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.helix; })
+        (final: prev: { inherit (inputs.helix.packages.${prev.system}) helix; })
         inputs.fonts.overlays.default
       ];
     in

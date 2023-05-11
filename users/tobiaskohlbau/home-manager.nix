@@ -22,6 +22,7 @@ in
     pkgs.ripgrep
     pkgs.xcwd
     jdtls
+    pkgs._1password
   ] ++ (lib.optionals isLinux [
     pkgs.firefox
     pkgs.rofi
@@ -70,6 +71,11 @@ in
         fish_user_key_bindings = {
           body = ''
             bind \e\cB f;
+          '';
+        };
+        opunlock = {
+          body = ''
+            eval $(op signin);
           '';
         };
         kubectl = {

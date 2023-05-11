@@ -24,6 +24,10 @@ in
 
   xdg.configFile."i3/config".text = builtins.readFile ./i3;
 
+  home.file.".npmrc".text = ''
+    prefix = ''${HOME}/.npm;
+  '';
+
   programs.fish = {
     enable = true;
 

@@ -306,6 +306,23 @@ in
         args = ["-"];
       };
       auto-format = true;
+      config = {
+        extendedClientCapabilities = {
+          classFileContentsSupport = true;
+        };
+        settings.java = {
+          import = {
+            generatesMetadataFilesAtProjectRoot = true;
+          };
+          "import".gradle = {
+            enabled = true;
+            user.home = "/home/tobiaskohlbau/.gradle";
+            offline.enabled = true;
+          };
+          eclipse.downloadSources = true;
+          configuration.updateBuildConfiguration = "automatic";
+        };
+      };
     }];
   };
 

@@ -30,6 +30,8 @@ in
 
   xdg.configFile."i3/config".text = builtins.readFile ./i3;
 
+  xdg.configFile."gdb/gdbinit".text = builtins.readFile ./gdbinit;
+
   home.file.".npmrc".text = ''
     prefix = ''${HOME}/.npm;
   '';

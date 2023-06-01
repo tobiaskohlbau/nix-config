@@ -54,6 +54,13 @@
   };
 
   fonts = {
+    fontconfig = {
+      antialias = true;
+      subpixel = {
+        rgba = "none";
+        lcdfilter = "none";
+      };
+    };
     fontDir.enable = true;
     fonts = [
       pkgs.fira-code
@@ -65,6 +72,8 @@
     gnumake
     xclip
   ];
+
+  services.xserver.upscaleDefaultCursor = true;
 
   systemd.user.services.spice-agent = {
     enable = true;

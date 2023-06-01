@@ -8,7 +8,7 @@ let
 in
 {
   # Homemanager needs this in order to work. Otherwise errors are thrown.
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.05";
 
   xdg.enable = true;
 
@@ -301,31 +301,36 @@ in
       };
     };
 
-    languages = [{
-      name = "java";
-      formatter = {
-        command = "google-java-format";
-        args = ["-"];
-      };
-      auto-format = true;
-      config = {
-        extendedClientCapabilities = {
-          classFileContentsSupport = true;
-        };
-        settings.java = {
-          import = {
-            generatesMetadataFilesAtProjectRoot = true;
+    languages = {
+      language-server.jdtls = {
+        config = {
+          extendedClientCapabilities = {
+            classFileContentsSupport = true;
           };
-          "import".gradle = {
-            enabled = true;
-            user.home = "/home/tobiaskohlbau/.gradle";
-            offline.enabled = true;
+          settings.java = {
+            import = {
+              generatesMetadataFilesAtProjectRoot = true;
+            };
+            "import".gradle = {
+              enabled = true;
+              user.home = "/home/tobiaskohlbau/.gradle";
+              offline.enabled = true;
+            };
+            eclipse.downloadSources = true;
+            configuration.updateBuildConfiguration = "automatic";
           };
-          eclipse.downloadSources = true;
-          configuration.updateBuildConfiguration = "automatic";
         };
       };
-    }];
+
+      language = [{
+        name = "java";
+        formatter = {
+          command = "google-java-format";
+          args = ["-"];
+        };
+        auto-format = true;
+      }];
+    };
   };
 
   programs.go = {

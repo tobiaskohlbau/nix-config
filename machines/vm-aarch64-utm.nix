@@ -26,14 +26,12 @@
   users.mutableUsers = false;
 
   services.openssh.enable = true;
-  services.openssh.passwordAuthentication = true;
-  services.openssh.permitRootLogin = "no";
+  services.openssh.settings.PasswordAuthentication = true;
+  services.openssh.settings.PermitRootLogin = "no";
 
   networking.firewall.enable = false;
 
-  system.stateVersion = "22.11";
-
-  hardware.video.hidpi.enable = true;
+  system.stateVersion = "23.05";
 
   services.xserver = {
     enable = true;

@@ -24,6 +24,7 @@ in
     jdtls
     pkgs._1password
     pkgs.gotools
+    pkgs.nodejs
   ] ++ (lib.optionals isLinux [
     pkgs.firefox
     pkgs.rofi

@@ -25,6 +25,8 @@ in
     pkgs._1password
     pkgs.gotools
     pkgs.nodejs
+    pkgs.nodePackages.svelte-language-server
+    pkgs.glab
   ] ++ (lib.optionals isLinux [
     pkgs.firefox
     pkgs.rofi

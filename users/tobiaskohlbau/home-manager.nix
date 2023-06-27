@@ -346,4 +346,10 @@ in
     enable = true;
     extraConfig = builtins.readFile ./kitty;
   };
+
+  programs.alacritty = {
+    enable = true;
+  };
+
+  xdg.configFile."alacritty/alacritty.yml".text = builtins.readFile ./alacritty;
 }

@@ -19,7 +19,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec kitty -d $(xcwd 2>/dev/null || echo $HOME)
+bindsym $mod+Return exec alacritty --working-directory $(xcwd)
 bindsym $mod+d split h
 bindsym $mod+Shift+d split v
 

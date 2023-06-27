@@ -23,6 +23,7 @@ in
     pkgs.xcwd
     jdtls
     pkgs._1password
+    pkgs.gotools
   ] ++ (lib.optionals isLinux [
     pkgs.firefox
     pkgs.rofi
@@ -329,6 +330,12 @@ in
           args = ["-"];
         };
         auto-format = true;
+      }
+      {
+        name = "go";
+        formatter = {
+          command = "goimports";
+        };
       }];
     };
   };

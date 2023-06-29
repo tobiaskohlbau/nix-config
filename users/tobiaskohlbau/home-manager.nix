@@ -158,16 +158,6 @@ in
       init.defaultBranch = "main";
       core.editor = "hx";
     };
-    includes = [
-      {
-        condition = "gitdir:~/src/github.com/myopenfactory/**/*.git";
-        contents = {
-          user = {
-            email = "t.kohlbau@myopenfactory.com";
-          };
-        };
-      }
-    ];
   };
 
   programs.gh = {

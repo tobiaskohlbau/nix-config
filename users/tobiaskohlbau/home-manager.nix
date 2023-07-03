@@ -60,6 +60,8 @@ in
 
     shellAbbrs = {
       k = "kubectl";
+      # allow fixing display resolution after vm window resizing
+      fdr = "xrandr --output Virtual-1 --auto";
     };
     plugins = [
       {

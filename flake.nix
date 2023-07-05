@@ -11,6 +11,7 @@
     helix.url = "github:helix-editor/helix";
     fonts.url = "git+ssh://git@github.com/tobiaskohlbau/fonts-nix";
     nix-config-private.url = "git+ssh://git@github.com/tobiaskohlbau/nix-config-private";
+    zig.url = "github:mitchellh/zig-overlay";
   };
 
 
@@ -20,6 +21,7 @@
       overlays = [
         (final: prev: { inherit (inputs.helix.packages.${prev.system}) helix; })
         inputs.fonts.overlays.default
+        inputs.zig.overlays.default
       ];
       nix-config-private = inputs.nix-config-private;
     in

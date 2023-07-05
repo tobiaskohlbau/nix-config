@@ -27,6 +27,9 @@ in
     pkgs.nodejs
     pkgs.nodePackages.svelte-language-server
     pkgs.glab
+    pkgs.vscode
+    pkgs.zigpkgs.master
+    # pkgs.nerdctl
   ] ++ (lib.optionals isLinux [
     pkgs.firefox
     pkgs.rofi
@@ -293,6 +296,10 @@ in
       keys = {
         normal."+" = {
           i = ":toggle-option lsp.display-inlay-hints";
+          h = {
+            g = ":toggle-option file-picker.git-ignore";
+            h = ":toggle-option file-picker.hidden";
+          };
         };
       };
     };

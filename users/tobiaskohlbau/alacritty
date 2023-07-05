@@ -46,7 +46,7 @@ font:
     family: Berkeley Mono
     style: Bold Italic
 
-  size: 14.5
+  size: 16.0
 
 key_bindings:
   - { key: V,   mods: Super, action: Paste }

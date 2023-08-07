@@ -12,31 +12,31 @@ in
 
   xdg.enable = true;
 
-  home.packages = [
-    pkgs.jq
-    pkgs.fzf
-    pkgs.fd
-    pkgs.htop
-    pkgs.kubectl
-    pkgs.kubelogin
-    pkgs.ripgrep
-    pkgs.xcwd
+  home.packages = with pkgs; [
+    jq
+    fzf
+    fd
+    htop
+    kubectl
+    kubelogin
+    ripgrep
+    xcwd
     jdtls
-    pkgs._1password
-    pkgs.gotools
-    pkgs.gopls
-    pkgs.nodejs
-    pkgs.nodePackages.svelte-language-server
-    pkgs.glab
-    pkgs.vscode
-    pkgs.unstable.zig_0_11
-    pkgs.kubelogin
-    pkgs.azure-cli
-    pkgs.delta
-    pkgs.meld
+    _1password
+    gotools
+    gopls
+    nodejs
+    nodePackages.svelte-language-server
+    glab
+    vscode
+    unstable.zig_0_11
+    kubelogin
+    azure-cli
+    delta
+    meld
   ] ++ (lib.optionals isLinux [
-    pkgs.firefox
-    pkgs.rofi
+    firefox
+    rofi
   ]);
 
   xdg.configFile."i3/config".text = builtins.readFile ./i3;

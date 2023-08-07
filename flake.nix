@@ -9,8 +9,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     helix.url = "github:helix-editor/helix";
-    fonts.url = "git+ssh://git@github.com/tobiaskohlbau/fonts-nix";
-    nix-config-private.url = "git+ssh://git@github.com/tobiaskohlbau/nix-config-private";
+    fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
+    nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
     zig.url = "github:mitchellh/zig-overlay";
   };
 
@@ -22,6 +22,11 @@
         (final: prev: { inherit (inputs.helix.packages.${prev.system}) helix; })
         inputs.fonts.overlays.default
         inputs.zig.overlays.default
+        (
+          final: prev: {
+            unstable = import inputs.nixpkgs-unstable { system = final.system; };
+          }
+        )
       ];
       nix-config-private = inputs.nix-config-private;
     in

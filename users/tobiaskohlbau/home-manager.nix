@@ -24,12 +24,16 @@ in
     jdtls
     pkgs._1password
     pkgs.gotools
+    pkgs.gopls
     pkgs.nodejs
     pkgs.nodePackages.svelte-language-server
     pkgs.glab
     pkgs.vscode
-    pkgs.zigpkgs.master
-    # pkgs.nerdctl
+    pkgs.unstable.zig_0_11
+    pkgs.kubelogin
+    pkgs.azure-cli
+    pkgs.delta
+    pkgs.meld
   ] ++ (lib.optionals isLinux [
     pkgs.firefox
     pkgs.rofi
@@ -162,6 +166,13 @@ in
       };
       init.defaultBranch = "main";
       core.editor = "hx";
+      core.pager = "delta";
+      interactive.diffFilter = "delta --color-only";
+      delta.navigate = true;
+      delta.light = true;
+      merge.conflictstyle = "diff3";
+      diff.colorMoved = "default";
+      merge.tool = "meld";
     };
   };
 

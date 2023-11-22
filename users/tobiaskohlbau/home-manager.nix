@@ -26,14 +26,18 @@ in
     gotools
     gopls
     nodejs
-    nodePackages.svelte-language-server
+    unstable.nodePackages.svelte-language-server
+    nodePackages.vscode-langservers-extracted
     glab
     vscode
-    unstable.zig_0_11
+    # unstable.zig
     kubelogin
     azure-cli
     delta
     meld
+    unstable.jetbrains.idea-community
+    unstable.bun
+    unstable.zig
   ] ++ (lib.optionals isLinux [
     firefox
     rofi
@@ -67,8 +71,10 @@ in
 
     shellAbbrs = {
       k = "kubectl";
+      xclip = "xclip -selection c";
       # allow fixing display resolution after vm window resizing
-      fdr = "xrandr --output Virtual-1 --auto";
+      mbscr = "xrandr --output Virtual-1 --auto && xrandr --dpi 220 && i3-msg restart";
+      dtscr = "xrandr --output Virtual-1 --auto && xrandr --dpi 110 && i3-msg restart";
     };
     plugins = [
       {
@@ -174,6 +180,9 @@ in
       diff.colorMoved = "default";
       merge.tool = "meld";
     };
+    aliases = {
+      cleanbr = "! git branch -d `git branch --merged | grep -v '^*\\|main'`";
+    };
   };
 
   programs.gh = {
@@ -260,6 +269,8 @@ in
       bind-key -n C-S-Right swap-window -t +1
     '';
   };
+
+  home.sessionVariables = { EDITOR = "hx"; };
 
   programs.helix = {
     enable = true;
@@ -350,11 +361,20 @@ in
           command = "goimports";
         };
       }];
+      # {
+      #   name = "kotlin";
+      #   formatter = {
+      #     command = "ktlint";
+      #     args = ["-F"];
+      #   };
+      #   indent = { tab-width = 2; unit = "\t"; };
+      # }];
     };
   };
 
   programs.go = {
     enable = true;
+    package = pkgs.unstable.go_1_21;
   };
 
   programs.direnv = {

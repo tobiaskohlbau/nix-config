@@ -51,6 +51,13 @@
     windowManager = {
       i3.enable = true;
     };
+
+    libinput = {
+      enable = true;
+      mouse = {
+        naturalScrolling = true;
+      };
+    };
   };
 
   fonts = {
@@ -73,7 +80,6 @@
     xclip
   ];
 
-  services.xserver.upscaleDefaultCursor = true;
 
   systemd.user.services.spice-agent = {
     enable = true;

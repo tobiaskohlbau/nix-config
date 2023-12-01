@@ -38,6 +38,9 @@ in
     unstable.jetbrains.idea-community
     unstable.bun
     unstable.zig
+    unstable.bazel_6
+    efm-langserver
+    nodePackages.typescript-language-server
   ] ++ (lib.optionals isLinux [
     firefox
     rofi
@@ -327,6 +330,46 @@ in
     };
 
     languages = {
+      language-server.eslint = {
+        command = "vscode-eslint-language-server";
+        args = [ "--stdio"];
+        config = {
+          codeActionsOnSave = { mode = "all"; "source.fixAll.eslint" = true; };
+          format = { enable = true; };
+          nodePath = "";
+          quiet = false;
+          rulesCustomizations = [];
+          run = "onType";
+          validate = "on";
+          experimental = {};
+          problems = { shortenToSingleLine = false; };
+          codeAction = {
+            disableRuleComment = { enable = true; location = "separateLine"; };
+            showDocumentation = { enable = false; };
+          };
+        };
+      };
+      language-server.efm = {
+        command = "efm-langserver";
+        config = {
+          documentFormatting = true;
+          languages = { 
+            typescript = [
+              { 
+                formatCommand ="npx prettier --stdin-filepath \${INPUT}";
+                formatStdin = true;
+              }
+            ];
+          };
+        };
+      };
+      language-server.typescript = {
+        command = "typescript-language-server";
+        args = ["--stdio"];
+        config = {
+          hostInfo = "helix";
+        };
+      };
       language-server.jdtls = {
         config = {
           extendedClientCapabilities = {
@@ -360,6 +403,15 @@ in
         formatter = {
           command = "goimports";
         };
+      }
+      {
+        name = "typescript";
+        auto-format = true;
+        language-servers = [
+          { name = "efm"; only-features = ["format" "diagnostics"]; }
+          { name = "typescript-language-server"; except-features = ["format" "diagnostics"]; }
+          { name = "eslint"; }
+        ];
       }];
       # {
       #   name = "kotlin";

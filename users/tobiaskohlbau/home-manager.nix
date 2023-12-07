@@ -38,7 +38,6 @@ in
     unstable.jetbrains.idea-community
     unstable.bun
     unstable.zig
-    unstable.bazel_6
     efm-langserver
     nodePackages.typescript-language-server
   ] ++ (lib.optionals isLinux [
@@ -92,6 +91,25 @@ in
     ];
 
     functions = {
+        bazel = {
+          body = ''
+            set directory_hash (pwd | sha1sum | head -c 40)
+            docker ps | grep -q "bazel_$directory_hash"
+            if test $status -ne 0;
+              docker run \
+                -v $(pwd):$(pwd) \
+                -v $HOME/.cache/bazel/:/home/tobiaskohlbau/.cache/bazel/ \
+                -v $HOME/.cache/bazelisk:/home/tobiaskohlbau/.cache/bazelisk \
+                -w $(pwd) \
+                --name bazel_$directory_hash \
+                --rm \
+                --privileged \
+                -d \
+                ghcr.io/tobiaskohlbau/bazel:latest
+            end
+            docker exec -it bazel_$directory_hash bazel $argv
+          '';
+        };
         fish_user_key_bindings = {
           body = ''
             bind \e\cB f;

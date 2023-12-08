@@ -40,6 +40,7 @@ in
     unstable.zig
     efm-langserver
     nodePackages.typescript-language-server
+    bazel-buildtools
   ] ++ (lib.optionals isLinux [
     firefox
     rofi
@@ -93,21 +94,35 @@ in
     functions = {
         bazel = {
           body = ''
-            set directory_hash (pwd | sha1sum | head -c 40)
+            set -l cwd (pwd)
+            set -l dir (pwd)
+
+            while not test "$dir" = '/'
+              set workspace_file "$dir/WORKSPACE"
+
+              if test -f "$workspace_file";
+                break
+              end
+
+              cd $dir/..
+              set dir (pwd)
+            end
+            cd $cwd
+
+            set directory_hash (echo -n "$dir" | sha1sum | head -c 40)
             docker ps | grep -q "bazel_$directory_hash"
             if test $status -ne 0;
               docker run \
-                -v $(pwd):$(pwd) \
-                -v $HOME/.cache/bazel/:/home/tobiaskohlbau/.cache/bazel/ \
-                -v $HOME/.cache/bazelisk:/home/tobiaskohlbau/.cache/bazelisk \
-                -w $(pwd) \
+                -v $dir:$dir \
+                -v $HOME/.cache/:/home/tobiaskohlbau/.cache/ \
+                -w $dir \
                 --name bazel_$directory_hash \
                 --rm \
                 --privileged \
                 -d \
                 ghcr.io/tobiaskohlbau/bazel:latest
             end
-            docker exec -it bazel_$directory_hash bazel $argv
+            docker exec -it -w $dir bazel_$directory_hash bazel $argv
           '';
         };
         fish_user_key_bindings = {
@@ -430,6 +445,14 @@ in
           { name = "typescript-language-server"; except-features = ["format" "diagnostics"]; }
           { name = "eslint"; }
         ];
+      }
+      {
+        name = "starlark";
+        formatter = {
+          command = "buildifier";
+          args = ["-"];
+        };
+        auto-format = true;
       }];
       # {
       #   name = "kotlin";

@@ -8,7 +8,7 @@ let
 in
 {
   # Homemanager needs this in order to work. Otherwise errors are thrown.
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 
   xdg.enable = true;
 
@@ -26,7 +26,7 @@ in
     gotools
     gopls
     nodejs
-    unstable.nodePackages.svelte-language-server
+    nodePackages.svelte-language-server
     nodePackages.vscode-langservers-extracted
     glab
     vscode
@@ -110,19 +110,54 @@ in
             cd $cwd
 
             set directory_hash (echo -n "$dir" | sha1sum | head -c 40)
-            docker ps | grep -q "bazel_$directory_hash"
+            docker ps | grep -q "bazel_"$directory_hash"_aarch64"
             if test $status -ne 0;
               docker run \
                 -v $dir:$dir \
                 -v $HOME/.cache/:/home/tobiaskohlbau/.cache/ \
                 -w $dir \
-                --name bazel_$directory_hash \
+                --name bazel_{$directory_hash}_aarch64 \
                 --rm \
+                --platform linux/arm64/v8 \
                 --privileged \
                 -d \
-                ghcr.io/tobiaskohlbau/bazel:latest
+                ghcr.io/tobiaskohlbau/bazel:latest_arm64
             end
-            docker exec -it -w $dir bazel_$directory_hash bazel $argv
+            docker exec -it -w $dir bazel_{$directory_hash}_aarch64 bazel $argv
+          '';
+        };
+        bazel64 = {
+          body = ''
+            set -l cwd (pwd)
+            set -l dir (pwd)
+
+            while not test "$dir" = '/'
+              set workspace_file "$dir/WORKSPACE"
+
+              if test -f "$workspace_file";
+                break
+              end
+
+              cd $dir/..
+              set dir (pwd)
+            end
+            cd $cwd
+
+            set directory_hash (echo -n "$dir" | sha1sum | head -c 40)
+            docker ps | grep -q "bazel_"$directory_hash"_amd64"
+            if test $status -ne 0;
+              docker run \
+                -v $dir:$dir \
+                -v $HOME/.cache/:/home/tobiaskohlbau/.cache/ \
+                -w $dir \
+                --name bazel_{$directory_hash}_amd64 \
+                --rm \
+                --platform linux/amd64 \
+                --privileged \
+                -d \
+                ghcr.io/tobiaskohlbau/bazel:latest_amd64
+            end
+            docker exec -it -w $dir bazel_{$directory_hash}_amd64 bazel $argv
           '';
         };
         fish_user_key_bindings = {

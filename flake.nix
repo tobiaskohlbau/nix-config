@@ -2,13 +2,13 @@
   description = "NixOS systems and tools by tobiaskohlbau";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/3876cc613ac3983078964ffb5a0c01d00028139e";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    helix.url = "github:helix-editor/helix";
+    helix.url = "github:helix-editor/helix/86023cf1e6c9ab12446061e40c838335c5790979";
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
     nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
     zig.url = "github:mitchellh/zig-overlay";

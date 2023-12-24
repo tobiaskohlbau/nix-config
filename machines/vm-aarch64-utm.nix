@@ -31,7 +31,7 @@
 
   networking.firewall.enable = false;
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 
   services.xserver = {
     enable = true;
@@ -69,7 +69,7 @@
       };
     };
     fontDir.enable = true;
-    fonts = [
+    packages = [
       pkgs.fira-code
       pkgs.fontpkgs.berkeley-mono
     ];

@@ -9,8 +9,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     helix.url = "github:helix-editor/helix/86023cf1e6c9ab12446061e40c838335c5790979";
-    fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
-    nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
+    fonts.url = "github:tobiaskohlbau/fonts-nix";
+    nix-config-private.url = "github:tobiaskohlbau/nix-config-private";
     zig.url = "github:mitchellh/zig-overlay";
   };
 
@@ -35,6 +35,11 @@
       nixosConfigurations.vm-aarch64-utm = mkVM "vm-aarch64-utm" {
         inherit nixpkgs home-manager overlays nix-config-private;
         system = "aarch64-linux";
+        user = "tobiaskohlbau";
+      };
+      nixosConfigurations.pc-x86_64 = mkVM "pc-x86_64" {
+        inherit nixpkgs home-manager overlays nix-config-private;
+        system = "x86_64-linux";
         user = "tobiaskohlbau";
       };
     };

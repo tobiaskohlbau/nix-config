@@ -121,15 +121,15 @@
       "locked": {
         "lastModified": 1682535712,
         "narHash": "sha256-CQUjhbrUwdb2eVlk5PyFnYmCcqYqZDHIrWW+moqb6Ro=",
-        "ref": "refs/heads/main",
+        "owner": "tobiaskohlbau",
+        "repo": "fonts-nix",
         "rev": "379f92a5d25c49e40fec357fbceb84017279b8df",
-        "revCount": 1,
-        "type": "git",
-        "url": "https://github.com/tobiaskohlbau/fonts-nix"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://github.com/tobiaskohlbau/fonts-nix"
+        "owner": "tobiaskohlbau",
+        "repo": "fonts-nix",
+        "type": "github"
       }
     },
     "helix": {
@@ -179,15 +179,15 @@
       "locked": {
         "lastModified": 1690201890,
         "narHash": "sha256-jz7k4qcG5h30AnGZVvsqBj4j80x7W8CXU0JkTXbe5CY=",
-        "ref": "refs/heads/main",
+        "owner": "tobiaskohlbau",
+        "repo": "nix-config-private",
         "rev": "028e8bff68db991a17bf6f6beb7a1811b53356ce",
-        "revCount": 2,
-        "type": "git",
-        "url": "https://github.com/tobiaskohlbau/nix-config-private"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://github.com/tobiaskohlbau/nix-config-private"
+        "owner": "tobiaskohlbau",
+        "repo": "nix-config-private",
+        "type": "github"
       }
     },
     "nixpkgs": {

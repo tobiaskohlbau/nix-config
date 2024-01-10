@@ -121,15 +121,15 @@
       "locked": {
         "lastModified": 1682535712,
         "narHash": "sha256-CQUjhbrUwdb2eVlk5PyFnYmCcqYqZDHIrWW+moqb6Ro=",
-        "owner": "tobiaskohlbau",
-        "repo": "fonts-nix",
+        "ref": "refs/heads/main",
         "rev": "379f92a5d25c49e40fec357fbceb84017279b8df",
-        "type": "github"
+        "revCount": 1,
+        "type": "git",
+        "url": "https://github.com/tobiaskohlbau/fonts-nix"
       },
       "original": {
-        "owner": "tobiaskohlbau",
-        "repo": "fonts-nix",
-        "type": "github"
+        "type": "git",
+        "url": "https://github.com/tobiaskohlbau/fonts-nix"
       }
     },
     "helix": {
@@ -161,11 +161,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1702814678,
-        "narHash": "sha256-zDtO0jV2QLoddUJinLlTQrQqCUW3dPiIWOSYgg98T7E=",
+        "lastModified": 1704099619,
+        "narHash": "sha256-QRVMkdxLmv+aKGjcgeEg31xtJEIsYq4i1Kbyw5EPS6g=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "1488651d02c1a7a15e284210f0d380a62d8d8cef",
+        "rev": "7e398b3d76bc1503171b1364c9d4a07ac06f3851",
         "type": "github"
       },
       "original": {
@@ -179,15 +179,15 @@
       "locked": {
         "lastModified": 1690201890,
         "narHash": "sha256-jz7k4qcG5h30AnGZVvsqBj4j80x7W8CXU0JkTXbe5CY=",
-        "owner": "tobiaskohlbau",
-        "repo": "nix-config-private",
+        "ref": "refs/heads/main",
         "rev": "028e8bff68db991a17bf6f6beb7a1811b53356ce",
-        "type": "github"
+        "revCount": 2,
+        "type": "git",
+        "url": "https://github.com/tobiaskohlbau/nix-config-private"
       },
       "original": {
-        "owner": "tobiaskohlbau",
-        "repo": "nix-config-private",
-        "type": "github"
+        "type": "git",
+        "url": "https://github.com/tobiaskohlbau/nix-config-private"
       }
     },
     "nixpkgs": {
@@ -208,11 +208,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1702830618,
-        "narHash": "sha256-lvhwIvRwhOLgzbRuYkqHy4M5cQHYs4ktL6/hyuBS6II=",
+        "lastModified": 1704538339,
+        "narHash": "sha256-1734d3mQuux9ySvwf6axRWZRBhtcZA9Q8eftD6EZg6U=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "91a00709aebb3602f172a0bf47ba1ef013e34835",
+        "rev": "46ae0210ce163b3cba6c7da08840c1d63de9c701",
         "type": "github"
       },
       "original": {
@@ -240,11 +240,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1702921762,
-        "narHash": "sha256-O/rP7gulApQAB47u6szEd8Pn8Biw0d84j5iuP2tcxzY=",
+        "lastModified": 1704732714,
+        "narHash": "sha256-ABqK/HggMYA/jMUXgYyqVAcQ8QjeMyr1jcXfTpSHmps=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "d02ffbbe834b5599fc5f134e644e49397eb07188",
+        "rev": "6723fa4e4f1a30d42a633bef5eb01caeb281adc3",
         "type": "github"
       },
       "original": {
@@ -343,11 +343,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1702850407,
-        "narHash": "sha256-dG9eKPJXgZNcXkNJwBdx/7byx08Z3ppXU1E54EY1/t0=",
+        "lastModified": 1704846207,
+        "narHash": "sha256-QebIvfRvCEoCnUtI6dOHTG22hUZ6yNLwsfUwYsrXe4w=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "f5d3c30b3f36ec5d3d5dd81fad850f5523767e5d",
+        "rev": "7556a51aa8608c7f6ee25cef966b9e79a3e250a7",
         "type": "github"
       },
       "original": {

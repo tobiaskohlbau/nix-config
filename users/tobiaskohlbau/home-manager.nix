@@ -115,6 +115,8 @@ in
               docker run \
                 -v $dir:$dir \
                 -v $HOME/.cache/:/home/tobiaskohlbau/.cache/ \
+                -v $HOME/.docker/:/home/tobiaskohlbau/.docker/ \
+                -v /var/run/docker.sock:/var/run/docker.sock \
                 -w $dir \
                 --name bazel_{$directory_hash}_aarch64 \
                 --rm \
@@ -149,6 +151,8 @@ in
               docker run \
                 -v $dir:$dir \
                 -v $HOME/.cache/:/home/tobiaskohlbau/.cache/ \
+                -v $HOME/.docker/:/home/tobiaskohlbau/.docker/ \
+                -v /var/run/docker.sock:/var/run/docker.sock \
                 -w $dir \
                 --name bazel_{$directory_hash}_amd64 \
                 --rm \

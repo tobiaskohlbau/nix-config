@@ -44,5 +44,10 @@
         system = "x86_64-linux";
         user = "tobiaskohlbau";
       };
+      nixosConfigurations.laptop-x86_64 = mkVM "laptop-x86_64" {
+        inherit nixpkgs home-manager overlays nix-config-private;
+        system = "x86_64-linux";
+        user = "tobiaskohlbau";
+      };
     };
 }

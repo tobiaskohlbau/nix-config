@@ -14,12 +14,15 @@
     # fonts.url = "git+https:tobiaskohlbau/fonts-nix";
     # nix-config-private.url = "git+https:tobiaskohlbau/nix-config-private";
     zig.url = "github:mitchellh/zig-overlay";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, ... }@inputs:
     let
-      mkVM = import ./lib/mkvm.nix;
+      mkVM = import ./lib/mkvm.nix {
+        inherit overlays nixpkgs inputs;
+      };
       overlays = [
         (final: prev: { inherit (inputs.helix.packages.${prev.system}) helix; })
         inputs.fonts.overlays.default
@@ -30,24 +33,21 @@
           }
         )
       ];
-      nix-config-private = inputs.nix-config-private;
     in
     {
       formatter."aarch64-linux" = nixpkgs.legacyPackages."aarch64-linux".nixpkgs-fmt;
       nixosConfigurations.vm-aarch64-utm = mkVM "vm-aarch64-utm" {
-        inherit nixpkgs home-manager overlays nix-config-private;
         system = "aarch64-linux";
         user = "tobiaskohlbau";
       };
       nixosConfigurations.pc-x86_64 = mkVM "pc-x86_64" {
-        inherit nixpkgs home-manager overlays nix-config-private;
         system = "x86_64-linux";
         user = "tobiaskohlbau";
       };
       nixosConfigurations.laptop-x86_64 = mkVM "laptop-x86_64" {
-        inherit nixpkgs home-manager overlays nix-config-private;
         system = "x86_64-linux";
         user = "tobiaskohlbau";
+        surface = true;
       };
     };
 }

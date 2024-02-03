@@ -4,6 +4,8 @@
     ./shared.nix
   ];
 
+  networking.hostName = "dev";
+
   services.spice-vdagentd.enable = true;
 
   systemd.user.services.spice-agent = {

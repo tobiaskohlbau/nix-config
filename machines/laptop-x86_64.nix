@@ -4,6 +4,8 @@
     ./shared.nix
   ];
 
+  networking.hostName = "surfacebook";
+
   networking.wireless.enable = true;
   networking.wireless.environmentFile = "/root/wifi.secrets";
   networking.wireless.networks = {

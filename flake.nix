@@ -8,11 +8,9 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    helix.url = "github:helix-editor/helix/86023cf1e6c9ab12446061e40c838335c5790979";
+    helix.url = "github:helix-editor/helix";
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
     nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
-    # fonts.url = "git+https:tobiaskohlbau/fonts-nix";
-    # nix-config-private.url = "git+https:tobiaskohlbau/nix-config-private";
     zig.url = "github:mitchellh/zig-overlay";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };

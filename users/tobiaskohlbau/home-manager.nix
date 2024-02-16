@@ -26,6 +26,7 @@ in
     gotools
     gopls
     nodejs
+    nodePackages.pnpm
     nodePackages.svelte-language-server
     nodePackages.vscode-langservers-extracted
     glab
@@ -41,6 +42,7 @@ in
     efm-langserver
     nodePackages.typescript-language-server
     bazel-buildtools
+    k3d
   ] ++ (lib.optionals isLinux [
     firefox
     rofi
@@ -70,6 +72,7 @@ in
       if test -n $SSH_AUTH_SOCK
         set -x -U SSH_AUTH_SOCK $SSH_AUTH_SOCK
       end
+      fish_add_path $HOME/go/bin
     '';
 
     shellAbbrs = {
@@ -109,59 +112,46 @@ in
             end
             cd $cwd
 
-            set directory_hash (echo -n "$dir" | sha1sum | head -c 40)
-            docker ps | grep -q "bazel_"$directory_hash"_aarch64"
+            if test $dir = "/";
+              echo "Could not find WORKSPACE root directory."
+              return 1
+            end
+
+            set -l mounts
+            set -a mounts -v $dir:$dir
+            set -a mounts -v $HOME/.cache/:/home/tobiaskohlbau/.cache/
+            set -a mounts -v $HOME/.docker/:/home/tobiaskohlbau/.docker/
+            set -a mounts -v /var/run/docker.sock:/var/run/docker.sock
+
+            set auth_sock (readlink -f $SSH_AUTH_SOCK)
+            if test $status -eq 0;
+              set -a mounts -v $auth_sock:$auth_sock
+            end
+
+            set -l directory_hash (echo -n "$dir" | sha1sum | head -c 40)
+            docker ps | grep -q "bazel_"$directory_hash""
             if test $status -ne 0;
               docker run \
-                -v $dir:$dir \
-                -v $HOME/.cache/:/home/tobiaskohlbau/.cache/ \
-                -v $HOME/.docker/:/home/tobiaskohlbau/.docker/ \
-                -v /var/run/docker.sock:/var/run/docker.sock \
+                --network host \
+                $mounts \
                 -w $dir \
-                --name bazel_{$directory_hash}_aarch64 \
+                --name bazel_{$directory_hash} \
                 --rm \
-                --platform linux/arm64/v8 \
                 --privileged \
                 -d \
-                ghcr.io/tobiaskohlbau/bazel:latest_arm64
+                ghcr.io/tobiaskohlbau/bazel:latest
             end
-            docker exec -it -w $dir bazel_{$directory_hash}_aarch64 bazel $argv
-          '';
-        };
-        bazel64 = {
-          body = ''
-            set -l cwd (pwd)
-            set -l dir (pwd)
 
-            while not test "$dir" = '/'
-              set workspace_file "$dir/WORKSPACE"
-
-              if test -f "$workspace_file";
-                break
+            set -l envs
+            if test -e .envrc;
+              for line in (cat .envrc | grep -v '^#' | grep -v '^$')
+                set env (string split -m1 -f2 ' ' $line)
+                set variable (string split -m1 -f1 '=' $env)
+                set -a envs --env $variable
               end
-
-              cd $dir/..
-              set dir (pwd)
             end
-            cd $cwd
-
-            set directory_hash (echo -n "$dir" | sha1sum | head -c 40)
-            docker ps | grep -q "bazel_"$directory_hash"_amd64"
-            if test $status -ne 0;
-              docker run \
-                -v $dir:$dir \
-                -v $HOME/.cache/:/home/tobiaskohlbau/.cache/ \
-                -v $HOME/.docker/:/home/tobiaskohlbau/.docker/ \
-                -v /var/run/docker.sock:/var/run/docker.sock \
-                -w $dir \
-                --name bazel_{$directory_hash}_amd64 \
-                --rm \
-                --platform linux/amd64 \
-                --privileged \
-                -d \
-                ghcr.io/tobiaskohlbau/bazel:latest_amd64
-            end
-            docker exec -it -w $dir bazel_{$directory_hash}_amd64 bazel $argv
+            
+            docker exec -it -w $dir $envs -e SSH_AUTH_SOCK bazel_{$directory_hash} bazel $argv
           '';
         };
         fish_user_key_bindings = {

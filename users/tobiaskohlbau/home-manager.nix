@@ -31,14 +31,12 @@ in
     nodePackages.vscode-langservers-extracted
     glab
     vscode
-    # unstable.zig
     kubelogin
     azure-cli
     delta
     meld
     unstable.jetbrains.idea-community
     unstable.bun
-    unstable.zig
     efm-langserver
     nodePackages.typescript-language-server
     bazel-buildtools

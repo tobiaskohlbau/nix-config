@@ -1,3 +1,5 @@
+{isNative, privateNixConfig, ...}:
+
 { config, lib, pkgs, ... }:
 
 let
@@ -7,6 +9,10 @@ let
   '';
 in
 {
+  imports = [
+    "${privateNixConfig}/home-manager.nix"
+  ];
+
   # Homemanager needs this in order to work. Otherwise errors are thrown.
   home.stateVersion = "23.11";
 
@@ -41,10 +47,13 @@ in
     nodePackages.typescript-language-server
     bazel-buildtools
     k3d
-  ] ++ (lib.optionals isLinux [
+  ] ++ lib.optionals isLinux [
     firefox
     rofi
-  ]);
+  ] ++ lib.optionals isNative [
+    pavucontrol
+    discord
+  ];
 
   xdg.configFile."i3/config".text = builtins.readFile ./i3;
 

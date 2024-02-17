@@ -20,11 +20,9 @@ in nixpkgs.lib.nixosSystem rec {
     home-manager.home-manager {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.${user} = {
-        imports = [
-          ../users/${user}/home-manager.nix
-          "${nix-config-private}/home-manager.nix"
-        ];
+      home-manager.users.${user} = import ../users/${user}/home-manager.nix {
+        isNative = isSurface;
+        privateNixConfig = nix-config-private;
       };
     }
   ];

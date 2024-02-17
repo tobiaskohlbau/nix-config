@@ -47,10 +47,12 @@ in
     nodePackages.typescript-language-server
     bazel-buildtools
     k3d
+    zig_0_11
   ] ++ lib.optionals isLinux [
     firefox
     rofi
   ] ++ lib.optionals isNative [
+    brightnessctl
     pavucontrol
     discord
   ];

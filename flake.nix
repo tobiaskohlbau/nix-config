@@ -18,7 +18,7 @@
 
   outputs = { self, nixpkgs, home-manager, nixos-hardware, ... }@inputs:
     let
-      mkVM = import ./lib/mkvm.nix {
+      mkMachine = import ./lib/mkmachine.nix {
         inherit overlays nixpkgs inputs;
       };
       overlays = [
@@ -34,18 +34,19 @@
     in
     {
       formatter."aarch64-linux" = nixpkgs.legacyPackages."aarch64-linux".nixpkgs-fmt;
-      nixosConfigurations.vm-aarch64-utm = mkVM "vm-aarch64-utm" {
+      nixosConfigurations.vm-aarch64-utm = mkMachine "vm-aarch64-utm" {
         system = "aarch64-linux";
         user = "tobiaskohlbau";
       };
-      nixosConfigurations.pc-x86_64 = mkVM "pc-x86_64" {
+      nixosConfigurations.pc-x86_64 = mkMachine "pc-x86_64" {
         system = "x86_64-linux";
         user = "tobiaskohlbau";
+        native = true;
       };
-      nixosConfigurations.laptop-x86_64 = mkVM "laptop-x86_64" {
+      nixosConfigurations.laptop-x86_64 = mkMachine "surfacebook" {
         system = "x86_64-linux";
         user = "tobiaskohlbau";
-        surface = true;
+        native = true;
       };
     };
 }

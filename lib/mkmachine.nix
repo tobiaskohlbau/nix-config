@@ -1,10 +1,11 @@
 { nixpkgs, overlays, inputs}:
 
 
-name: { system, user, surface ? false }:
+name: { system, user, native ? false }:
 
 let
-  isSurface = surface;
+  isNative = native;
+  isSurface = name == "surfacebook";
   home-manager = inputs.home-manager.nixosModules;
   nix-config-private = inputs.nix-config-private;
 in nixpkgs.lib.nixosSystem rec {
@@ -21,7 +22,7 @@ in nixpkgs.lib.nixosSystem rec {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.${user} = import ../users/${user}/home-manager.nix {
-        isNative = isSurface;
+        inherit isNative;
         privateNixConfig = nix-config-private;
       };
     }

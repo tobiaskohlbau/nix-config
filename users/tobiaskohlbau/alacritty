@@ -51,3 +51,6 @@ font:
 key_bindings:
   - { key: V,   mods: Super, action: Paste }
   - { key: C,   mods: Super, action: Copy }
+
+env:
+  WINIT_X11_SCALE_FACTOR: "1"

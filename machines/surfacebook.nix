@@ -11,4 +11,8 @@
   networking.wireless.networks = {
     Hertz.psk = "@PSK_HERTZ@";
   };
+
+  services.xserver = {
+    xkbOptions = "caps:swapescape";
+  };
 }

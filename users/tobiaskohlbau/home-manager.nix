@@ -521,4 +521,13 @@ in
   };
 
   xdg.configFile."alacritty/alacritty.yml".text = builtins.readFile ./alacritty;
+
+  xresources.extraConfig = builtins.readFile ./Xresources;
+
+  home.pointerCursor = {
+    name = "Vanilla-DMZ";
+    package = pkgs.vanilla-dmz;
+    size = 128;
+    x11.enable = true;
+  };
 }

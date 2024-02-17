@@ -43,7 +43,7 @@
         user = "tobiaskohlbau";
         native = true;
       };
-      nixosConfigurations.laptop-x86_64 = mkMachine "surfacebook" {
+      nixosConfigurations.surfacebook = mkMachine "surfacebook" {
         system = "x86_64-linux";
         user = "tobiaskohlbau";
         native = true;

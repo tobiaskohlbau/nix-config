@@ -87,9 +87,6 @@ in
     shellAbbrs = {
       k = "kubectl";
       xclip = "xclip -selection c";
-      # allow fixing display resolution after vm window resizing
-      mbscr = "xrandr --output Virtual-1 --auto && xrandr --dpi 220 && i3-msg restart";
-      dtscr = "xrandr --output Virtual-1 --auto && xrandr --dpi 110 && i3-msg restart";
     };
     plugins = [
       {

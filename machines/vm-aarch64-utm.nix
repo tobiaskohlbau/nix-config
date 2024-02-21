@@ -20,4 +20,5 @@
     };
   };
 
+  services.xserver.dpi = 220;
 }

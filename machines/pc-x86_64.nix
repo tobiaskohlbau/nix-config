@@ -5,4 +5,14 @@
   ];
 
   networking.hostName = "ampere";
+
+  services.xserver.dpi = 140;
+
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+  services.xserver.videoDrivers = ["nvidia"];
 }

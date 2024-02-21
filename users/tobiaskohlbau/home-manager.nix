@@ -230,6 +230,18 @@ in
                 --height=50% --layout=reverse
         '';
       };
+
+      fxsc = {
+        body = ''
+          # allow fixing display resolution after vm window resizing or monitor change
+          set screen_name (xrandr | grep -w connected | awk '{print $1}')
+          echo $screen_name
+
+          xrandr --output $screen_name --auto
+          xrandr --dpi $argv[1]
+          i3-msg restart
+        '';
+      };
     };
   };
 
@@ -523,8 +535,6 @@ in
   };
 
   xdg.configFile."alacritty/alacritty.yml".text = builtins.readFile ./alacritty;
-
-  xresources.extraConfig = builtins.readFile ./Xresources;
 
   home.pointerCursor = {
     name = "Vanilla-DMZ";

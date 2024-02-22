@@ -15,4 +15,6 @@
   };
 
   services.xserver.videoDrivers = ["nvidia"];
+
+  time.hardwareClockInLocalTime = true;
 }

@@ -127,9 +127,7 @@ in
             end
 
             set -l mounts
-            set -a mounts -v $dir:$dir
-            set -a mounts -v $HOME/.cache/:/home/tobiaskohlbau/.cache/
-            set -a mounts -v $HOME/.docker/:/home/tobiaskohlbau/.docker/
+            set -a mounts -v $HOME:/home/tobiaskohlbau/
             set -a mounts -v /var/run/docker.sock:/var/run/docker.sock
 
             set auth_sock (readlink -f $SSH_AUTH_SOCK)

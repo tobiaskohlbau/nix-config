@@ -87,9 +87,6 @@ in
     shellAbbrs = {
       k = "kubectl";
       xclip = "xclip -selection c";
-      # allow fixing display resolution after vm window resizing
-      mbscr = "xrandr --output Virtual-1 --auto && xrandr --dpi 220 && i3-msg restart";
-      dtscr = "xrandr --output Virtual-1 --auto && xrandr --dpi 110 && i3-msg restart";
     };
     plugins = [
       {
@@ -226,6 +223,18 @@ in
           	fzf --bind "change:reload:$RG_PREFIX {q} || true" \
                 --ansi --disabled --query "$INITIAL_QUERY" \
                 --height=50% --layout=reverse
+        '';
+      };
+
+      fxsc = {
+        body = ''
+          # allow fixing display resolution after vm window resizing or monitor change
+          set screen_name (xrandr | grep -w connected | awk '{print $1}')
+          echo $screen_name
+
+          xrandr --output $screen_name --auto
+          xrandr --dpi $argv[1]
+          i3-msg restart
         '';
       };
     };
@@ -521,8 +530,6 @@ in
   };
 
   xdg.configFile."alacritty/alacritty.yml".text = builtins.readFile ./alacritty;
-
-  xresources.extraConfig = builtins.readFile ./Xresources;
 
   home.pointerCursor = {
     name = "Vanilla-DMZ";

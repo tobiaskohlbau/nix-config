@@ -358,6 +358,7 @@ in
     settings = {
       theme = "gruvbox_light";
       editor = {
+        true-color = true;
         whitespace = {
           render = "all";
         };

@@ -7,7 +7,12 @@ DISK_NAME ?= unset
 MAKEFILE_DIR := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
 switch:
+ifeq ($(shell uname), Darwin)
+	NIXPKGS_ALLOW_UNFREE=1 nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.${NIXCONFIG}.system"
+	./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${NIXCONFIG}"
+else
 	sudo nixos-rebuild switch --flake ".#$(NIXCONFIG)"
+endif
 
 test:
 	sudo nixos-rebuild test --flake ".#$(NIXCONFIG)"

@@ -4,6 +4,7 @@
 
 let
   isLinux = pkgs.stdenv.isLinux;
+  isDarwin = pkgs.stdenv.isDarwin;
   jdtls = pkgs.writeShellScriptBin "jdtls" ''
     jdt-language-server -data $HOME/.cache/jdt.ls/data$(pwd)
   '';
@@ -23,12 +24,11 @@ in
     fzf
     fd
     htop
+    ripgrep
+  ] ++ lib.optionals isLinux [
     kubectl
     kubelogin
-    ripgrep
-    xcwd
     jdtls
-    _1password
     gotools
     gopls
     nodejs
@@ -36,7 +36,6 @@ in
     nodePackages.svelte-language-server
     nodePackages.vscode-langservers-extracted
     glab
-    vscode
     kubelogin
     azure-cli
     delta
@@ -48,7 +47,8 @@ in
     bazel-buildtools
     k3d
     zig_0_11
-  ] ++ lib.optionals isLinux [
+    _1password
+    xcwd
     firefox
     rofi
   ] ++ lib.optionals isNative [
@@ -80,6 +80,8 @@ in
       # I use this to use my yubikey-agent after sshing into dev once from host.
       if test -n $SSH_AUTH_SOCK
         set -x -U SSH_AUTH_SOCK $SSH_AUTH_SOCK
+      else
+        set -x -U SSH_AUTH_SOCK /opt/homebrew/var/run/yubikey-agent.sock
       end
       fish_add_path $HOME/go/bin
     '';
@@ -273,8 +275,7 @@ in
   programs.tmux = {
     enable = true;
     extraConfig = ''
-      #set -g default-terminal "tmux-256color"
-      set -ga terminal-overrides ",xterm-256color*:Tc"
+      set -as terminal-features ",xterm-256color:RGB
 
       set -g base-index 1
       set -g pane-base-index 1
@@ -312,8 +313,6 @@ in
       set -g window-status-activity-style bg=black,fg=yellow
       set -g window-status-separator ""
       set -g status-justify centre
-
-      bind r source-file ~/.tmux.conf
 
       bind '"' split-window -c "#{pane_current_path}"
       bind % split-window -h -c "#{pane_current_path}"
@@ -532,7 +531,7 @@ in
 
   xdg.configFile."alacritty/alacritty.yml".text = builtins.readFile ./alacritty;
 
-  home.pointerCursor = {
+  home.pointerCursor = lib.mkIf isLinux {
     name = "Vanilla-DMZ";
     package = pkgs.vanilla-dmz;
     size = 128;

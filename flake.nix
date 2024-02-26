@@ -8,15 +8,18 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     helix.url = "github:helix-editor/helix";
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
     nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
     zig.url = "github:mitchellh/zig-overlay";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, darwin, ... }@inputs:
     let
       mkMachine = import ./lib/mkmachine.nix {
         inherit overlays nixpkgs inputs;
@@ -47,6 +50,11 @@
         system = "x86_64-linux";
         user = "tobiaskohlbau";
         native = true;
+      };
+      darwinConfigurations.macbook = mkMachine "macbook" {
+        system = "aarch64-darwin";
+        user   = "tobiaskohlbau";
+        darwin = true;
       };
     };
 }

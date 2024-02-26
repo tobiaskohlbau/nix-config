@@ -275,7 +275,8 @@ in
   programs.tmux = {
     enable = true;
     extraConfig = ''
-      set -as terminal-features ",xterm-256color:RGB
+      set -g default-terminal "tmux-256color"
+      set -sg terminal-overrides ",*:RGB"
 
       set -g base-index 1
       set -g pane-base-index 1

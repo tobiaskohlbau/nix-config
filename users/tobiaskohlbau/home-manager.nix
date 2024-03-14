@@ -58,6 +58,8 @@ in
     brightnessctl
     pavucontrol
     discord
+  ] ++ lib.optionals isDarwin [
+    yubikey-agent
   ];
 
   xdg.configFile."i3/config".text = builtins.readFile ./i3;

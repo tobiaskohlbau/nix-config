@@ -21,6 +21,7 @@ in
 
   home.packages = with pkgs; [
     jq
+    yq
     fzf
     fd
     htop
@@ -31,17 +32,18 @@ in
     jdtls
     gotools
     gopls
-    nodejs
+    nodejs_21
     nodePackages.pnpm
     nodePackages.svelte-language-server
     nodePackages.vscode-langservers-extracted
     glab
     kubelogin
     azure-cli
-    delta
     meld
     unstable.jetbrains.idea-community
     unstable.bun
+    unstable.google-java-format
+    temurin-bin-21
     efm-langserver
     nodePackages.typescript-language-server
     bazel-buildtools
@@ -49,6 +51,7 @@ in
     zig_0_11
     _1password
     xcwd
+    unzip
     firefox
     rofi
   ] ++ lib.optionals isNative [
@@ -157,7 +160,7 @@ in
               end
             end
             
-            docker exec -it -w $dir $envs -e SSH_AUTH_SOCK bazel_{$directory_hash} bazel $argv
+            docker exec -i -w $dir $envs -e SSH_AUTH_SOCK bazel_{$directory_hash} bazel $argv
           '';
         };
         fish_user_key_bindings = {
@@ -255,16 +258,22 @@ in
       };
       init.defaultBranch = "main";
       core.editor = "hx";
-      core.pager = "delta";
-      interactive.diffFilter = "delta --color-only";
-      delta.navigate = true;
-      delta.light = true;
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
       merge.tool = "meld";
     };
+    delta = {
+      enable = true;
+      options = {
+        syntax-theme = "gruvbox-light";
+        side-by-side = true;
+        line-numbers = true;
+        navigate = true;
+      };
+    };
     aliases = {
       cleanbr = "! git branch -d `git branch --merged | grep -v '^*\\|main'`";
+      cleanpr = "! gh pr list -s merged --json headRefName -q '.[].headRefName' | xargs git branch -D";
     };
   };
 

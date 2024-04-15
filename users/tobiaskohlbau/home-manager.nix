@@ -48,7 +48,7 @@ in
     nodePackages.typescript-language-server
     bazel-buildtools
     k3d
-    zig_0_11
+    zigpkgs.master
     _1password
     xcwd
     unzip
@@ -251,6 +251,10 @@ in
     enable = true;
     userName = "Tobias Kohlbau";
     userEmail = "tobias@kohlbau.de";
+    signing = {
+      key = "~/.ssh/key.pub";
+      signByDefault = true;
+    };
     extraConfig = {
       color.ui = true;
       github.user = "tobiaskohlbau";
@@ -263,6 +267,7 @@ in
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
       merge.tool = "meld";
+      gpg.format = "ssh";
     };
     delta = {
       enable = true;

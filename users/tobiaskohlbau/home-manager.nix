@@ -8,6 +8,8 @@ let
   jdtls = pkgs.writeShellScriptBin "jdtls" ''
     jdt-language-server -data $HOME/.cache/jdt.ls/data$(pwd)
   '';
+  bazel = pkgs.writeShellScriptBin "bazel" (builtins.readFile ./bazel.bash);
+  ibazel = pkgs.writeShellScriptBin "ibazel" (builtins.readFile ./bazel.bash);
 in
 {
   imports = [
@@ -30,6 +32,8 @@ in
     kubectl
     kubelogin
     jdtls
+    bazel
+    ibazel
     gotools
     gopls
     nodejs_21
@@ -108,63 +112,6 @@ in
     ];
 
     functions = {
-        bazel = {
-          body = ''
-            set -l cwd (pwd)
-            set -l dir (pwd)
-
-            while not test "$dir" = '/'
-              set workspace_file "$dir/WORKSPACE"
-
-              if test -f "$workspace_file";
-                break
-              end
-
-              cd $dir/..
-              set dir (pwd)
-            end
-            cd $cwd
-
-            if test $dir = "/";
-              echo "Could not find WORKSPACE root directory."
-              return 1
-            end
-
-            set -l mounts
-            set -a mounts -v $HOME:/home/tobiaskohlbau/
-            set -a mounts -v /var/run/docker.sock:/var/run/docker.sock
-
-            set auth_sock (readlink -f $SSH_AUTH_SOCK)
-            if test $status -eq 0;
-              set -a mounts -v $auth_sock:$auth_sock
-            end
-
-            set -l directory_hash (echo -n "$dir" | sha1sum | head -c 40)
-            docker ps | grep -q "bazel_"$directory_hash""
-            if test $status -ne 0;
-              docker run \
-                --network host \
-                $mounts \
-                -w $dir \
-                --name bazel_{$directory_hash} \
-                --rm \
-                --privileged \
-                -d \
-                ghcr.io/tobiaskohlbau/bazel:latest
-            end
-
-            set -l envs
-            if test -e .envrc;
-              for line in (cat .envrc | grep -v '^#' | grep -v '^$')
-                set env (string split -m1 -f2 ' ' $line)
-                set variable (string split -m1 -f1 '=' $env)
-                set -a envs --env $variable
-              end
-            end
-            
-            docker exec -i -w $dir $envs -e SSH_AUTH_SOCK bazel_{$directory_hash} bazel $argv
-          '';
-        };
         fish_user_key_bindings = {
           body = ''
             bind \e\cB f;

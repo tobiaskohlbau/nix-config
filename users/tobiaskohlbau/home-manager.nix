@@ -199,7 +199,7 @@ in
     userName = "Tobias Kohlbau";
     userEmail = "tobias@kohlbau.de";
     signing = {
-      key = "~/.ssh/key.pub";
+      key = "~/.ssh/id_ed25519.pub";
       signByDefault = true;
     };
     extraConfig = {

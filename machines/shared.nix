@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
   nix = {
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.latest;
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-outputs = true
@@ -27,31 +27,36 @@
 
   networking.firewall.enable = false;
 
+  # installed version do not change
   system.stateVersion = "23.11";
+
+  services.libinput = {
+    enable = true;
+    mouse = {
+      naturalScrolling = true;
+    };
+  };
+
+  services.displayManager.defaultSession = "none+i3";
 
   services.xserver = {
     enable = true;
-    layout = "us";
+
+    xkb = {
+      layout = "us";
+    };
 
     desktopManager = {
       xterm.enable = false;
       wallpaper.mode = "fill";
     };
 
-    displayManager = {
-      defaultSession = "none+i3";
-      lightdm.enable = true;
-    };
-
     windowManager = {
       i3.enable = true;
     };
 
-    libinput = {
-      enable = true;
-      mouse = {
-        naturalScrolling = true;
-      };
+    displayManager = {
+      lightdm.enable = true;
     };
   };
 

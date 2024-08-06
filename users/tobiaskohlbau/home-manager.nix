@@ -17,7 +17,7 @@ in
   ];
 
   # Homemanager needs this in order to work. Otherwise errors are thrown.
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   xdg.enable = true;
 
@@ -36,7 +36,7 @@ in
     ibazel
     gotools
     gopls
-    nodejs_21
+    nodejs_22
     nodePackages.pnpm
     nodePackages.svelte-language-server
     nodePackages.vscode-langservers-extracted
@@ -493,7 +493,7 @@ in
     enable = true;
   };
 
-  xdg.configFile."alacritty/alacritty.yml".text = builtins.readFile ./alacritty;
+  xdg.configFile."alacritty/alacritty.toml".text = builtins.readFile ./alacritty.toml;
 
   home.pointerCursor = lib.mkIf isLinux {
     name = "Vanilla-DMZ";

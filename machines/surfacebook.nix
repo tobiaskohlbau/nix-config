@@ -12,7 +12,5 @@
     Hertz.psk = "@PSK_HERTZ@";
   };
 
-  services.xserver = {
-    xkbOptions = "caps:swapescape";
-  };
+  services.xserver.xkb.options = "caps:swapescape";
 }

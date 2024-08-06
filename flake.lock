@@ -138,17 +138,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1714842995,
-        "narHash": "sha256-yV5iOwbekitHM2NtWGkuz0PcISw5h+a2R46hF6PZkfo=",
-        "owner": "mattwparas",
+        "lastModified": 1722600259,
+        "narHash": "sha256-ATlqn/xXHZ3L45poWDpPp/pxttKP6JTnWNNTWqw38cs=",
+        "owner": "helix-editor",
         "repo": "helix",
-        "rev": "ce3959aef89efab5b8713522f7b5da663f37f802",
+        "rev": "0a4432b104099534f7a25b8ea4148234db146ab6",
         "type": "github"
       },
       "original": {
-        "owner": "mattwparas",
+        "owner": "helix-editor",
         "repo": "helix",
-        "rev": "ce3959aef89efab5b8713522f7b5da663f37f802",
         "type": "github"
       }
     },
@@ -159,16 +158,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1719827415,
-        "narHash": "sha256-pvh+1hStXXAZf0sZ1xIJbWGx4u+OGBC1rVx6Wsw0fBw=",
+        "lastModified": 1720042825,
+        "narHash": "sha256-A0vrUB6x82/jvf17qPCpxaM+ulJnD8YZwH9Ci0BsAzE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f2e3c19867262dbe84fdfab42467fc8dd83a2005",
+        "rev": "e1391fb22e18a36f57e6999c7a9f966dc80ac073",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "release-23.11",
+        "ref": "release-24.05",
         "repo": "home-manager",
         "type": "github"
       }
@@ -254,16 +253,16 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1720535198,
-        "narHash": "sha256-zwVvxrdIzralnSbcpghA92tWu2DV2lwv89xZc8MTrbg=",
+        "lastModified": 1722791413,
+        "narHash": "sha256-rCTrlCWvHzMCNcKxPE3Z/mMK2gDZ+BvvpEVyRM4tKmU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "205fd4226592cc83fd4c0885a3e4c9c400efabb5",
+        "rev": "8b5b6723aca5a51edf075936439d9cd3947b7b2c",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-23.11",
+        "ref": "nixos-24.05",
         "repo": "nixpkgs",
         "type": "github"
       }

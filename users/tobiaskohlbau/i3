@@ -20,6 +20,7 @@ tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $mod+Return exec alacritty --working-directory $(xcwd)
+#bindsym $mod+Return exec ghostty
 bindsym $mod+d split h
 bindsym $mod+Shift+d split v
 
@@ -58,7 +59,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+z focus child
+bindsym $mod+z focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.

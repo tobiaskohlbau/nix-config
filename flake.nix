@@ -13,10 +13,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    helix.url = "github:helix-editor/helix";
+    helix.url = "github:helix-editor/helix/24.07";
+
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
     nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
     zig.url = "github:mitchellh/zig-overlay";
+    ghostty = {
+      url = "git+https://github.com/ghostty-org/ghostty";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, darwin, ... }@inputs:
@@ -26,6 +30,7 @@
       };
       overlays = [
         (final: prev: { inherit (inputs.helix.packages.${prev.system}) helix; })
+        (final: prev: { ghostty = inputs.ghostty.packages.${prev.system}.default; })
         inputs.fonts.overlays.default
         inputs.zig.overlays.default
         (

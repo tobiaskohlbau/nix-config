@@ -1,0 +1,7 @@
+font-family = "Berkeley Mono"
+font-size = 16.0
+theme = GruvboxLight
+window-decoration = false
+window-theme = dark
+keybind = super+c=copy_to_clipboard
+keybind = super+v=paste_from_clipboard

@@ -21,15 +21,25 @@ then
   exit 1
 fi
 
-mounts=("$HOME:$HOME" "/var/run/docker.sock:/var/run/docker.sock" "/tmp/.X11-unix:/tmp/.X11-unix")
+mounts=("$HOME:$HOME" "/var/run/docker.sock:/var/run/docker.sock" "/tmp:/tmp")
 
-auth_sock=$(readlink -f $SSH_AUTH_SOCK)
-if [[ $? -eq 0 ]]
+if [[ -n "$SSH_AUTH_SOCK" ]]
 then
-  mounts+=("$auth_sock:$auth_sock")
+  auth_sock=$(readlink -f $SSH_AUTH_SOCK)
+  if [[ $? -eq 0 ]]
+  then
+    mounts+=("$auth_sock:$auth_sock")
+  fi
 fi
 
 directory_hash=$(echo -n "$dir" | sha1sum | head -c 40)
+
+if [[ "$1" == "kill" ]]
+then
+  docker stop bazel_${directory_hash}
+  exit
+fi
+
 docker ps | grep -q "bazel_${directory_hash}"
 if [[ $? -ne 0 ]]
 then
@@ -67,4 +77,4 @@ then
   tty="--tty"
 fi
 
-docker exec --interactive $tty --workdir $dir $(printf -- '-e %s ' "${envs[@]}") bazel_$directory_hash $command $@
+docker exec --interactive $tty --workdir $dir $(printf -- '-e %s ' "${envs[@]}") bazel_$directory_hash $command "$@"

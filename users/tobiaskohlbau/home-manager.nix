@@ -36,8 +36,8 @@ in
     ibazel
     gotools
     gopls
-    nodejs_22
-    nodePackages.pnpm
+    nodejs
+    pnpm
     nodePackages.svelte-language-server
     nodePackages.vscode-langservers-extracted
     glab
@@ -58,6 +58,7 @@ in
     unzip
     firefox
     rofi
+    ghostty
   ] ++ lib.optionals isNative [
     brightnessctl
     pavucontrol
@@ -186,8 +187,7 @@ in
           set screen_name (xrandr | grep -w connected | awk '{print $1}')
           echo $screen_name
 
-          xrandr --output $screen_name --auto
-          xrandr --dpi $argv[1]
+          xrandr --output $screen_name --auto --dpi $argv[1]
           i3-msg restart
         '';
       };
@@ -228,6 +228,7 @@ in
     aliases = {
       cleanbr = "! git branch -d `git branch --merged | grep -v '^*\\|main'`";
       cleanpr = "! gh pr list -s merged --json headRefName -q '.[].headRefName' | xargs git branch -D";
+      bsc = "! git stash && git checkout -b \"$(git rev-parse --abbrev-ref HEAD)\"-\"$(git rev-parse HEAD)\" && git fetch && git rebase -i origin/main && git push origin -u && git checkout @{-1} && git stash pop";
     };
   };
 
@@ -318,6 +319,7 @@ in
 
   programs.helix = {
     enable = true;
+    extraPackages = [ pkgs.racket ];
     settings = {
       theme = "gruvbox_light";
       editor = {
@@ -367,6 +369,7 @@ in
             g = ":toggle-option file-picker.git-ignore";
             h = ":toggle-option file-picker.hidden";
           };
+          c = ":insert-output ~/tmp/commitgenerator/commitgenerator";
         };
       };
     };
@@ -432,6 +435,14 @@ in
         };
       };
 
+      language-server.steel = {
+        command = "steel-language-server";
+        args = [];
+        environment = {
+          STEEL_LSP_HOME = "/home/tobiaskohlbau/.config/steel-lsp/";
+        };
+      };
+
       language = [{
         name = "java";
         formatter = {
@@ -462,6 +473,16 @@ in
           args = ["-"];
         };
         auto-format = true;
+      }
+      {
+        name = "scheme";
+        formatter = {
+          command = "raco";
+          args = ["fmt" "-i"];
+        };
+        language-servers = [
+          { name = "steel"; }
+        ];
       }];
       # {
       #   name = "kotlin";
@@ -476,7 +497,7 @@ in
 
   programs.go = {
     enable = true;
-    package = pkgs.unstable.go_1_21;
+    package = pkgs.unstable.go_1_23;
   };
 
   programs.direnv = {
@@ -494,6 +515,9 @@ in
   };
 
   xdg.configFile."alacritty/alacritty.toml".text = builtins.readFile ./alacritty.toml;
+
+
+  xdg.configFile."ghostty/config".text = builtins.readFile ./ghostty;
 
   home.pointerCursor = lib.mkIf isLinux {
     name = "Vanilla-DMZ";

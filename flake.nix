@@ -46,6 +46,10 @@
         system = "aarch64-linux";
         user = "tobiaskohlbau";
       };
+      nixosConfigurations.vm-aarch64-utm-qemu = mkMachine "vm-aarch64-utm-qemu" {
+        system = "aarch64-linux";
+        user = "tobiaskohlbau";
+      };
       nixosConfigurations.pc-x86_64 = mkMachine "pc-x86_64" {
         system = "x86_64-linux";
         user = "tobiaskohlbau";

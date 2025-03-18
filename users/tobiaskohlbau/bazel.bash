@@ -3,8 +3,9 @@ dir=$(pwd)
 while [[ $dir != "/" ]]
 do
   workspace_file="$dir/WORKSPACE"
+  module_file="$dir/MODULE.bazel"
 
-  if [[ -f $workspace_file ]]
+  if [[ -f $workspace_file || -f $module_file ]]
   then
     break
   fi

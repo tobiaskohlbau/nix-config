@@ -17,7 +17,7 @@ in
   ];
 
   # Homemanager needs this in order to work. Otherwise errors are thrown.
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 
   xdg.enable = true;
 
@@ -53,7 +53,7 @@ in
     bazel-buildtools
     k3d
     zigpkgs.master
-    _1password
+    _1password-cli
     xcwd
     unzip
     firefox
@@ -371,6 +371,9 @@ in
           };
           c = ":insert-output ~/tmp/commitgenerator/commitgenerator";
         };
+        normal."space" = {
+          F = "file_picker_in_current_buffer_directory";
+        };
       };
     };
 
@@ -424,11 +427,11 @@ in
             import = {
               generatesMetadataFilesAtProjectRoot = true;
             };
-            "import".gradle = {
-              enabled = true;
-              user.home = "/home/tobiaskohlbau/.gradle";
-              offline.enabled = true;
-            };
+            # "import".gradle = {
+            #   enabled = true;
+            #   user.home = "/home/tobiaskohlbau/.gradle";
+            #   offline.enabled = true;
+            # };
             eclipse.downloadSources = true;
             configuration.updateBuildConfiguration = "automatic";
           };

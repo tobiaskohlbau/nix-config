@@ -35,4 +35,6 @@
   environment.variables = {
      SSH_AUTH_SOCK = "/tmp/yubikey-agent.socket";
   };
+
+  system.stateVersion = 5;
 }

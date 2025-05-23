@@ -17,7 +17,7 @@ in
   ];
 
   # Homemanager needs this in order to work. Otherwise errors are thrown.
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 
   xdg.enable = true;
 
@@ -66,6 +66,12 @@ in
   ] ++ lib.optionals isDarwin [
     yubikey-agent
   ];
+
+  xdg.dataFile.steel.source = pkgs.helix-cogs;
+  xdg.dataFile.steel.recursive = true;
+  home.sessionVariables.STEEL_HOME = "${config.xdg.dataHome}/steel";
+  home.sessionVariables.STEEL_LSP_HOME = "${config.xdg.dataHome}/steel/steel-language-server";
+  home.sessionVariables.HELIX_STEEL_CONFIG = "${config.xdg.configHome}/helix";
 
   xdg.configFile."i3/config".text = builtins.readFile ./i3;
 

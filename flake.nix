@@ -2,18 +2,18 @@
   description = "NixOS systems and tools by tobiaskohlbau";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-24.11";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    helix.url = "github:helix-editor/helix";
+    helix.url = "github:mattwparas/helix/steel-event-system";
 
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
     nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
@@ -31,6 +31,7 @@
       overlays = [
         (final: prev: { inherit (inputs.helix.packages.${prev.system}) helix; })
         (final: prev: { ghostty = inputs.ghostty.packages.${prev.system}.default; })
+        (final: prev: { helix-cogs = inputs.helix.packages.${prev.system}.helix-cogs; })
         inputs.fonts.overlays.default
         inputs.zig.overlays.default
         (

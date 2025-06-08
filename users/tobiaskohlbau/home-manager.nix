@@ -206,7 +206,7 @@ in
     userEmail = "tobias@kohlbau.de";
     signing = {
       key = "~/.ssh/id_ed25519.pub";
-      signByDefault = true;
+      signByDefault = false;
     };
     extraConfig = {
       color.ui = true;

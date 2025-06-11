@@ -501,6 +501,8 @@ in
       # }];
     };
   };
+  xdg.configFile."helix/helix.scm".text = builtins.readFile ./helix.scm;
+  xdg.configFile."helix/init.scm".text = builtins.readFile ./init.scm;
 
   programs.go = {
     enable = true;

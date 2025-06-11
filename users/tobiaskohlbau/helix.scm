@@ -29,10 +29,8 @@
   (define current-line-number (helix.static.get-current-line-number))
   (set-register! #\+ (list (string-append remote "/blame/main/" (trim-start-matches (current-path) (string-append (find-workspace) "/")) "#L" (int->string (+ 1 current-line-number))))))
 
-; (define (gh-blame)
-;   (set-register-value #\+ (list (trim-start-matches (current-path) (string-append (current-directory) "/")))))
 ;;@doc
-;; Testing format
+;; Formatting bazel files with buildifier
 (define (buildifier)
   (expanded-shell "buildifier" "-mode=fix" "-lint=fix" "%")
   (enqueue-thread-local-callback-with-delay 100 helix.reload))

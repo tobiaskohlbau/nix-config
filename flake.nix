@@ -31,7 +31,6 @@
       overlays = [
         (final: prev: { inherit (inputs.helix.packages.${prev.system}) helix; })
         (final: prev: { ghostty = inputs.ghostty.packages.${prev.system}.default; })
-        (final: prev: { helix-cogs = inputs.helix.packages.${prev.system}.helix-cogs; })
         inputs.fonts.overlays.default
         inputs.zig.overlays.default
         (

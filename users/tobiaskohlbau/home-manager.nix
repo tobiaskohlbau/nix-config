@@ -67,8 +67,6 @@ in
     yubikey-agent
   ];
 
-  xdg.dataFile.steel.source = pkgs.helix-cogs;
-  xdg.dataFile.steel.recursive = true;
   home.sessionVariables.STEEL_HOME = "${config.xdg.dataHome}/steel";
   home.sessionVariables.STEEL_LSP_HOME = "${config.xdg.dataHome}/steel/steel-language-server";
   home.sessionVariables.HELIX_STEEL_CONFIG = "${config.xdg.configHome}/helix";

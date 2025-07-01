@@ -71,9 +71,6 @@ in
   home.sessionVariables.STEEL_LSP_HOME = "${config.xdg.dataHome}/steel/steel-language-server";
   home.sessionVariables.HELIX_STEEL_CONFIG = "${config.xdg.configHome}/helix";
 
-  xdg.configFile."i3/config".text = builtins.readFile ./i3;
-
-  xdg.configFile."gdb/gdbinit".text = builtins.readFile ./gdbinit;
 
   home.file.".npmrc".text = ''
     prefix = ''${HOME}/.npm;
@@ -501,8 +498,6 @@ in
       # }];
     };
   };
-  xdg.configFile."helix/helix.scm".text = builtins.readFile ./helix.scm;
-  xdg.configFile."helix/init.scm".text = builtins.readFile ./init.scm;
 
   programs.go = {
     enable = true;
@@ -523,10 +518,15 @@ in
     enable = true;
   };
 
-  xdg.configFile."alacritty/alacritty.toml".text = builtins.readFile ./alacritty.toml;
-
-
-  xdg.configFile."ghostty/config".text = builtins.readFile ./ghostty;
+  xdg.configFile = {
+    "alacritty/alacritty.toml".text = builtins.readFile ./alacritty.toml;
+    "i3/config".text = builtins.readFile ./i3;
+    "gdb/gdbinit".text = builtins.readFile ./gdbinit;
+    "helix/helix.scm".text = builtins.readFile ./helix.scm;
+    "helix/init.scm".text = builtins.readFile ./init.scm;
+  } // (if isLinux then {
+    "ghostty/config".text = builtins.readFile ./ghostty.linux;
+  } else {});
 
   home.pointerCursor = lib.mkIf isLinux {
     name = "Vanilla-DMZ";

@@ -3,6 +3,7 @@ NIXUSER ?= tobiaskohlbau
 NIXCONFIG ?= unset
 GITHUB_TOKEN ?= unset
 DISK_NAME ?= unset
+DISK_SUFFIX ?=
 
 MAKEFILE_DIR := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
@@ -27,9 +28,9 @@ installer:
 		mkpart ESP fat32 1MB 512MB \
 		set 3 esp on; \
 		sleep 1; \
-		mkfs.ext4 -L nixos /dev/$(DISK_NAME)p1; \
-		mkswap -L swap /dev/$(DISK_NAME)p2; \
-		mkfs.fat -F 32 -n boot /dev/$(DISK_NAME)p3; \
+		mkfs.ext4 -L nixos /dev/$(DISK_NAME)$(DISK_SUFFIX)1; \
+		mkswap -L swap /dev/$(DISK_NAME)$(DISK_SUFFIX)2; \
+		mkfs.fat -F 32 -n boot /dev/$(DISK_NAME)$(DISK_SUFFIX)3; \
 		sleep 1; \
 		mount /dev/disk/by-label/nixos /mnt; \
 		mkdir -p /mnt/boot; \

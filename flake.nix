@@ -50,6 +50,10 @@
         system = "aarch64-linux";
         user = "tobiaskohlbau";
       };
+      nixosConfigurations.vm-aarch64-prl = mkMachine "vm-aarch64-prl" {
+        system = "aarch64-linux";
+        user = "tobiaskohlbau";
+      };
       nixosConfigurations.pc-x86_64 = mkMachine "pc-x86_64" {
         system = "x86_64-linux";
         user = "tobiaskohlbau";

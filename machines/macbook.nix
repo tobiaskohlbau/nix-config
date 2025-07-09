@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   nix.useDaemon = true;
 
   nix = {
@@ -20,7 +21,7 @@
       . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
     fi
     # End Nix
-    '';
+  '';
 
   programs.fish.enable = true;
   programs.fish.shellInit = ''
@@ -29,9 +30,13 @@
       source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
     end
     # End Nix
-    '';
+  '';
 
-  environment.shells = with pkgs; [ bashInteractive zsh fish ];
+  environment.shells = with pkgs; [
+    bashInteractive
+    zsh
+    fish
+  ];
   environment.systemPackages = with pkgs; [
   ];
 }

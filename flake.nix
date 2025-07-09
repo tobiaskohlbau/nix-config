@@ -23,7 +23,14 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      darwin,
+      ...
+    }@inputs:
     let
       mkMachine = import ./lib/mkmachine.nix {
         inherit overlays nixpkgs inputs;
@@ -33,15 +40,13 @@
         (final: prev: { ghostty = inputs.ghostty.packages.${prev.system}.default; })
         inputs.fonts.overlays.default
         inputs.zig.overlays.default
-        (
-          final: prev: {
-            unstable = import inputs.nixpkgs-unstable { system = final.system; };
-          }
-        )
+        (final: prev: {
+          unstable = import inputs.nixpkgs-unstable { system = final.system; };
+        })
       ];
     in
     {
-      formatter."aarch64-linux" = nixpkgs.legacyPackages."aarch64-linux".nixpkgs-fmt;
+      formatter."aarch64-linux" = nixpkgs.legacyPackages."aarch64-linux".nixfmt-tree;
       nixosConfigurations.vm-aarch64-utm = mkMachine "vm-aarch64-utm" {
         system = "aarch64-linux";
         user = "tobiaskohlbau";
@@ -66,7 +71,7 @@
       };
       darwinConfigurations.macbook = mkMachine "macbook" {
         system = "aarch64-darwin";
-        user   = "tobiaskohlbau";
+        user = "tobiaskohlbau";
         darwin = true;
       };
     };

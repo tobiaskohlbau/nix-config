@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   nix = {
     package = pkgs.nixVersions.latest;
     extraOptions = ''

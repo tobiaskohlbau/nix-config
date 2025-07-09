@@ -1,6 +1,11 @@
-{isNative, privateNixConfig, ...}:
+{ isNative, privateNixConfig, ... }:
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   isLinux = pkgs.stdenv.isLinux;
@@ -21,56 +26,60 @@ in
 
   xdg.enable = true;
 
-  home.packages = with pkgs; [
-    jq
-    yq
-    fzf
-    fd
-    htop
-    ripgrep
-  ] ++ lib.optionals isLinux [
-    kubectl
-    kubelogin
-    jdtls
-    bazel
-    ibazel
-    gotools
-    gopls
-    nodejs
-    pnpm
-    nodePackages.svelte-language-server
-    nodePackages.vscode-langservers-extracted
-    glab
-    kubelogin
-    azure-cli
-    meld
-    unstable.jetbrains.idea-community
-    unstable.bun
-    unstable.google-java-format
-    temurin-bin-21
-    efm-langserver
-    nodePackages.typescript-language-server
-    bazel-buildtools
-    k3d
-    zigpkgs.master
-    _1password-cli
-    xcwd
-    unzip
-    firefox
-    rofi
-    ghostty
-  ] ++ lib.optionals isNative [
-    brightnessctl
-    pavucontrol
-    discord
-  ] ++ lib.optionals isDarwin [
-    yubikey-agent
-  ];
+  home.packages =
+    with pkgs;
+    [
+      jq
+      yq
+      fzf
+      fd
+      htop
+      ripgrep
+    ]
+    ++ lib.optionals isLinux [
+      kubectl
+      kubelogin
+      jdtls
+      bazel
+      ibazel
+      gotools
+      gopls
+      nodejs
+      pnpm
+      nodePackages.svelte-language-server
+      nodePackages.vscode-langservers-extracted
+      glab
+      kubelogin
+      azure-cli
+      meld
+      unstable.jetbrains.idea-community
+      unstable.bun
+      unstable.google-java-format
+      temurin-bin-21
+      efm-langserver
+      nodePackages.typescript-language-server
+      bazel-buildtools
+      k3d
+      zigpkgs.master
+      _1password-cli
+      xcwd
+      unzip
+      firefox
+      rofi
+      ghostty
+    ]
+    ++ lib.optionals isNative [
+      brightnessctl
+      pavucontrol
+      discord
+    ]
+    ++ lib.optionals isDarwin [
+      yubikey-agent
+    ];
 
   home.sessionVariables.STEEL_HOME = "${config.xdg.dataHome}/steel";
   home.sessionVariables.STEEL_LSP_HOME = "${config.xdg.dataHome}/steel/steel-language-server";
   home.sessionVariables.HELIX_STEEL_CONFIG = "${config.xdg.configHome}/helix";
-
 
   home.file.".npmrc".text = ''
     prefix = ''${HOME}/.npm;
@@ -114,53 +123,53 @@ in
     ];
 
     functions = {
-        fish_user_key_bindings = {
-          body = ''
-            bind \e\cB f;
-          '';
-        };
-        opunlock = {
-          body = ''
-            eval $(op signin);
-          '';
-        };
-        kubectl = {
-          body = ''
-              if test "$argv[1]" = "switch";
-                if test -n "$argv[2]";
-                  set -g kns_namespace "$argv[2]"
-                  return 0	
-                else
-                  set -e kns_namespace
-                  return 0
-                end
+      fish_user_key_bindings = {
+        body = ''
+          bind \e\cB f;
+        '';
+      };
+      opunlock = {
+        body = ''
+          eval $(op signin);
+        '';
+      };
+      kubectl = {
+        body = ''
+            if test "$argv[1]" = "switch";
+              if test -n "$argv[2]";
+                set -g kns_namespace "$argv[2]"
+                return 0	
+              else
+                set -e kns_namespace
+                return 0
               end
+            end
 
-            	if test -n "$kns_namespace";
-            		command kubectl -n $kns_namespace $argv
-            	else
-            		command kubectl $argv
-            	end
-          '';
-        };
+          	if test -n "$kns_namespace";
+          		command kubectl -n $kns_namespace $argv
+          	else
+          		command kubectl $argv
+          	end
+        '';
+      };
 
       cdr = {
         wraps = "cd (git rev-parse --show-toplevel)";
         body = ''
-            cd (git rev-parse --show-toplevel) $argv;
+          cd (git rev-parse --show-toplevel) $argv;
         '';
       };
 
       f = {
         body = ''
-            set INITIAL_QUERY ""
-            set RG_PREFIX "rg --line-number --no-heading --color=always --smart-case --no-ignore-vcs"
+          set INITIAL_QUERY ""
+          set RG_PREFIX "rg --line-number --no-heading --color=always --smart-case --no-ignore-vcs"
 
-            FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
-            fzf --delimiter=":" --nth=2.. --bind "change:reload:$RG_PREFIX {q} || true" \
-                --ansi --query "$INITIAL_QUERY" \
-                --no-sort --preview-window 'down:40%:+{2}' \
-                --preview 'bat --style=numbers --color=always --highlight-line {2} {1}'
+          FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY'" \
+          fzf --delimiter=":" --nth=2.. --bind "change:reload:$RG_PREFIX {q} || true" \
+              --ansi --query "$INITIAL_QUERY" \
+              --no-sort --preview-window 'down:40%:+{2}' \
+              --preview 'bat --style=numbers --color=always --highlight-line {2} {1}'
 
         '';
       };
@@ -316,7 +325,9 @@ in
     '';
   };
 
-  home.sessionVariables = { EDITOR = "hx"; };
+  home.sessionVariables = {
+    EDITOR = "hx";
+  };
 
   programs.helix = {
     enable = true;
@@ -345,9 +356,19 @@ in
         };
 
         statusline = {
-          left = [ "mode" "spinner" ];
+          left = [
+            "mode"
+            "spinner"
+          ];
           center = [ "file-name" ];
-          right = [ "diagnostics" "selections" "position" "file-encoding" "file-line-ending" "file-type" ];
+          right = [
+            "diagnostics"
+            "selections"
+            "position"
+            "file-encoding"
+            "file-line-ending"
+            "file-type"
+          ];
           separator = "|";
           mode = {
             normal = "NORMAL";
@@ -381,20 +402,32 @@ in
     languages = {
       language-server.eslint = {
         command = "vscode-eslint-language-server";
-        args = [ "--stdio"];
+        args = [ "--stdio" ];
         config = {
-          codeActionsOnSave = { mode = "all"; "source.fixAll.eslint" = true; };
-          format = { enable = true; };
+          codeActionsOnSave = {
+            mode = "all";
+            "source.fixAll.eslint" = true;
+          };
+          format = {
+            enable = true;
+          };
           nodePath = "";
           quiet = false;
-          rulesCustomizations = [];
+          rulesCustomizations = [ ];
           run = "onType";
           validate = "on";
-          experimental = {};
-          problems = { shortenToSingleLine = false; };
+          experimental = { };
+          problems = {
+            shortenToSingleLine = false;
+          };
           codeAction = {
-            disableRuleComment = { enable = true; location = "separateLine"; };
-            showDocumentation = { enable = false; };
+            disableRuleComment = {
+              enable = true;
+              location = "separateLine";
+            };
+            showDocumentation = {
+              enable = false;
+            };
           };
         };
       };
@@ -402,10 +435,10 @@ in
         command = "efm-langserver";
         config = {
           documentFormatting = true;
-          languages = { 
+          languages = {
             typescript = [
-              { 
-                formatCommand ="npx prettier --stdin-filepath \${INPUT}";
+              {
+                formatCommand = "npx prettier --stdin-filepath \${INPUT}";
                 formatStdin = true;
               }
             ];
@@ -414,7 +447,7 @@ in
       };
       language-server.typescript = {
         command = "typescript-language-server";
-        args = ["--stdio"];
+        args = [ "--stdio" ];
         config = {
           hostInfo = "helix";
         };
@@ -441,53 +474,70 @@ in
 
       language-server.steel = {
         command = "steel-language-server";
-        args = [];
+        args = [ ];
         environment = {
           STEEL_LSP_HOME = "/home/tobiaskohlbau/.config/steel-lsp/";
         };
       };
 
-      language = [{
-        name = "java";
-        formatter = {
-          command = "google-java-format";
-          args = ["-"];
-        };
-        auto-format = true;
-      }
-      {
-        name = "go";
-        formatter = {
-          command = "goimports";
-        };
-      }
-      {
-        name = "typescript";
-        auto-format = true;
-        language-servers = [
-          { name = "efm"; only-features = ["format" "diagnostics"]; }
-          { name = "typescript-language-server"; except-features = ["format" "diagnostics"]; }
-          { name = "eslint"; }
-        ];
-      }
-      {
-        name = "starlark";
-        formatter = {
-          command = "buildifier";
-          args = ["-"];
-        };
-        auto-format = true;
-      }
-      {
-        name = "scheme";
-        formatter = {
-          command = "raco";
-          args = ["fmt" "-i"];
-        };
-        language-servers = [
-          { name = "steel"; }
-        ];
-      }];
+      language = [
+        {
+          name = "java";
+          formatter = {
+            command = "google-java-format";
+            args = [ "-" ];
+          };
+          auto-format = true;
+        }
+        {
+          name = "go";
+          formatter = {
+            command = "goimports";
+          };
+        }
+        {
+          name = "typescript";
+          auto-format = true;
+          language-servers = [
+            {
+              name = "efm";
+              only-features = [
+                "format"
+                "diagnostics"
+              ];
+            }
+            {
+              name = "typescript-language-server";
+              except-features = [
+                "format"
+                "diagnostics"
+              ];
+            }
+            { name = "eslint"; }
+          ];
+        }
+        {
+          name = "starlark";
+          formatter = {
+            command = "buildifier";
+            args = [ "-" ];
+          };
+          auto-format = true;
+        }
+        {
+          name = "scheme";
+          formatter = {
+            command = "raco";
+            args = [
+              "fmt"
+              "-i"
+            ];
+          };
+          language-servers = [
+            { name = "steel"; }
+          ];
+        }
+      ];
       # {
       #   name = "kotlin";
       #   formatter = {
@@ -518,15 +568,22 @@ in
     enable = true;
   };
 
-  xdg.configFile = {
-    "alacritty/alacritty.toml".text = builtins.readFile ./alacritty.toml;
-    "i3/config".text = builtins.readFile ./i3;
-    "gdb/gdbinit".text = builtins.readFile ./gdbinit;
-    "helix/helix.scm".text = builtins.readFile ./helix.scm;
-    "helix/init.scm".text = builtins.readFile ./init.scm;
-  } // (if isLinux then {
-    "ghostty/config".text = builtins.readFile ./ghostty.linux;
-  } else {});
+  xdg.configFile =
+    {
+      "alacritty/alacritty.toml".text = builtins.readFile ./alacritty.toml;
+      "i3/config".text = builtins.readFile ./i3;
+      "gdb/gdbinit".text = builtins.readFile ./gdbinit;
+      "helix/helix.scm".text = builtins.readFile ./helix.scm;
+      "helix/init.scm".text = builtins.readFile ./init.scm;
+    }
+    // (
+      if isLinux then
+        {
+          "ghostty/config".text = builtins.readFile ./ghostty.linux;
+        }
+      else
+        { }
+    );
 
   home.pointerCursor = lib.mkIf isLinux {
     name = "Vanilla-DMZ";

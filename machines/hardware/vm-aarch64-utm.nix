@@ -1,24 +1,36 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [ ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "uhci_hcd" "virtio_pci" "usbhid" "usb_storage" "sr_mod" "virtiofs" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "uhci_hcd"
+    "virtio_pci"
+    "usbhid"
+    "usb_storage"
+    "sr_mod"
+    "virtiofs"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-label/nixos";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/nixos";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-label/boot";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/boot";
+    fsType = "vfat";
+  };
 
   fileSystems."/run/rosetta" = {
     device = "rosetta";
@@ -26,9 +38,13 @@
   };
 
   nix.settings.extra-platforms = [ "x86_64-linux" ];
-  nix.settings.extra-sandbox-paths = [ "/run/rosetta" "/run/binfmt" ];
+  nix.settings.extra-sandbox-paths = [
+    "/run/rosetta"
+    "/run/binfmt"
+  ];
 
-  boot.binfmt.registrations."rosetta" = { # based on https://developer.apple.com/documentation/virtualization/running_intel_binaries_in_linux_vms_with_rosetta#3978495
+  boot.binfmt.registrations."rosetta" = {
+    # based on https://developer.apple.com/documentation/virtualization/running_intel_binaries_in_linux_vms_with_rosetta#3978495
     interpreter = "/run/rosetta/rosetta";
     fixBinary = true;
     wrapInterpreterInShell = false;

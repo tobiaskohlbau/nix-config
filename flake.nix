@@ -43,6 +43,15 @@
         (final: prev: {
           unstable = import inputs.nixpkgs-unstable { system = final.system; };
         })
+        (final: prev: {
+          ghostty-software = prev.ghostty.overrideAttrs (prevAttrs: {
+            postInstall =
+              (prevAttrs.postInstall or "")
+              + ''
+                wrapProgram $out/bin/ghostty --set LIBGL_ALWAYS_SOFTWARE 1
+              '';
+          });
+        })
       ];
     in
     {

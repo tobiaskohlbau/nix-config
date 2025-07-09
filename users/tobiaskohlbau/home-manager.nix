@@ -1,4 +1,9 @@
-{ isNative, privateNixConfig, ... }:
+{
+  isNative,
+  machineName,
+  privateNixConfig,
+  ...
+}:
 
 {
   config,
@@ -15,6 +20,10 @@ let
   '';
   bazel = pkgs.writeShellScriptBin "bazel" (builtins.readFile ./bazel.bash);
   ibazel = pkgs.writeShellScriptBin "ibazel" (builtins.readFile ./bazel.bash);
+  mkIfElse = cond: a: b: [
+    (lib.mkIf cond a)
+    (lib.mkIf (!cond) b)
+  ];
 in
 {
   imports = [
@@ -66,7 +75,6 @@ in
       unzip
       firefox
       rofi
-      ghostty
     ]
     ++ lib.optionals isNative [
       brightnessctl
@@ -75,7 +83,9 @@ in
     ]
     ++ lib.optionals isDarwin [
       yubikey-agent
-    ];
+    ]
+    # For parallels enable ghostty with software rendering as opengl setup is broken.
+    ++ mkIfElse (lib.strings.hasInfix "prl" "${machineName}") ghostty-software ghostty;
 
   home.sessionVariables.STEEL_HOME = "${config.xdg.dataHome}/steel";
   home.sessionVariables.STEEL_LSP_HOME = "${config.xdg.dataHome}/steel/steel-language-server";

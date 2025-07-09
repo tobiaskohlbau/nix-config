@@ -36,6 +36,7 @@ libSystem rec {
       home-manager.useUserPackages = true;
       home-manager.users.${if darwin then "tobias" else user} = import ../users/${user}/home-manager.nix {
         inherit isNative;
+        machineName = name;
         privateNixConfig = nix-config-private;
       };
     }

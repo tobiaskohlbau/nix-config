@@ -190,12 +190,15 @@
       }
     },
     "nix-config-private": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_5"
+      },
       "locked": {
-        "lastModified": 1757077754,
-        "narHash": "sha256-4aoMWSpRRHLyYq9KhtJ2y1EtvSYBTnfvCtmHEyn3jfE=",
+        "lastModified": 1757078269,
+        "narHash": "sha256-cd4y9qqbSvRJxmleV376O1366Em7I/xlz0emd6OLvQs=",
         "ref": "refs/heads/main",
-        "rev": "f823824cec0f0f8a40725254e7040298709c192a",
-        "revCount": 5,
+        "rev": "439ea4a6b327820ebd55ec61d09c0f3dfecfc903",
+        "revCount": 6,
         "type": "git",
         "url": "https://github.com/tobiaskohlbau/nix-config-private"
       },
@@ -312,6 +315,22 @@
     },
     "nixpkgs_6": {
       "locked": {
+        "lastModified": 1757020766,
+        "narHash": "sha256-PLoSjHRa2bUbi1x9HoXgTx2AiuzNXs54c8omhadyvp0=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "fe83bbdde2ccdc2cb9573aa846abe8363f79a97a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-25.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_7": {
+      "locked": {
         "lastModified": 1708161998,
         "narHash": "sha256-6KnemmUorCvlcAvGziFosAVkrlWZGIc6UNT9GUYr0jQ=",
         "owner": "NixOS",
@@ -335,7 +354,7 @@
         "home-manager": "home-manager",
         "nix-config-private": "nix-config-private",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_5",
+        "nixpkgs": "nixpkgs_6",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "zig": "zig_2"
       }
@@ -439,7 +458,7 @@
       "inputs": {
         "flake-compat": "flake-compat_2",
         "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_6"
+        "nixpkgs": "nixpkgs_7"
       },
       "locked": {
         "lastModified": 1757032345,

@@ -45,11 +45,9 @@
         })
         (final: prev: {
           ghostty-software = prev.ghostty.overrideAttrs (prevAttrs: {
-            postInstall =
-              (prevAttrs.postInstall or "")
-              + ''
-                wrapProgram $out/bin/ghostty --set LIBGL_ALWAYS_SOFTWARE 1
-              '';
+            postInstall = (prevAttrs.postInstall or "") + ''
+              wrapProgram $out/bin/ghostty --set LIBGL_ALWAYS_SOFTWARE 1
+            '';
           });
         })
       ];

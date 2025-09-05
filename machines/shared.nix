@@ -86,6 +86,7 @@
     helix
     gnumake
     xclip
+    nixfmt-rfc-style
   ];
 
   nixpkgs.config.allowUnfree = true;

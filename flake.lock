@@ -191,11 +191,11 @@
     },
     "nix-config-private": {
       "locked": {
-        "lastModified": 1754471259,
-        "narHash": "sha256-kqRplt1gkdxAALoPnac0E6wea4dviWtYR8QqOR54pVY=",
+        "lastModified": 1757077754,
+        "narHash": "sha256-4aoMWSpRRHLyYq9KhtJ2y1EtvSYBTnfvCtmHEyn3jfE=",
         "ref": "refs/heads/main",
-        "rev": "8b07d62bbdce61fe0e08d9c6b36e0cfc83749526",
-        "revCount": 4,
+        "rev": "f823824cec0f0f8a40725254e7040298709c192a",
+        "revCount": 5,
         "type": "git",
         "url": "https://github.com/tobiaskohlbau/nix-config-private"
       },
@@ -296,11 +296,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1756886854,
-        "narHash": "sha256-6tooT142NLcFjt24Gi4B0G1pgWLvfw7y93sYEfSHlLI=",
+        "lastModified": 1757020766,
+        "narHash": "sha256-PLoSjHRa2bUbi1x9HoXgTx2AiuzNXs54c8omhadyvp0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "0e6684e6c5755325f801bda1751a8a4038145d7d",
+        "rev": "fe83bbdde2ccdc2cb9573aa846abe8363f79a97a",
         "type": "github"
       },
       "original": {

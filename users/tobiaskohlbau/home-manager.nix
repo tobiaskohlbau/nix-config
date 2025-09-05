@@ -409,22 +409,21 @@ in
     enable = true;
   };
 
-  xdg.configFile =
-    {
-      "alacritty/alacritty.toml".text = builtins.readFile ./alacritty.toml;
-      "i3/config".text = builtins.readFile ./i3;
-      "gdb/gdbinit".text = builtins.readFile ./gdbinit;
-      "helix/helix.scm".text = builtins.readFile ./helix.scm;
-      "helix/init.scm".text = builtins.readFile ./init.scm;
-    }
-    // (
-      if isLinux then
-        {
-          "ghostty/config".text = builtins.readFile ./ghostty.linux;
-        }
-      else
-        { }
-    );
+  xdg.configFile = {
+    "alacritty/alacritty.toml".text = builtins.readFile ./alacritty.toml;
+    "i3/config".text = builtins.readFile ./i3;
+    "gdb/gdbinit".text = builtins.readFile ./gdbinit;
+    "helix/helix.scm".text = builtins.readFile ./helix.scm;
+    "helix/init.scm".text = builtins.readFile ./init.scm;
+  }
+  // (
+    if isLinux then
+      {
+        "ghostty/config".text = builtins.readFile ./ghostty.linux;
+      }
+    else
+      { }
+  );
 
   home.pointerCursor = lib.mkIf isLinux {
     name = "Vanilla-DMZ";

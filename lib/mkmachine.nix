@@ -36,5 +36,6 @@ libSystem rec {
         machineName = name;
       };
     }
-  ] ++ rest.modules;
+  ]
+  ++ rest.modules;
 }

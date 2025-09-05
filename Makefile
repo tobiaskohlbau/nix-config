@@ -4,6 +4,7 @@ NIXCONFIG ?= unset
 GITHUB_TOKEN ?= unset
 DISK_NAME ?= unset
 DISK_SUFFIX ?=
+OVERRIDES ?=
 
 MAKEFILE_DIR := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
@@ -14,7 +15,7 @@ ifeq ($(shell uname), Darwin)
 	NIXPKGS_ALLOW_UNFREE=1 nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.${NIXCONFIG}.system"
 	./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${NIXCONFIG}"
 else
-	sudo nixos-rebuild switch --flake ".#$(NIXCONFIG)" --show-trace
+	sudo nixos-rebuild switch --flake ".#$(NIXCONFIG)" ${OVERRIDES}
 endif
 
 test:

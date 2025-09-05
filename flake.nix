@@ -60,6 +60,13 @@
         system = "aarch64-linux";
         user = "tobiaskohlbau";
       };
+      nixosConfigurations.vm-aarch64-utm-work = mkMachine "vm-aarch64-utm" {
+        system = "aarch64-linux";
+        user = "tobiaskohlbau";
+        modules = [
+          inputs.nix-config-private.nixosModules.syseleven
+        ];
+      };
       nixosConfigurations.vm-aarch64-utm-qemu = mkMachine "vm-aarch64-utm-qemu" {
         system = "aarch64-linux";
         user = "tobiaskohlbau";
@@ -77,6 +84,9 @@
         system = "x86_64-linux";
         user = "tobiaskohlbau";
         native = true;
+        modules = [
+          inputs.nixos-hardware.nixosModules.microsoft-surface-common
+        ];
       };
       darwinConfigurations.macbook = mkMachine "macbook" {
         system = "aarch64-darwin";

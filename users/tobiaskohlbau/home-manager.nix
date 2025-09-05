@@ -1,7 +1,6 @@
 {
   isNative,
   machineName,
-  privateNixConfig,
   ...
 }:
 
@@ -15,21 +14,12 @@
 let
   isLinux = pkgs.stdenv.isLinux;
   isDarwin = pkgs.stdenv.isDarwin;
-  jdtls = pkgs.writeShellScriptBin "jdtls" ''
-    jdt-language-server -data $HOME/.cache/jdt.ls/data$(pwd)
-  '';
-  bazel = pkgs.writeShellScriptBin "bazel" (builtins.readFile ./bazel.bash);
-  ibazel = pkgs.writeShellScriptBin "ibazel" (builtins.readFile ./bazel.bash);
   mkIfElse = cond: a: b: [
     (lib.mkIf cond a)
     (lib.mkIf (!cond) b)
   ];
 in
 {
-  imports = [
-    "${privateNixConfig}/home-manager.nix"
-  ];
-
   # Homemanager needs this in order to work. Otherwise errors are thrown.
   home.stateVersion = "25.05";
 
@@ -46,8 +36,6 @@ in
       ripgrep
     ]
     ++ lib.optionals isLinux [
-      kubectl
-      kubeswitch
       meld
       xcwd
       unzip
@@ -92,11 +80,9 @@ in
         set -x -U SSH_AUTH_SOCK /opt/homebrew/var/run/yubikey-agent.sock
       end
       fish_add_path $HOME/go/bin
-      switcher init fish | source
     '';
 
     shellAbbrs = {
-      k = "kubectl";
       xclip = "xclip -selection c";
     };
     plugins = [
@@ -120,15 +106,6 @@ in
       opunlock = {
         body = ''
           eval $(op signin);
-        '';
-      };
-      kubectl = {
-        body = ''
-            if test "$argv[1]" = "switch";
-              kubeswitch $argv[2..-1]
-            else
-              command kubectl $argv
-            end
         '';
       };
 
@@ -382,78 +359,6 @@ in
     };
 
     languages = {
-      language-server.eslint = {
-        command = "vscode-eslint-language-server";
-        args = [ "--stdio" ];
-        config = {
-          codeActionsOnSave = {
-            mode = "all";
-            "source.fixAll.eslint" = true;
-          };
-          format = {
-            enable = true;
-          };
-          nodePath = "";
-          quiet = false;
-          rulesCustomizations = [ ];
-          run = "onType";
-          validate = "on";
-          experimental = { };
-          problems = {
-            shortenToSingleLine = false;
-          };
-          codeAction = {
-            disableRuleComment = {
-              enable = true;
-              location = "separateLine";
-            };
-            showDocumentation = {
-              enable = false;
-            };
-          };
-        };
-      };
-      language-server.efm = {
-        command = "efm-langserver";
-        config = {
-          documentFormatting = true;
-          languages = {
-            typescript = [
-              {
-                formatCommand = "npx prettier --stdin-filepath \${INPUT}";
-                formatStdin = true;
-              }
-            ];
-          };
-        };
-      };
-      language-server.typescript = {
-        command = "typescript-language-server";
-        args = [ "--stdio" ];
-        config = {
-          hostInfo = "helix";
-        };
-      };
-      language-server.jdtls = {
-        config = {
-          extendedClientCapabilities = {
-            classFileContentsSupport = true;
-          };
-          settings.java = {
-            import = {
-              generatesMetadataFilesAtProjectRoot = true;
-            };
-            # "import".gradle = {
-            #   enabled = true;
-            #   user.home = "/home/tobiaskohlbau/.gradle";
-            #   offline.enabled = true;
-            # };
-            eclipse.downloadSources = true;
-            configuration.updateBuildConfiguration = "automatic";
-          };
-        };
-      };
-
       language-server.steel = {
         command = "steel-language-server";
         args = [ ];
@@ -464,47 +369,10 @@ in
 
       language = [
         {
-          name = "java";
-          formatter = {
-            command = "google-java-format";
-            args = [ "-" ];
-          };
-          auto-format = true;
-        }
-        {
           name = "go";
           formatter = {
             command = "goimports";
           };
-        }
-        {
-          name = "typescript";
-          auto-format = true;
-          language-servers = [
-            {
-              name = "efm";
-              only-features = [
-                "format"
-                "diagnostics"
-              ];
-            }
-            {
-              name = "typescript-language-server";
-              except-features = [
-                "format"
-                "diagnostics"
-              ];
-            }
-            { name = "eslint"; }
-          ];
-        }
-        {
-          name = "starlark";
-          formatter = {
-            command = "buildifier";
-            args = [ "-" ];
-          };
-          auto-format = true;
         }
         {
           name = "scheme";
@@ -535,11 +403,6 @@ in
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-  };
-
-  programs.kitty = {
-    enable = true;
-    extraConfig = builtins.readFile ./kitty;
   };
 
   programs.alacritty = {

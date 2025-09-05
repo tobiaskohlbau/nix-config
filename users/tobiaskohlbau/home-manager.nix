@@ -47,30 +47,8 @@ in
     ]
     ++ lib.optionals isLinux [
       kubectl
-      kubelogin
-      jdtls
-      bazel
-      ibazel
-      gotools
-      gopls
-      nodejs
-      pnpm
-      nodePackages.svelte-language-server
-      nodePackages.vscode-langservers-extracted
-      glab
-      kubelogin
-      azure-cli
+      kubeswitch
       meld
-      unstable.jetbrains.idea-community
-      unstable.bun
-      unstable.google-java-format
-      temurin-bin-21
-      efm-langserver
-      nodePackages.typescript-language-server
-      bazel-buildtools
-      k3d
-      zigpkgs.master
-      _1password-cli
       xcwd
       unzip
       firefox
@@ -114,6 +92,7 @@ in
         set -x -U SSH_AUTH_SOCK /opt/homebrew/var/run/yubikey-agent.sock
       end
       fish_add_path $HOME/go/bin
+      switcher init fish | source
     '';
 
     shellAbbrs = {
@@ -146,20 +125,10 @@ in
       kubectl = {
         body = ''
             if test "$argv[1]" = "switch";
-              if test -n "$argv[2]";
-                set -g kns_namespace "$argv[2]"
-                return 0	
-              else
-                set -e kns_namespace
-                return 0
-              end
+              kubeswitch $argv[2..-1]
+            else
+              command kubectl $argv
             end
-
-          	if test -n "$kns_namespace";
-          		command kubectl -n $kns_namespace $argv
-          	else
-          		command kubectl $argv
-          	end
         '';
       };
 
@@ -393,6 +362,9 @@ in
           skip-levels = 1;
         };
 
+        file-picker = {
+          hidden = false;
+        };
       };
       keys = {
         normal."+" = {
@@ -548,20 +520,16 @@ in
           ];
         }
       ];
-      # {
-      #   name = "kotlin";
-      #   formatter = {
-      #     command = "ktlint";
-      #     args = ["-F"];
-      #   };
-      #   indent = { tab-width = 2; unit = "\t"; };
-      # }];
     };
+
+    ignores = [
+      ".direnv/"
+    ];
   };
 
   programs.go = {
     enable = true;
-    package = pkgs.unstable.go_1_23;
+    package = pkgs.go;
   };
 
   programs.direnv = {

@@ -42,5 +42,5 @@ libSystem rec {
         machineName = name;
       };
     }
-  ] ++ additionalModules;
+  ];
 }

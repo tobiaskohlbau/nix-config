@@ -52,12 +52,9 @@
         system = "aarch64-linux";
         user = "tobiaskohlbau";
       };
-      nixosConfigurations.vm-aarch64-utm-work = mkMachine "vm-aarch64-utm" {
+      nixosConfigurations.vm-aarch64-utm-work = mkMachine "vm-aarch64-utm-work" {
         system = "aarch64-linux";
         user = "tobiaskohlbau";
-        modules = [
-          inputs.nix-config-private.nixosModules.syseleven
-        ];
       };
       nixosConfigurations.vm-aarch64-utm-qemu = mkMachine "vm-aarch64-utm-qemu" {
         system = "aarch64-linux";

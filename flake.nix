@@ -36,7 +36,7 @@
         inherit overlays nixpkgs inputs;
       };
       overlays = [
-        (final: prev: { inherit (inputs.helix.packages.${prev.system}) helix; })
+        (final: prev: { steel-helix = inputs.helix.packages.${prev.system}.default; })
         (final: prev: { ghostty = inputs.ghostty.packages.${prev.system}.default; })
         inputs.fonts.overlays.default
         inputs.zig.overlays.default

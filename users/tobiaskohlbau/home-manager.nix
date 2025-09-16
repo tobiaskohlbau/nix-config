@@ -20,6 +20,10 @@ let
   ];
 in
 {
+  imports = [
+    ./helix-steel.nix
+  ];
+
   # Homemanager needs this in order to work. Otherwise errors are thrown.
   home.stateVersion = "25.05";
 
@@ -29,7 +33,7 @@ in
     with pkgs;
     [
       jq
-      yq
+      yq-go
       fzf
       fd
       htop
@@ -391,6 +395,13 @@ in
     ignores = [
       ".direnv/"
     ];
+
+    steel = {
+      enable = true;
+      scms = {
+        gh-blame = builtins.readFile ./gh-blame.scm;
+      };
+    };
   };
 
   programs.go = {
@@ -411,8 +422,6 @@ in
     "alacritty/alacritty.toml".text = builtins.readFile ./alacritty.toml;
     "i3/config".text = builtins.readFile ./i3;
     "gdb/gdbinit".text = builtins.readFile ./gdbinit;
-    "helix/helix.scm".text = builtins.readFile ./helix.scm;
-    "helix/init.scm".text = builtins.readFile ./init.scm;
   };
 
   home.pointerCursor = lib.mkIf isLinux {

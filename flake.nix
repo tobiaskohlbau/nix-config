@@ -13,7 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    helix.url = "github:mattwparas/helix/steel-event-system";
+    steel-helix.url = "github:mattwparas/helix/steel-event-system";
 
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
     nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
@@ -36,7 +36,7 @@
         inherit overlays nixpkgs inputs;
       };
       overlays = [
-        (final: prev: { steel-helix = inputs.helix.packages.${prev.system}.default; })
+        (final: prev: { steel-helix = inputs.steel-helix.packages.${prev.system}.default; })
         (final: prev: { ghostty = inputs.ghostty.packages.${prev.system}.default; })
         inputs.fonts.overlays.default
         inputs.zig.overlays.default
@@ -66,15 +66,6 @@
       nixosConfigurations.vm-aarch64-prl = mkMachine "vm-aarch64-prl" {
         system = "aarch64-linux";
         user = "tobiaskohlbau";
-        overlays = [
-          (final: prev: {
-            ghostty = prev.ghostty.overrideAttrs (prevAttrs: {
-              postInstall = (prevAttrs.postInstall or "") + ''
-                wrapProgram $out/bin/ghostty --set LIBGL_ALWAYS_SOFTWARE 1
-              '';
-            });
-          })
-        ];
       };
       nixosConfigurations.pc-x86_64 = mkMachine "pc-x86_64" {
         system = "x86_64-linux";
@@ -85,9 +76,6 @@
         system = "x86_64-linux";
         user = "tobiaskohlbau";
         native = true;
-        modules = [
-          inputs.nixos-hardware.nixosModules.microsoft-surface-common
-        ];
       };
       darwinConfigurations.macbook = mkMachine "macbook" {
         system = "aarch64-darwin";

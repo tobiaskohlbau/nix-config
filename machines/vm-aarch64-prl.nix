@@ -36,4 +36,12 @@
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnsupportedSystem = true;
+
+  nixpkgs.overlays = [(final: prev: {
+    ghostty = prev.ghostty.overrideAttrs (prevAttrs: {
+      postInstall = (prevAttrs.postInstall or "") + ''
+        wrapProgram $out/bin/ghostty --set LIBGL_ALWAYS_SOFTWARE 1
+      '';
+    });
+  })];
 }

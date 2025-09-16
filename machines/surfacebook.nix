@@ -2,11 +2,13 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 {
   imports = [
     ./hardware/pc-x86_64.nix
+    inputs.nixos-hardware.outputs.nixosModules.microsoft-surface-common
     ./shared.nix
   ];
 

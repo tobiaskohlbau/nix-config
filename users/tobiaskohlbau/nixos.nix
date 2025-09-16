@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home-manager.users.tobias.xdg.configFile."ghostty/config".text = builtins.readFile ./ghostty.linux;
+  home-manager.users.tobiaskohlbau.xdg.configFile."ghostty/config".text = builtins.readFile ./ghostty.linux;
 
   programs.fish.enable = true;
   users.users.tobiaskohlbau = {

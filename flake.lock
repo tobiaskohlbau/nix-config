@@ -148,26 +148,6 @@
         "url": "https://github.com/ghostty-org/ghostty"
       }
     },
-    "helix": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_4",
-        "rust-overlay": "rust-overlay"
-      },
-      "locked": {
-        "lastModified": 1757900956,
-        "narHash": "sha256-4bOfZTMpfPSA+Mpvwmmp677rL/UVeaYodPB2/LTmu6w=",
-        "owner": "mattwparas",
-        "repo": "helix",
-        "rev": "2270457b8cb8f020ce3b5e2547ba4c66ec310f64",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mattwparas",
-        "ref": "steel-event-system",
-        "repo": "helix",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -191,14 +171,14 @@
     },
     "nix-config-private": {
       "inputs": {
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1757401127,
-        "narHash": "sha256-R0p1TWtXKzzmtiHEFak0al5Wwpokg7IJwXItKTHtGmQ=",
+        "lastModified": 1758013740,
+        "narHash": "sha256-ft1VIcips/UYqwOxdkTdK+YuiaE/hF96m5qx5dI9C4o=",
         "ref": "refs/heads/main",
-        "rev": "ecbfde2211ac9197c67491d43a148e0e1e640946",
-        "revCount": 7,
+        "rev": "64f9d4762e070251dc1e4f14c0e68539dda2fb73",
+        "revCount": 9,
         "type": "git",
         "url": "https://github.com/tobiaskohlbau/nix-config-private"
       },
@@ -283,22 +263,6 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1740560979,
-        "narHash": "sha256-Vr3Qi346M+8CjedtbyUevIGDZW8LcA1fTG0ugPY/Hic=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "5135c59491985879812717f4c9fea69604e7f26f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_5": {
-      "locked": {
         "lastModified": 1757020766,
         "narHash": "sha256-PLoSjHRa2bUbi1x9HoXgTx2AiuzNXs54c8omhadyvp0=",
         "owner": "nixos",
@@ -313,7 +277,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_6": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1757810152,
         "narHash": "sha256-Vp9K5ol6h0J90jG7Rm4RWZsCB3x7v5VPx588TQ1dkfs=",
@@ -325,6 +289,22 @@
       "original": {
         "owner": "nixos",
         "ref": "nixos-25.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_6": {
+      "locked": {
+        "lastModified": 1740560979,
+        "narHash": "sha256-Vr3Qi346M+8CjedtbyUevIGDZW8LcA1fTG0ugPY/Hic=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "5135c59491985879812717f4c9fea69604e7f26f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -350,19 +330,19 @@
         "darwin": "darwin",
         "fonts": "fonts",
         "ghostty": "ghostty",
-        "helix": "helix",
         "home-manager": "home-manager",
         "nix-config-private": "nix-config-private",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_6",
+        "nixpkgs": "nixpkgs_5",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "steel-helix": "steel-helix",
         "zig": "zig_2"
       }
     },
     "rust-overlay": {
       "inputs": {
         "nixpkgs": [
-          "helix",
+          "steel-helix",
           "nixpkgs"
         ]
       },
@@ -377,6 +357,26 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "steel-helix": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_6",
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1757900956,
+        "narHash": "sha256-4bOfZTMpfPSA+Mpvwmmp677rL/UVeaYodPB2/LTmu6w=",
+        "owner": "mattwparas",
+        "repo": "helix",
+        "rev": "2270457b8cb8f020ce3b5e2547ba4c66ec310f64",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattwparas",
+        "ref": "steel-event-system",
+        "repo": "helix",
         "type": "github"
       }
     },

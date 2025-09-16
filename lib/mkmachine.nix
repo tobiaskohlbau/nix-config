@@ -10,8 +10,6 @@ name:
   user,
   native ? false,
   darwin ? false,
-  modules ? [ ],
-  overlays ? [ ],
   ...
 }:
 
@@ -20,14 +18,16 @@ let
   home-manager =
     if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
   libSystem = if darwin then inputs.darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
-  additionalOverlays = overlays;
-  additionalModules = modules;
 in
 libSystem rec {
   inherit system;
 
+  specialArgs = {
+    inherit inputs;
+  };
+
   modules = [
-    { nixpkgs.overlays = overlays ++ additionalOverlays; }
+    { nixpkgs.overlays = overlays; }
 
     ../machines/${name}.nix
     ../users/tobiaskohlbau/${if darwin then "darwin" else "nixos"}.nix
@@ -40,6 +40,5 @@ libSystem rec {
         machineName = name;
       };
     }
-  ]
-  ++ additionalModules;
+  ];
 }

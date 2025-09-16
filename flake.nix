@@ -43,17 +43,11 @@
         (final: prev: {
           unstable = import inputs.nixpkgs-unstable { system = final.system; };
         })
-        (final: prev: {
-          ghostty-software = prev.ghostty.overrideAttrs (prevAttrs: {
-            postInstall = (prevAttrs.postInstall or "") + ''
-              wrapProgram $out/bin/ghostty --set LIBGL_ALWAYS_SOFTWARE 1
-            '';
-          });
-        })
       ];
     in
     {
       formatter."aarch64-linux" = nixpkgs.legacyPackages."aarch64-linux".nixfmt-tree;
+      formatter."aarch64-darwin" = nixpkgs.legacyPackages."aarch64-darwin".nixfmt-tree;
       nixosConfigurations.vm-aarch64-utm = mkMachine "vm-aarch64-utm" {
         system = "aarch64-linux";
         user = "tobiaskohlbau";
@@ -72,6 +66,15 @@
       nixosConfigurations.vm-aarch64-prl = mkMachine "vm-aarch64-prl" {
         system = "aarch64-linux";
         user = "tobiaskohlbau";
+        overlays = [
+          (final: prev: {
+            ghostty = prev.ghostty.overrideAttrs (prevAttrs: {
+              postInstall = (prevAttrs.postInstall or "") + ''
+                wrapProgram $out/bin/ghostty --set LIBGL_ALWAYS_SOFTWARE 1
+              '';
+            });
+          })
+        ];
       };
       nixosConfigurations.pc-x86_64 = mkMachine "pc-x86_64" {
         system = "x86_64-linux";
@@ -88,7 +91,7 @@
       };
       darwinConfigurations.macbook = mkMachine "macbook" {
         system = "aarch64-darwin";
-        user = "tobiaskohlbau";
+        user = "tobias";
         darwin = true;
       };
     };

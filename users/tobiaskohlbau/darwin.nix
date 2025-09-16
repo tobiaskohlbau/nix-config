@@ -1,6 +1,11 @@
 { inputs, pkgs, ... }:
 
 {
+  system.primaryUser = "tobias";
+  ids.gids.nixbld = 30000;
+
+  home-manager.users.tobias.xdg.configFile."ghostty/config".text = builtins.readFile ./ghostty.darwin;
+
   homebrew = {
     enable = true;
     casks = [
@@ -8,7 +13,7 @@
       "dash"
       "discord"
       "rectangle"
-      "alacritty"
+      "ghostty"
     ];
   };
 

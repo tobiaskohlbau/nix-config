@@ -10,23 +10,27 @@ name:
   user,
   native ? false,
   darwin ? false,
+  modules ? [ ],
+  overlays ? [ ],
   ...
-}@rest:
+}:
 
 let
   isNative = native;
   home-manager =
     if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
   libSystem = if darwin then inputs.darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
+  additionalOverlays = overlays;
+  additionalModules = modules;
 in
 libSystem rec {
   inherit system;
 
   modules = [
-    { nixpkgs.overlays = overlays; }
+    { nixpkgs.overlays = overlays ++ additionalOverlays; }
 
     ../machines/${name}.nix
-    ../users/${user}/${if darwin then "darwin" else "nixos"}.nix
+    ../users/tobiaskohlbau/${if darwin then "darwin" else "nixos"}.nix
     home-manager.home-manager
     {
       home-manager.useGlobalPkgs = true;
@@ -37,5 +41,5 @@ libSystem rec {
       };
     }
   ]
-  ++ rest.modules;
+  ++ additionalModules;
 }

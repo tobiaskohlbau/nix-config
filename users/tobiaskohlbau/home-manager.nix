@@ -41,6 +41,7 @@ in
       unzip
       firefox
       rofi
+      ghostty
     ]
     ++ lib.optionals isNative [
       brightnessctl
@@ -49,9 +50,7 @@ in
     ]
     ++ lib.optionals isDarwin [
       yubikey-agent
-    ]
-    # For parallels enable ghostty with software rendering as opengl setup is broken.
-    ++ mkIfElse (lib.strings.hasInfix "prl" "${machineName}") ghostty-software ghostty;
+    ];
 
   home.sessionVariables.STEEL_HOME = "${config.xdg.dataHome}/steel";
   home.sessionVariables.STEEL_LSP_HOME = "${config.xdg.dataHome}/steel/steel-language-server";
@@ -287,7 +286,6 @@ in
 
   programs.helix = {
     enable = true;
-    extraPackages = [ pkgs.racket ];
     settings = {
       theme = "gruvbox_light";
       editor = {
@@ -415,15 +413,7 @@ in
     "gdb/gdbinit".text = builtins.readFile ./gdbinit;
     "helix/helix.scm".text = builtins.readFile ./helix.scm;
     "helix/init.scm".text = builtins.readFile ./init.scm;
-  }
-  // (
-    if isLinux then
-      {
-        "ghostty/config".text = builtins.readFile ./ghostty.linux;
-      }
-    else
-      { }
-  );
+  };
 
   home.pointerCursor = lib.mkIf isLinux {
     name = "Vanilla-DMZ";

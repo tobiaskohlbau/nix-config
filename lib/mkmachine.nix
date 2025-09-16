@@ -10,6 +10,7 @@ name:
   user,
   native ? false,
   darwin ? false,
+  modules ? [],
   ...
 }:
 
@@ -18,6 +19,7 @@ let
   home-manager =
     if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
   libSystem = if darwin then inputs.darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
+  additionalModules = modules;
 in
 libSystem rec {
   inherit system;
@@ -40,5 +42,5 @@ libSystem rec {
         machineName = name;
       };
     }
-  ];
+  ] ++ additionalModules;
 }

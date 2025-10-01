@@ -12,3 +12,5 @@ mouse-hide-while-typing = true
 
 keybind = super+c=copy_to_clipboard
 keybind = super+v=paste_from_clipboard
+keybind = super+h=goto_split:left
+keybind = super+l=goto_split:right

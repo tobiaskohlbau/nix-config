@@ -5,6 +5,9 @@
   ids.gids.nixbld = 30000;
 
   home-manager.users.tobias.xdg.configFile."ghostty/config".text = builtins.readFile ./ghostty.darwin;
+  home-manager.users.tobias.home.packages = with pkgs; [
+    gnused
+  ];
 
   homebrew = {
     enable = true;

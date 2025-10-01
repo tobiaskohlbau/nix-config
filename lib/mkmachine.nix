@@ -37,6 +37,7 @@ libSystem rec {
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
+      home-manager.backupFileExtension = "bak";
       home-manager.users.${user} = import ../users/tobiaskohlbau/home-manager.nix {
         inherit isNative;
         machineName = name;

@@ -160,6 +160,17 @@ in
           i3-msg restart
         '';
       };
+
+      nightmode = {
+        body = ''
+          sed -i 's/theme\s*=\s*".*"/theme = "gruvbox_dark_hard"/g' ~/.config/helix/config.toml
+        '';
+      };
+      daymode = {
+        body = ''
+          sed -i 's/theme\s*=\s*".*"/theme = "gruvbox_light_hard"/g' ~/.config/helix/config.toml
+        '';
+      };
     };
   };
 
@@ -188,7 +199,7 @@ in
     delta = {
       enable = true;
       options = {
-        syntax-theme = "gruvbox-light";
+        syntax-theme = "gruvbox-light-hard";
         side-by-side = true;
         line-numbers = true;
         navigate = true;
@@ -291,7 +302,7 @@ in
   programs.helix = {
     enable = true;
     settings = {
-      theme = "gruvbox_light";
+      theme = "gruvbox_light_hard";
       editor = {
         true-color = true;
         whitespace = {

@@ -11,4 +11,5 @@
      inputs.nix-config-private.nixosModules.syseleven
   ];
 
+  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
 }

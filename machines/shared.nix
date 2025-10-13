@@ -32,7 +32,7 @@
   services.openssh.settings.PasswordAuthentication = true;
   services.openssh.settings.PermitRootLogin = "no";
 
-  networking.firewall.enable = false;
+  networking.firewall.enable = lib.mkDefault false;
 
   # installed version do not change
   system.stateVersion = "23.11";
@@ -83,7 +83,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    helix
     gnumake
     xclip
     nixfmt-rfc-style

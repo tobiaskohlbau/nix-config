@@ -38,6 +38,7 @@ in
       fd
       htop
       ripgrep
+      gotools
     ]
     ++ lib.optionals isLinux [
       meld

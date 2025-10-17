@@ -225,6 +225,17 @@ in
     enable = true;
   };
 
+  programs.jujutsu = {
+    enable = true;
+    package = pkgs.unstable.jujutsu;
+    settings = {
+      user = {
+        name = "Tobias Kohlbau";
+        email = "tobias@kohlbau.de";
+      };
+    };
+  };
+
   programs.tmux = {
     enable = true;
     extraConfig = ''

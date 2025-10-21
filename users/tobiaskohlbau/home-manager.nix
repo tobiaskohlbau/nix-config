@@ -74,6 +74,7 @@ in
 
   programs.fish = {
     enable = true;
+    package = pkgs.unstable.fish;
 
     interactiveShellInit = ''
       # Check for active ssh agent forwarding.
@@ -84,10 +85,12 @@ in
         set -x -U SSH_AUTH_SOCK /opt/homebrew/var/run/yubikey-agent.sock
       end
       fish_add_path $HOME/go/bin
+      jj util completion fish | source
     '';
 
     shellAbbrs = {
       xclip = "xclip -selection c";
+      jf = "jj git fetch";
     };
     plugins = [
       {
@@ -225,13 +228,23 @@ in
     enable = true;
   };
 
+
   programs.jujutsu = {
     enable = true;
     package = pkgs.unstable.jujutsu;
+
     settings = {
       user = {
-        name = "Tobias Kohlbau";
-        email = "tobias@kohlbau.de";
+          name = "Tobias Kohlbau";
+          email = "tobias@kohlbau.de";
+      };
+      
+      aliases = {
+        tug = ["bookmark" "move" "--from" "closest_bookmark(@-)" "--to" "@-"];
+      };
+
+      revset-aliases = {
+        "closest_bookmark(to)" = "heads(::to & bookmarks())";
       };
     };
   };

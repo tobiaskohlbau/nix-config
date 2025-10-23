@@ -1,6 +1,4 @@
 font-family = "Berkeley Mono"
-font-size = 16.0
-#theme = light:Gruvbox Light Hard,dark:Gruvbox Dark Hard
 theme = Gruvbox Light Hard
 window-theme = dark
 gtk-titlebar = false

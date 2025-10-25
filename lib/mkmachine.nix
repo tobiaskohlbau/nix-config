@@ -10,7 +10,7 @@ name:
   user,
   native ? false,
   darwin ? false,
-  modules ? [],
+  modules ? [ ],
   ...
 }:
 

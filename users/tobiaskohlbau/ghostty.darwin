@@ -1,9 +1,5 @@
 font-family = "Berkeley Mono"
 theme = light:Gruvbox Light Hard,dark:Gruvbox Dark Hard
-window-theme = dark
-gtk-titlebar = false
-
-#mouse-scroll-multiplier = 10000
 
 macos-non-native-fullscreen = visible-menu
 macos-option-as-alt = left

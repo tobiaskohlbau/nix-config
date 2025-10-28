@@ -3,8 +3,8 @@ set $mod Mod4
 font pango:Berkeley Mono Regular 6
 font pango:Berkeley Mono Regular 6
 
-new_window pixel 2
-new_float pixel 2
+default_border pixel 2
+default_floating_border pixel 2
 focus_follows_mouse no
 
 exec --no-startup-id dex --autostart --environment i3
@@ -13,10 +13,6 @@ exec --no-startup-id nm-applet
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
-# move tiling windows via drag & drop by left-clicking into the title bar,
-# or left-clicking anywhere into the window while holding the floating modifier.
-tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $mod+Return exec ghostty --gtk-single-instance=true

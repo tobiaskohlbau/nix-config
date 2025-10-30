@@ -19,7 +19,12 @@ else
 endif
 
 test:
-	sudo nixos-rebuild test --flake ".#$(NIXCONFIG)"
+ifeq ($(shell uname), Darwin)
+	NIXPKGS_ALLOW_UNFREE=1 nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.${NIXCONFIG}.system" --override-input "nix-config-private" "../nix-config-private" --no-update-lock-file
+	sudo ./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${NIXCONFIG}"
+else
+	sudo nixos-rebuild test --flake ".#$(NIXCONFIG)" --override-input "nix-config-private" "../nix-config-private" --no-update-lock-file
+endif
 
 installer:
 	ssh $(SSH_OPTIONS) root@$(NIXADDR) " \

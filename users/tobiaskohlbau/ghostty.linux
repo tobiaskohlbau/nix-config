@@ -5,9 +5,8 @@ gtk-titlebar = false
 
 #mouse-scroll-multiplier = 10000
 
-macos-non-native-fullscreen = visible-menu
-macos-option-as-alt = left
 mouse-hide-while-typing = true
 
 keybind = super+c=copy_to_clipboard
 keybind = super+v=paste_from_clipboard
+shell-integration = fish

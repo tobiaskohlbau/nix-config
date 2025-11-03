@@ -69,6 +69,8 @@
     };
   };
 
+  services.gnome.gnome-keyring.enable = true;
+
   fonts = {
     fontconfig = {
       antialias = true;

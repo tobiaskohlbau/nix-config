@@ -11,7 +11,7 @@
   ];
 
   networking.hostName = "dev";
-  networking.enableIPv6 = true;
+  networking.enableIPv6 = lib.mkDefault true;
 
   services.spice-vdagentd.enable = true;
 

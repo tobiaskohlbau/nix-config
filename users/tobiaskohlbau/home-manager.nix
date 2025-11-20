@@ -432,6 +432,7 @@ in
       enable = true;
       scms = {
         gh-blame = builtins.readFile ./gh-blame.scm;
+        notes = builtins.readFile ./notes.scm;
       };
     };
   };

@@ -44,7 +44,7 @@
     };
   };
 
-  services.displayManager = lib.mkIf (config.specialisation != {}) {
+  services.displayManager = lib.mkIf (config.specialisation != { }) {
     defaultSession = "none+i3";
   };
 

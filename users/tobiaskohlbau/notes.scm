@@ -3,6 +3,8 @@
 (require "helix/editor.scm")
 (require "helix/misc.scm")
 
+;;@doc
+; Open notes with filename
 (define (notes-internal #:note_type file)
   (helix.open (string-append "~/notes/" file ".md")))
 

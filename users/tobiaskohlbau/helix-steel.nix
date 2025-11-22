@@ -28,14 +28,18 @@ in
   };
 
   config = mkIf cfg.enable {
-    #home.sessionVariables.HELIX_STEEL_CONFIG = "${config.xdg.configHome}/helix";
-
     programs.helix = {
       package = pkgs.steel-helix.overrideAttrs (prevAttrs: {
         cargoBuildFeatures = [
           "helix-term/steel"
         ];
       });
+
+      extraPackages = with pkgs; [
+        steel
+        schemat
+      ];
+
       languages = {
         language-server.steel = {
           command = "steel-language-server";
@@ -45,11 +49,7 @@ in
           {
             name = "scheme";
             formatter = {
-              command = "raco";
-              args = [
-                "fmt"
-                "-i"
-              ];
+              command = "schemat";
             };
             language-servers = [
               { name = "steel"; }
@@ -58,10 +58,6 @@ in
         ];
       };
     };
-
-    home.packages = with pkgs; [
-      steel
-    ];
 
     xdg.configFile =
       lib.mapAttrs' (

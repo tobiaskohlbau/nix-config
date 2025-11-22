@@ -45,6 +45,7 @@
         (final: prev: {
           unstable = import inputs.nixpkgs-unstable { system = final.system; };
         })
+        (final: prev: import ./pkgs { pkgs = nixpkgs.legacyPackages.${prev.system}; })
       ];
     in
     {

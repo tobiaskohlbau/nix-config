@@ -405,9 +405,9 @@ in
 
     steel = {
       enable = true;
-      scms = {
-        gh-blame = builtins.readFile ./gh-blame.scm;
-        notes = builtins.readFile ./notes.scm;
+      cogs = {
+        gh-blame = builtins.readFile ./cogs/gh-blame/gh-blame.scm;
+        notes = builtins.readFile ./cogs/notes/notes.scm;
       };
     };
   };

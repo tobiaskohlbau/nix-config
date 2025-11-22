@@ -77,38 +77,19 @@ in
       "helix/helix.scm" = {
         text = ''
           (require "helix/editor.scm")
-          (require "helix/misc.scm")
-
-          (define (current-path)
-            (let* ([focus (editor-focus)]
-                   [focus-doc-id (editor->doc-id focus)])
-              (editor-document->path focus-doc-id)))
-
-          (provide current-path)
-
-          ;; Implementation detail that should be cleaned up. We shouldn't really make
-          ;; this accessible at the top level like this - it should more or less be a
-          ;; reserved detail. These should not be top level values, and if they are
-          ;; top level values, they should have a better name.
-          ;;
-          ;; This is simply an implementation defined behavior.
-          (define (path->package path)
-            (eval (string->symbol (string-append "__module-mangler" (canonicalize-path path) "__%#__"))))
-
-          (define (module->exported path)
-            (~> path path->package hash-keys->list))
+          (require (prefix-in helix. "helix/commands.scm"))
+          (require (prefix-in helix.static. "helix/static.scm"))
         ''
         + cfg.extraHelix;
       };
       "helix/init.scm".text = ''
         (require (prefix-in helix. "helix/commands.scm"))
         (require (prefix-in helix.static. "helix/static.scm"))
-        (require "helix/configuration.scm")
+        (require (only-in "helix/ext.scm" evalp eval-buffer))
 
-        (require "gh-blame/gh-blame.scm")
         ${lib.concatStringsSep "\n" (
           lib.mapAttrsToList (k: v: ''
-            (require "${k}/${k}.scm")
+            (require "${k}.scm")
           '') cfg.cogs
         )}
       ''
@@ -117,7 +98,7 @@ in
 
     xdg.dataFile = lib.mapAttrs' (
       n: v:
-      lib.nameValuePair "steel/cogs/${n}/${n}.scm" {
+      lib.nameValuePair "steel/cogs/${n}.scm" {
         source = if lib.isString v then pkgs.writeText "${n}.scm" v else abort "Unsupported value type!";
       }
     ) cfg.cogs;

@@ -58,10 +58,6 @@ in
       yubikey-agent
     ];
 
-  home.sessionVariables.STEEL_HOME = "${config.xdg.dataHome}/steel";
-  home.sessionVariables.STEEL_LSP_HOME = "${config.xdg.dataHome}/steel/steel-language-server";
-  home.sessionVariables.HELIX_STEEL_CONFIG = "${config.xdg.configHome}/helix";
-
   home.file.".npmrc".text = ''
     prefix = ''${HOME}/.npm;
   '';
@@ -393,33 +389,12 @@ in
     };
 
     languages = {
-      language-server.steel = {
-        command = "steel-language-server";
-        args = [ ];
-        environment = {
-          STEEL_LSP_HOME = "/home/tobiaskohlbau/.config/steel-lsp/";
-        };
-      };
-
       language = [
         {
           name = "go";
           formatter = {
             command = "goimports";
           };
-        }
-        {
-          name = "scheme";
-          formatter = {
-            command = "raco";
-            args = [
-              "fmt"
-              "-i"
-            ];
-          };
-          language-servers = [
-            { name = "steel"; }
-          ];
         }
       ];
     };

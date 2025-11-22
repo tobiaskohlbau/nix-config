@@ -14,6 +14,7 @@
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     steel-helix.url = "github:mattwparas/helix/steel-event-system";
+    steel.url = "github:mattwparas/steel";
 
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
     nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
@@ -37,6 +38,7 @@
       };
       overlays = [
         (final: prev: { steel-helix = inputs.steel-helix.packages.${prev.system}.default; })
+        (final: prev: { steel = inputs.steel.packages.${prev.system}.default; })
         (final: prev: { ghostty = inputs.ghostty.packages.${prev.system}.default; })
         inputs.fonts.overlays.default
         inputs.zig.overlays.default

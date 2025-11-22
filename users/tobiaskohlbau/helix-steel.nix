@@ -28,11 +28,41 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.helix.package = pkgs.steel-helix.overrideAttrs (prevAttrs: {
-      cargoBuildFeatures = [
-        "helix-term/steel"
-      ];
-    });
+    #home.sessionVariables.HELIX_STEEL_CONFIG = "${config.xdg.configHome}/helix";
+
+    programs.helix = {
+      package = pkgs.steel-helix.overrideAttrs (prevAttrs: {
+        cargoBuildFeatures = [
+          "helix-term/steel"
+        ];
+      });
+      languages = {
+        language-server.steel = {
+          command = "steel-language-server";
+          args = [ ];
+        };
+        language = [
+          {
+            name = "scheme";
+            formatter = {
+              command = "raco";
+              args = [
+                "fmt"
+                "-i"
+              ];
+            };
+            language-servers = [
+              { name = "steel"; }
+            ];
+          }
+        ];
+      };
+    };
+
+    home.packages = with pkgs; [
+      steel
+    ];
+
     xdg.configFile =
       lib.mapAttrs' (
         n: v:

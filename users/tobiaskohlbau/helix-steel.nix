@@ -42,6 +42,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.sessionVariables.STEEL_HOME = "${config.xdg.dataHome}/steel";
     programs.helix = {
       package = pkgs.steel-helix.overrideAttrs (prevAttrs: {
         cargoBuildFeatures = [

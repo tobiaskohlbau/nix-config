@@ -381,6 +381,8 @@ in
             h = ":toggle-option file-picker.hidden";
           };
           c = ":insert-output ~/tmp/commitgenerator/commitgenerator";
+          b = ":forge-blame";
+          o = ":forge-open";
         };
         normal."space" = {
           F = "file_picker_in_current_buffer_directory";
@@ -406,7 +408,7 @@ in
     steel = {
       enable = true;
       cogs = {
-        blame = builtins.readFile ./cogs/blame.scm;
+        forge = builtins.readFile ./cogs/forge.scm;
         notes = builtins.readFile ./cogs/notes.scm;
       };
     };

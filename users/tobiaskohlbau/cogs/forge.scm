@@ -4,7 +4,8 @@
 (require "helix/misc.scm")
 
 ;;@doc
-; Copy blame url of current line, on upstream forge, into system clipboard.
+; Open blame of current line, on upstream forge.
+; On linux assumes VM and copies to system clipboard instead.
 (define (forge-blame . args)
   (define remote-name (if (null? args) "origin" (car args)))
   (define branch (if (= (length args) 2) (last args) (default-branch remote-name)))
@@ -12,10 +13,11 @@
   (define current-line-number (helix.static.get-current-line-number))
   (define url (cond [(string-contains? remote "github") (string-append remote "/blame/" branch (trim-start-matches (current-path) (find-workspace)) "/#L" (int->string (+ 1 current-line-number)))]
                [(string-contains? remote "gitlab") (string-append remote "/-/blame/" branch (trim-start-matches (current-path) (find-workspace)) "#L" (int->string (+ 1 current-line-number)))]))
-  (set-register! #\+ (list url)))
+  (open-or-copy url))
 
 ;;@doc
-; Opens current file in forge by copying it into system clipboard.
+; Open url of current line, on upstream forge.
+; On linux assumes VM and copies to system clipboard instead.
 (define (forge-open . args)
   (define remote-name (if (null? args) "origin" (car args)))
   (define branch (if (= (length args) 2) (last args) (default-branch remote-name)))
@@ -23,12 +25,31 @@
   (define current-line-number (helix.static.get-current-line-number))
   (define url (cond [(string-contains? remote "github") (string-append remote "/blob/" branch (trim-start-matches (current-path) (find-workspace)) "/#L" (int->string (+ 1 current-line-number)))]
                [(string-contains? remote "gitlab") (string-append remote "/-/blob/" branch (trim-start-matches (current-path) (find-workspace)) "#L" (int->string (+ 1 current-line-number)))]))
-  (set-register! #\+ (list url))
-  )
+  (open-or-copy url))
+
+(define (open-or-copy url)
+  (cond [(string=? (operating-system) "darwin") (~> (command "open"
+                                                     (list url))
+                                                 (spawn-process)
+                                                 (Ok->value)
+                                                 (wait)
+                                                 (Ok->value))]
+    [(string=? (operating-system) "linux") (set-register! #\+ (list url))]))
 
 (define (with-stdout-piped command)
   (set-piped-stdout! command)
   command)
+
+(define (operating-system)
+  (define uname (~> (command "uname"
+                     '("-a"))
+                 (with-stdout-piped)
+                 (spawn-process)
+                 (Ok->value)
+                 (wait->stdout)
+                 (Ok->value)
+                 (trim)))
+  (cond [(string-contains? uname "Darwin") "darwin"] [(string-contains? uname "Linux") "linux"]))
 
 (define (remote-url remote-name)
   (define url (~> (command "git"

@@ -14,14 +14,12 @@
     programs.fish.functions = {
       nightmode = {
         body = ''
-          sed -i 's/theme\s*=\s*".*"/theme = "gruvbox_dark_hard"/g' ~/.config/helix/config.toml
           osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
           pkill -USR1 hx
         '';
       };
       daymode = {
         body = ''
-          sed -i 's/theme\s*=\s*".*"/theme = "gruvbox_light_hard"/g' ~/.config/helix/config.toml
           osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false'
           pkill -USR1 hx
         '';

@@ -319,7 +319,10 @@ in
   programs.helix = {
     enable = true;
     settings = {
-      theme = "gruvbox_light_hard";
+      theme = {
+        light = "gruvbox_light_hard";
+        dark = "gruvbox_dark_hard";
+      };
       editor = {
         true-color = true;
         whitespace = {

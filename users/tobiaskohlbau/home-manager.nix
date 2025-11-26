@@ -48,6 +48,7 @@ in
       firefox
       rofi
       ghostty
+      xsettingsd
     ]
     ++ lib.optionals isNative [
       brightnessctl
@@ -62,6 +63,10 @@ in
     prefix = ''${HOME}/.npm;
   '';
 
+   services.xsettingsd = {
+     enable = true;
+   };
+  
   programs.bat = {
     enable = true;
     config = {

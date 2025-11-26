@@ -20,7 +20,9 @@
     nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
     zig.url = "github:mitchellh/zig-overlay";
     ghostty = {
-      url = "git+https://github.com/ghostty-org/ghostty";
+      # temporary switch to fork which fixes mode 2031 support
+      # url = "github:ghostty-org/ghostty";
+      url = "github:tobiaskohlbau/ghostty/push-lrvtvupzsxpx";
     };
   };
 

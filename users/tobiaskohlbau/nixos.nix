@@ -7,16 +7,12 @@
     programs.fish.functions = {
       nightmode = {
         body = ''
-          sed -i 's/^theme\s*=\s*.*/theme = Gruvbox Dark Hard/g' ~/.config/ghostty/config
-          sed -i 's/^window-theme\s*=\s*.*/window-theme = dark/g' ~/.config/ghostty/config
           systemctl reload --user app-com.mitchellh.ghostty.service
           pkill -USR1 hx
         '';
       };
       daymode = {
         body = ''
-          sed -i 's/^theme\s*=\s*.*/theme = Gruvbox Light Hard/g' ~/.config/ghostty/config
-          sed -i 's/^window-theme\s*=\s*.*/window-theme = light/g' ~/.config/ghostty/config
           systemctl reload --user app-com.mitchellh.ghostty.service
           pkill -USR1 hx
         '';

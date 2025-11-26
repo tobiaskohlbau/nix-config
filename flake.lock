@@ -171,17 +171,18 @@
         "zon2nix": "zon2nix"
       },
       "locked": {
-        "lastModified": 1763851392,
-        "narHash": "sha256-3vqjgFp4dBLRYYE4IZILzX8ioif2UM6nG4nCme3mHHs=",
-        "ref": "refs/heads/main",
-        "rev": "6b28671eade5d31ef737349cdf53a2e6470a8648",
-        "revCount": 13049,
-        "type": "git",
-        "url": "https://github.com/ghostty-org/ghostty"
+        "lastModified": 1764196738,
+        "narHash": "sha256-CCv/LriaHKnzz0X99AzjrwXgFlj4bQhKC7Cs5Z/X3U0=",
+        "owner": "tobiaskohlbau",
+        "repo": "ghostty",
+        "rev": "c616b939f9f7fe2539c2af0332fe9684b54cddb5",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://github.com/ghostty-org/ghostty"
+        "owner": "tobiaskohlbau",
+        "ref": "push-lrvtvupzsxpx",
+        "repo": "ghostty",
+        "type": "github"
       }
     },
     "home-manager": {
@@ -210,11 +211,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1763455377,
-        "narHash": "sha256-bI1PG1a51/+hGFHp9Mul6cX6v1mhX8wWQQV7DRiTSDI=",
+        "lastModified": 1764227599,
+        "narHash": "sha256-NFVYxg5HTiIkmN1UTAZD2LHMIzQTT8XbqWSWJH8fxmk=",
         "ref": "refs/heads/main",
-        "rev": "1b20f5ab3eefcefa97c406498a0d5d2686c59402",
-        "revCount": 17,
+        "rev": "8a31061de409efaaea5411b50359d0a2e7b72da1",
+        "revCount": 18,
         "type": "git",
         "url": "https://github.com/tobiaskohlbau/nix-config-private"
       },

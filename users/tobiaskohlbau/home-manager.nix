@@ -25,7 +25,7 @@ in
   ];
 
   # Homemanager needs this in order to work. Otherwise errors are thrown.
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   xdg.enable = true;
 
@@ -76,7 +76,7 @@ in
 
   programs.fish = {
     enable = true;
-    package = pkgs.unstable.fish;
+    package = pkgs.fish;
 
     interactiveShellInit = ''
       # Check for active ssh agent forwarding.
@@ -171,39 +171,29 @@ in
 
   programs.git = {
     enable = true;
-    userName = "Tobias Kohlbau";
-    userEmail = "tobias@kohlbau.de";
-    signing = {
-      key = "~/.ssh/id_ed25519.pub";
-      signByDefault = false;
-    };
-    extraConfig = {
-      color.ui = true;
-      github.user = "tobiaskohlbau";
-      push = {
-        default = "upstream";
-        autoSetupRemote = true;
+    settings = {
+      user = {
+        name = "Tobias Kohlbau";
+        email = "tobias@kohlbau.de";
       };
-      init.defaultBranch = "main";
-      core.editor = "hx";
-      merge.conflictstyle = "diff3";
-      diff.colorMoved = "default";
-      merge.tool = "meld";
-      gpg.format = "ssh";
-    };
-    delta = {
-      enable = true;
-      options = {
-        syntax-theme = "gruvbox-light-hard";
-        side-by-side = true;
-        line-numbers = true;
-        navigate = true;
+      signing = {
+        key = "~/.ssh/id_ed25519.pub";
+        signByDefault = false;
       };
-    };
-    aliases = {
-      cleanbr = "! git branch -d `git branch --merged | grep -v '^*\\|main'`";
-      cleanpr = "! gh pr list -s merged --json headRefName -q '.[].headRefName' | xargs git branch -D";
-      bsc = "! git stash && git checkout -b \"$(git rev-parse --abbrev-ref HEAD)\"-\"$(git rev-parse HEAD)\" && git fetch && git rebase -i origin/main && git push origin -u && git checkout @{-1} && git stash pop";
+      extraConfig = {
+        color.ui = true;
+        github.user = "tobiaskohlbau";
+        push = {
+          default = "upstream";
+          autoSetupRemote = true;
+        };
+        init.defaultBranch = "main";
+        core.editor = "hx";
+        merge.conflictstyle = "diff3";
+        diff.colorMoved = "default";
+        merge.tool = "meld";
+        gpg.format = "ssh";
+      };
     };
   };
 
@@ -213,7 +203,7 @@ in
 
   programs.jujutsu = {
     enable = true;
-    package = pkgs.unstable.jujutsu;
+    package = pkgs.jujutsu;
 
     settings = {
       user = {

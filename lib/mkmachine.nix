@@ -22,7 +22,6 @@ let
   additionalModules = modules;
 in
 libSystem rec {
-  inherit system;
 
   specialArgs = {
     inherit inputs;
@@ -43,5 +42,7 @@ libSystem rec {
         machineName = name;
       };
     }
+
+    { nixpkgs.hostPlatform = system; }
   ];
 }

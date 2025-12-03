@@ -2,14 +2,14 @@
   description = "NixOS systems and tools by tobiaskohlbau";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     darwin = {
-      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -39,15 +39,15 @@
         inherit overlays nixpkgs inputs;
       };
       overlays = [
-        (final: prev: { steel-helix = inputs.steel-helix.packages.${prev.system}.default; })
-        (final: prev: { steel = inputs.steel.packages.${prev.system}.default; })
-        (final: prev: { ghostty = inputs.ghostty.packages.${prev.system}.default; })
+        (final: prev: { steel-helix = inputs.steel-helix.packages.${prev.stdenv.hostPlatform.system}.default; })
+        (final: prev: { steel = inputs.steel.packages.${prev.stdenv.hostPlatform.system}.default; })
+        (final: prev: { ghostty = inputs.ghostty.packages.${prev.stdenv.hostPlatform.system}.default; })
         inputs.fonts.overlays.default
         inputs.zig.overlays.default
         (final: prev: {
-          unstable = import inputs.nixpkgs-unstable { system = final.system; };
+          unstable = import inputs.nixpkgs-unstable { system = final.stdenv.hostPlatform.system; };
         })
-        (final: prev: import ./pkgs { pkgs = nixpkgs.legacyPackages.${prev.system}; })
+        (final: prev: import ./pkgs { pkgs = nixpkgs.legacyPackages.${prev.stdenv.hostPlatform.system}; })
       ];
     in
     {

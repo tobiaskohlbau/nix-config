@@ -17,7 +17,6 @@
 
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
     nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
-    zig.url = "github:mitchellh/zig-overlay";
     ghostty = {
       # temporary switch to fork which fixes mode 2031 support
       # url = "github:ghostty-org/ghostty";
@@ -44,7 +43,6 @@
         (final: prev: { steel = inputs.steel.packages.${prev.stdenv.hostPlatform.system}.default; })
         (final: prev: { ghostty = inputs.ghostty.packages.${prev.stdenv.hostPlatform.system}.default; })
         inputs.fonts.overlays.default
-        inputs.zig.overlays.default
         (final: prev: {
           unstable = import inputs.nixpkgs-unstable { system = final.stdenv.hostPlatform.system; };
         })

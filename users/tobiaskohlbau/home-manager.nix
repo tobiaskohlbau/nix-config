@@ -27,6 +27,10 @@ in
   # Homemanager needs this in order to work. Otherwise errors are thrown.
   home.stateVersion = "25.11";
 
+  home.sessionVariables = {
+    EDITOR = "hx";
+  };
+
   xdg.enable = true;
 
   home.packages =
@@ -228,10 +232,6 @@ in
     };
   };
 
-  home.sessionVariables = {
-    EDITOR = "hx";
-  };
-
   programs.helix = {
     enable = true;
     settings = {
@@ -341,10 +341,6 @@ in
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-  };
-
-  programs.alacritty = {
-    enable = true;
   };
 
   xdg.configFile = {

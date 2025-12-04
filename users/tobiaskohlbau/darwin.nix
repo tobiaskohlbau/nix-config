@@ -30,10 +30,8 @@
   homebrew = {
     enable = true;
     casks = [
-      "1password"
       "dash"
       "discord"
-      "rectangle"
       "ghostty"
     ];
   };

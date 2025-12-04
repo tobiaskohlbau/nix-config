@@ -342,7 +342,6 @@ in
   };
 
   xdg.configFile = {
-    "alacritty/alacritty.toml".text = builtins.readFile ./alacritty.toml;
     "i3/config".text = builtins.readFile ./i3;
     "gdb/gdbinit".text = builtins.readFile ./gdbinit;
   };

@@ -76,6 +76,27 @@ in
     };
   };
 
+  programs.starship = {
+    enable = true;
+    settings = {
+      add_newline = false;
+      format = lib.concatStrings [
+        "$directory"
+        "$kubernetes"
+        "$character"
+      ];
+
+      character = {
+        success_symbol = "➜";
+        error_symbol = "➜";
+      };
+
+      kubernetes = {
+        disabled = false;
+      };
+    };
+  };
+
   programs.fish = {
     enable = true;
     package = pkgs.fish;

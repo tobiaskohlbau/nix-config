@@ -42,8 +42,6 @@ in
       fd
       htop
       ripgrep
-      gotools
-      vscode-langservers-extracted
     ]
     ++ lib.optionals isLinux [
       meld

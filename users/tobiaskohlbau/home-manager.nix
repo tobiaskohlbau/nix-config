@@ -114,11 +114,6 @@ in
           bind \e\cB f;
         '';
       };
-      opunlock = {
-        body = ''
-          eval $(op signin);
-        '';
-      };
 
       cdr = {
         wraps = "cd (git rev-parse --show-toplevel)";

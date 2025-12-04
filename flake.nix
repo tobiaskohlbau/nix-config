@@ -12,7 +12,6 @@
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     steel-helix.url = "github:mattwparas/helix/steel-event-system";
     steel.url = "github:mattwparas/steel";
 
@@ -39,7 +38,9 @@
         inherit overlays nixpkgs inputs;
       };
       overlays = [
-        (final: prev: { steel-helix = inputs.steel-helix.packages.${prev.stdenv.hostPlatform.system}.default; })
+        (final: prev: {
+          steel-helix = inputs.steel-helix.packages.${prev.stdenv.hostPlatform.system}.default;
+        })
         (final: prev: { steel = inputs.steel.packages.${prev.stdenv.hostPlatform.system}.default; })
         (final: prev: { ghostty = inputs.ghostty.packages.${prev.stdenv.hostPlatform.system}.default; })
         inputs.fonts.overlays.default
@@ -51,33 +52,24 @@
       ];
     in
     {
-      formatter."aarch64-linux" = nixpkgs.legacyPackages."aarch64-linux".nixfmt-tree;
-      formatter."aarch64-darwin" = nixpkgs.legacyPackages."aarch64-darwin".nixfmt-tree;
-      nixosConfigurations.vm-aarch64-utm = mkMachine "vm-aarch64-utm" {
-        system = "aarch64-linux";
-        user = "tobiaskohlbau";
+      formatter = {
+        "aarch64-linux" = nixpkgs.legacyPackages."aarch64-linux".nixfmt-tree;
+        "aarch64-darwin" = nixpkgs.legacyPackages."aarch64-darwin".nixfmt-tree;
       };
-      nixosConfigurations.vm-aarch64-utm-work = mkMachine "vm-aarch64-utm-work" {
-        system = "aarch64-linux";
-        user = "tobiaskohlbau";
-      };
-      nixosConfigurations.vm-aarch64-utm-qemu = mkMachine "vm-aarch64-utm-qemu" {
-        system = "aarch64-linux";
-        user = "tobiaskohlbau";
-      };
-      nixosConfigurations.vm-aarch64-prl = mkMachine "vm-aarch64-prl" {
-        system = "aarch64-linux";
-        user = "tobiaskohlbau";
-      };
-      nixosConfigurations.pc-x86_64 = mkMachine "pc-x86_64" {
-        system = "x86_64-linux";
-        user = "tobiaskohlbau";
-        native = true;
-      };
-      nixosConfigurations.surfacebook = mkMachine "surfacebook" {
-        system = "x86_64-linux";
-        user = "tobiaskohlbau";
-        native = true;
+      nixosConfigurations = {
+        vm-aarch64-utm = mkMachine "vm-aarch64-utm" {
+          system = "aarch64-linux";
+          user = "tobiaskohlbau";
+        };
+        vm-aarch64-utm-work = mkMachine "vm-aarch64-utm-work" {
+          system = "aarch64-linux";
+          user = "tobiaskohlbau";
+        };
+        pc-x86_64 = mkMachine "pc-x86_64" {
+          system = "x86_64-linux";
+          user = "tobiaskohlbau";
+          native = true;
+        };
       };
       darwinConfigurations.macbook = mkMachine "macbook" {
         system = "aarch64-darwin";

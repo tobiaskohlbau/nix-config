@@ -2,7 +2,9 @@
 
 {
   system.primaryUser = "tobias";
-  ids.gids.nixbld = 30000;
+  ids.gids.nixbld = 350;
+
+  nix.enable = true;
 
   home-manager.users.tobias = {
     xdg.configFile."ghostty/config".text = builtins.readFile ./ghostty.darwin;
@@ -32,7 +34,6 @@
     casks = [
       "dash"
       "discord"
-      "ghostty"
     ];
   };
 

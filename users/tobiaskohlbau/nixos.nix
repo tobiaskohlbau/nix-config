@@ -4,6 +4,10 @@
   home-manager.users.tobiaskohlbau = {
     xdg.configFile."ghostty/config".text = builtins.readFile ./ghostty.linux;
 
+    services.xsettingsd = {
+      enable = true;
+    };
+
     programs.fish.functions = {
       nightmode = {
         body = ''

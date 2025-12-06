@@ -65,10 +65,6 @@ in
     prefix = ''${HOME}/.npm;
   '';
 
-  services.xsettingsd = {
-    enable = true;
-  };
-
   programs.bat = {
     enable = true;
     config = {

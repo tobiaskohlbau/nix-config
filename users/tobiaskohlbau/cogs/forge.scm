@@ -36,10 +36,6 @@
                                                  (Ok->value))]
     [(string=? (operating-system) "linux") (set-register! #\+ (list url))]))
 
-(define (with-stdout-piped command)
-  (set-piped-stdout! command)
-  command)
-
 (define (operating-system)
   (define uname (~> (command "uname"
                      '("-a"))

@@ -11,6 +11,7 @@
       experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
+      abort-on-warn = true
     '';
   };
 

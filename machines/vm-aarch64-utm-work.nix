@@ -12,4 +12,9 @@
   ];
 
   networking.enableIPv6 = false;
+
+  environment.pathsToLink = [
+    "/share/applications"
+    "/share/xdg-desktop-portal"
+  ];
 }

@@ -49,8 +49,7 @@ in
       unzip
       firefox
       rofi
-      ghostty
-      xsettingsd
+      dconf
     ]
     ++ lib.optionals isNative [
       brightnessctl

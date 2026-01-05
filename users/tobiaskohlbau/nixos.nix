@@ -4,23 +4,29 @@
   home-manager.users.tobiaskohlbau = {
     xdg.configFile."ghostty/config".text = builtins.readFile ./ghostty.linux;
 
-    services.xsettingsd = {
-      enable = true;
-    };
-
     programs.fish.functions = {
       nightmode = {
         body = ''
-          systemctl reload --user app-com.mitchellh.ghostty.service
-          pkill -USR1 hx
+          dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
         '';
       };
       daymode = {
         body = ''
-          systemctl reload --user app-com.mitchellh.ghostty.service
-          pkill -USR1 hx
+          dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
         '';
       };
+    };
+
+    programs.ghostty = {
+      enable = true;
+      systemd.enable = true;
+      package = pkgs.ghostty;
+    };
+
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+      configPackages = with pkgs; [ xdg-desktop-portal-gtk ];
     };
   };
 

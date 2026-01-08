@@ -22,6 +22,7 @@
       # url = "github:ghostty-org/ghostty";
       url = "github:tobiaskohlbau/ghostty/push-lrvtvupzsxpx";
     };
+    zig.url = "github:mitchellh/zig-overlay";
   };
 
   outputs =
@@ -47,6 +48,7 @@
           unstable = import inputs.nixpkgs-unstable { system = final.stdenv.hostPlatform.system; };
         })
         (final: prev: import ./pkgs { pkgs = nixpkgs.legacyPackages.${prev.stdenv.hostPlatform.system}; })
+        inputs.zig.overlays.default
       ];
     in
     {

@@ -42,6 +42,7 @@ in
       fd
       htop
       ripgrep
+      zigpkgs."0.15.2"
     ]
     ++ lib.optionals isLinux [
       meld

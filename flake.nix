@@ -18,9 +18,7 @@
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
     nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
     ghostty = {
-      # temporary switch to fork which fixes mode 2031 support
-      # url = "github:ghostty-org/ghostty";
-      url = "github:tobiaskohlbau/ghostty/push-lrvtvupzsxpx";
+      url = "github:ghostty-org/ghostty";
     };
     zig.url = "github:mitchellh/zig-overlay";
   };

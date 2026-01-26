@@ -12,7 +12,7 @@
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    steel-helix.url = "github:mattwparas/helix/steel-event-system";
+    helix.url = "github:mattwparas/helix/steel-event-system";
     steel.url = "github:mattwparas/steel";
 
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
@@ -37,7 +37,7 @@
       };
       overlays = [
         (final: prev: {
-          steel-helix = inputs.steel-helix.packages.${prev.stdenv.hostPlatform.system}.default;
+          helix = inputs.helix.packages.${prev.stdenv.hostPlatform.system}.default;
         })
         (final: prev: { steel = inputs.steel.packages.${prev.stdenv.hostPlatform.system}.default; })
         (final: prev: { ghostty = inputs.ghostty.packages.${prev.stdenv.hostPlatform.system}.default; })

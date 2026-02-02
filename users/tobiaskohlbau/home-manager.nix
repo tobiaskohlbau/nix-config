@@ -51,6 +51,8 @@ in
       firefox
       rofi
       dconf
+      bpftrace
+      dnsutils
     ]
     ++ lib.optionals isNative [
       brightnessctl

@@ -18,7 +18,7 @@
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
     nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
     ghostty = {
-      url = "github:ghostty-org/ghostty";
+      url = "github:tobiaskohlbau/ghostty/push-uuulpxsytysy";
     };
     zig.url = "github:mitchellh/zig-overlay";
   };

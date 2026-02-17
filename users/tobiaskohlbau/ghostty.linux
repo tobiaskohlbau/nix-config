@@ -2,8 +2,8 @@ font-family = "Berkeley Mono"
 theme = light:Gruvbox Light Hard,dark:Gruvbox Dark Hard
 gtk-titlebar = false
 
-mouse-hide-while-typing = true
-
 keybind = super+c=copy_to_clipboard
 keybind = super+v=paste_from_clipboard
 shell-integration = fish
+
+custom-shader-animation = false

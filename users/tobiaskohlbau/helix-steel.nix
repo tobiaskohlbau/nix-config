@@ -23,7 +23,7 @@ in
       type = types.attrs;
       default = { };
       example = [ ];
-      description = ''cogs to use'';
+      description = "cogs to use";
     };
 
     settings = mkOption {
@@ -37,14 +37,14 @@ in
       type = types.lines;
       default = "";
       example = "(require module.scm)";
-      description = ''additional configuration appended to default init.scm'';
+      description = "additional configuration appended to default init.scm";
     };
 
     extraHelix = mkOption {
       type = types.lines;
       default = "";
       example = "(require module.scm)";
-      description = ''additional configuration appended to default helix.scm'';
+      description = "additional configuration appended to default helix.scm";
     };
   };
 

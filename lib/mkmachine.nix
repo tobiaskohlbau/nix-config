@@ -38,5 +38,6 @@ libSystem rec {
     }
 
     { nixpkgs.hostPlatform = system; }
-  ] ++ extraModules;
+  ]
+  ++ extraModules;
 }

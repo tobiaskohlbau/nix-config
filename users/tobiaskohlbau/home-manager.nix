@@ -43,6 +43,8 @@ in
       htop
       ripgrep
       zigpkgs."0.15.2"
+      delve
+      gotools
     ]
     ++ lib.optionals isLinux [
       meld
@@ -236,10 +238,18 @@ in
           "--to"
           "@-"
         ];
+        restack = [
+          "rebase"
+          "-o"
+          "trunk()"
+          "-s"
+          "mutable_roots()"
+        ];
       };
 
       revset-aliases = {
         "closest_bookmark(to)" = "heads(::to & bookmarks())";
+        "mutable_roots()" = "roots(trunk()..) & mutable()";
       };
     };
   };
@@ -354,7 +364,7 @@ in
 
   programs.go = {
     enable = true;
-    package = pkgs.go;
+    package = pkgs.go_1_26;
   };
 
   programs.direnv = {

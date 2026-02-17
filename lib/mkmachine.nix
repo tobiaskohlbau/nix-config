@@ -10,7 +10,7 @@ name:
   user,
   native ? false,
   darwin ? false,
-  modules ? [ ],
+  extraModules ? [ ],
   ...
 }:
 
@@ -19,14 +19,8 @@ let
   home-manager =
     if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
   libSystem = if darwin then inputs.darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem;
-  additionalModules = modules;
 in
 libSystem rec {
-
-  specialArgs = {
-    inherit inputs;
-  };
-
   modules = [
     { nixpkgs.overlays = overlays; }
 
@@ -44,5 +38,5 @@ libSystem rec {
     }
 
     { nixpkgs.hostPlatform = system; }
-  ];
+  ] ++ extraModules;
 }

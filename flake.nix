@@ -12,13 +12,13 @@
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    helix.url = "github:mattwparas/helix/steel-event-system";
-    steel.url = "github:mattwparas/steel";
+    helix.url = "github:mattwparas/helix?rev=df8f82a548fd018e9d040ff7b379ed177ff8809c";
+    steel.url = "github:mattwparas/steel?rev=0a1b043b9c3d17c49cb3d47a97867527f4e46450";
 
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
     nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
     ghostty = {
-      url = "github:tobiaskohlbau/ghostty/push-uuulpxsytysy";
+      url = "github:ghostty-org/ghostty";
     };
     zig.url = "github:mitchellh/zig-overlay";
   };
@@ -59,9 +59,12 @@
           system = "aarch64-linux";
           user = "tobiaskohlbau";
         };
-        vm-aarch64-utm-work = mkMachine "vm-aarch64-utm-work" {
+        vm-aarch64-utm-work = mkMachine "vm-aarch64-utm" {
           system = "aarch64-linux";
           user = "tobiaskohlbau";
+          extraModules = [
+            inputs.nix-config-private.nixosModules.syseleven
+          ];
         };
         pc-x86_64 = mkMachine "pc-x86_64" {
           system = "x86_64-linux";

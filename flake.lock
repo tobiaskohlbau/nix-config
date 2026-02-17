@@ -172,16 +172,15 @@
         "zon2nix": "zon2nix"
       },
       "locked": {
-        "lastModified": 1770827021,
-        "narHash": "sha256-kBoj/zTADTdh5tRT5ynshiRsZsGm4FcqYnyIoW+pgmU=",
-        "owner": "tobiaskohlbau",
+        "lastModified": 1771304564,
+        "narHash": "sha256-YWp7rJyua56w1drXv5GehfeQik9h6k3llQBBZFyiOGM=",
+        "owner": "ghostty-org",
         "repo": "ghostty",
-        "rev": "f661d948a27ff2cbc0a1c08935f5c48e80afe96b",
+        "rev": "b6dbd445d038c50be168dae81c1ca02da3316b8b",
         "type": "github"
       },
       "original": {
-        "owner": "tobiaskohlbau",
-        "ref": "push-uuulpxsytysy",
+        "owner": "ghostty-org",
         "repo": "ghostty",
         "type": "github"
       }
@@ -192,17 +191,17 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1770827046,
-        "narHash": "sha256-yNcwEARJE0F0/x4r/bHYQEcu01MmillRoLZJ7GEixQU=",
+        "lastModified": 1771207600,
+        "narHash": "sha256-sCytET1N+eOs9bTTlDtV3hRc/g4eclwYWDBRu8uue/8=",
         "owner": "mattwparas",
         "repo": "helix",
-        "rev": "e2203b63b9a3038eed8d7f58e193a719d746a414",
+        "rev": "df8f82a548fd018e9d040ff7b379ed177ff8809c",
         "type": "github"
       },
       "original": {
         "owner": "mattwparas",
-        "ref": "steel-event-system",
         "repo": "helix",
+        "rev": "df8f82a548fd018e9d040ff7b379ed177ff8809c",
         "type": "github"
       }
     },
@@ -253,11 +252,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1770799726,
-        "narHash": "sha256-NW9R5hoIGkRILfoJkf7c3tkZiPkf1D8M94jmEX6VfdU=",
+        "lastModified": 1771333033,
+        "narHash": "sha256-3RjgE6FAh9VQjMTBgS6mPNe8xK5ovg2MDXHQkVYw8tA=",
         "ref": "refs/heads/main",
-        "rev": "c49b2e245ba135cfebbf0c78c61d1aefdd573e22",
-        "revCount": 23,
+        "rev": "31d605fe4455bcc2146cf24b1281596878b96ff0",
+        "revCount": 25,
         "type": "git",
         "url": "https://github.com/tobiaskohlbau/nix-config-private"
       },
@@ -313,11 +312,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1759381078,
-        "narHash": "sha256-gTrEEp5gEspIcCOx9PD8kMaF1iEmfBcTbO0Jag2QhQs=",
+        "lastModified": 1770841267,
+        "narHash": "sha256-9xejG0KoqsoKEGp2kVbXRlEYtFFcDTHjidiuX8hGO44=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "7df7ff7d8e00218376575f0acdcc5d66741351ee",
+        "rev": "ec7c70d12ce2fc37cb92aff673dcdca89d187bae",
         "type": "github"
       },
       "original": {
@@ -413,11 +412,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1759631821,
-        "narHash": "sha256-V8A1L0FaU/aSXZ1QNJScxC12uP4hANeRBgI4YdhHeRM=",
+        "lastModified": 1770952264,
+        "narHash": "sha256-CjymNrJZWBtpavyuTkfPVPaZkwzIzGaf0E/3WgcwM14=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "1d7cbdaad90f8a5255a89a6eddd8af24dc89cafe",
+        "rev": "ec6a3d5cdf14bb5a1dd03652bd3f6351004d2188",
         "type": "github"
       },
       "original": {
@@ -435,16 +434,17 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1770876098,
-        "narHash": "sha256-lOdjlfGd8J805HwVo+dlFUIBwBb1fC1dw45yQzHWtj0=",
+        "lastModified": 1771207521,
+        "narHash": "sha256-YX1d4wuxqz0fJWsKaZX9g2VkZxGpb+zhsLMOSbGSA6I=",
         "owner": "mattwparas",
         "repo": "steel",
-        "rev": "38a983ff23c79e5b0ee63e2e7ca5f16987550b71",
+        "rev": "0a1b043b9c3d17c49cb3d47a97867527f4e46450",
         "type": "github"
       },
       "original": {
         "owner": "mattwparas",
         "repo": "steel",
+        "rev": "0a1b043b9c3d17c49cb3d47a97867527f4e46450",
         "type": "github"
       }
     },

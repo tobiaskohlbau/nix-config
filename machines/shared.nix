@@ -98,6 +98,13 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnsupportedSystem = true;
 
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+    configPackages = with pkgs; [ xdg-desktop-portal-gtk ];
+  };
+
   specialisation = {
     wayland.configuration = {
       services.xserver = {
@@ -110,11 +117,15 @@
         wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
         mako # notification system developed by swaywm maintainer
         lemurs
+        foot
+        waybar
       ];
 
       # Enable the gnome-keyring secrets vault.
       # Will be exposed through DBus to programs willing to store secrets.
       services.gnome.gnome-keyring.enable = true;
+
+      services.dbus.enable = true;
 
       # enable Sway window manager
       programs.sway = {

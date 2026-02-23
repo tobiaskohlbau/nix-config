@@ -13,6 +13,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
+  boot.blacklistedKernelModules = [ "uhci_hcd" ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";

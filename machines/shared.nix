@@ -93,6 +93,8 @@
     nixfmt-rfc-style
   ];
 
+  environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
+
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnsupportedSystem = true;
 

@@ -59,6 +59,10 @@
           system = "aarch64-linux";
           user = "tobiaskohlbau";
         };
+        vm-aarch64-fusion = mkMachine "vm-aarch64-fusion" {
+          system = "aarch64-linux";
+          user = "tobiaskohlbau";
+        };
         vm-aarch64-utm-work = mkMachine "vm-aarch64-utm" {
           system = "aarch64-linux";
           user = "tobiaskohlbau";

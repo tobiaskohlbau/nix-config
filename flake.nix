@@ -12,8 +12,8 @@
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    helix.url = "github:mattwparas/helix?rev=df8f82a548fd018e9d040ff7b379ed177ff8809c";
-    steel.url = "github:mattwparas/steel?rev=0a1b043b9c3d17c49cb3d47a97867527f4e46450";
+    helix.url = "github:mattwparas/helix?rev=c63d037da8ba5739b171795e61b1756d7e6ed355";
+    steel.url = "github:mattwparas/steel?rev=57bcc84f7102162e541dbed7965a28a729ff11ed";
 
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
     nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";

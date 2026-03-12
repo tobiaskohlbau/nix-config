@@ -12,7 +12,8 @@
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    helix.url = "github:mattwparas/helix?rev=c63d037da8ba5739b171795e61b1756d7e6ed355";
+    # helix.url = "github:mattwparas/helix?rev=c63d037da8ba5739b171795e61b1756d7e6ed355";
+    helix.url = "github:helix-editor/helix?rev=78b999f11eb67de3ed4cd9946ad71fc00b8737c7";
     steel.url = "github:mattwparas/steel?rev=57bcc84f7102162e541dbed7965a28a729ff11ed";
 
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
@@ -56,6 +57,10 @@
       };
       nixosConfigurations = {
         vm-aarch64-utm = mkMachine "vm-aarch64-utm" {
+          system = "aarch64-linux";
+          user = "tobiaskohlbau";
+        };
+        vm-aarch64-utm-qemu = mkMachine "vm-aarch64-utm-qemu" {
           system = "aarch64-linux";
           user = "tobiaskohlbau";
         };

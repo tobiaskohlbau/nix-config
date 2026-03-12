@@ -26,6 +26,13 @@ in
       description = ''cogs to use'';
     };
 
+    settings = mkOption {
+      type = types.attrs;
+      default = {};
+      example = [ ];
+      description = ''additional settings only applied if steel is enabled'';
+    };
+
     extraInit = mkOption {
       type = types.lines;
       default = "";
@@ -72,6 +79,8 @@ in
           }
         ];
       };
+
+      settings = cfg.settings;
     };
 
     xdg.configFile = {

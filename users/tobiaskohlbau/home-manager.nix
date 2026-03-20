@@ -345,7 +345,7 @@ in
     ];
 
     steel = {
-      enable = false;
+      enable = true;
       cogs = {
         forge = builtins.readFile ./cogs/forge.scm;
         notes = builtins.readFile ./cogs/notes.scm;

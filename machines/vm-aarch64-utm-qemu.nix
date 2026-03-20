@@ -29,5 +29,9 @@
     };
   };
 
+  environment.sessionVariables = {
+    LIBGL_ALWAYS_SOFTWARE = "1";
+  };
+
   services.xserver.dpi = 220;
 }

@@ -372,6 +372,11 @@ in
     nix-direnv.enable = true;
   };
 
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
   xdg.configFile = {
     "i3/config".text = builtins.readFile ./i3;
     "gdb/gdbinit".text = builtins.readFile ./gdbinit;

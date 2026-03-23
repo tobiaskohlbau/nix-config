@@ -14,6 +14,8 @@ switch:
 ifeq ($(shell uname), Darwin)
 	NIXPKGS_ALLOW_UNFREE=1 nix build --extra-experimental-features nix-command --extra-experimental-features flakes ".#darwinConfigurations.${NIXCONFIG}.system"
 	sudo ./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${NIXCONFIG}"
+else ifneq (,$(findstring work,$(NIXCONFIG)))
+	sudo nixos-rebuild switch --flake ".#$(NIXCONFIG)" ${OVERRIDES} --option cores 1 --option max-jobs 1
 else
 	sudo nixos-rebuild switch --flake ".#$(NIXCONFIG)" ${OVERRIDES}
 endif

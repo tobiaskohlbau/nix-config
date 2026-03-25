@@ -21,6 +21,7 @@
       url = "github:ghostty-org/ghostty";
     };
     zig.url = "github:mitchellh/zig-overlay";
+    opencode.url = "github:anomalyco/opencode";
   };
 
   outputs =
@@ -47,6 +48,7 @@
         })
         (final: prev: import ./pkgs { pkgs = nixpkgs.legacyPackages.${prev.stdenv.hostPlatform.system}; })
         inputs.zig.overlays.default
+        (final: prev: { opencode = inputs.opencode.packages.${prev.stdenv.hostPlatform.system}.default; })
       ];
     in
     {
@@ -78,6 +80,10 @@
           system = "x86_64-linux";
           user = "tobiaskohlbau";
           native = true;
+        };
+        llm = mkMachine "llm" {
+          system = "aarch64-linux";
+          user = "tobiaskohlbau";
         };
       };
       darwinConfigurations.macbook = mkMachine "macbook" {

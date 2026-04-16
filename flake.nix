@@ -69,7 +69,7 @@
           system = "aarch64-linux";
           user = "tobiaskohlbau";
         };
-        vm-aarch64-utm-work = mkMachine "vm-aarch64-utm" {
+        vm-aarch64-utm-qemu-work = mkMachine "vm-aarch64-utm-qemu" {
           system = "aarch64-linux";
           user = "tobiaskohlbau";
           extraModules = [

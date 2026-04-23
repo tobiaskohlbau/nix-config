@@ -39,6 +39,11 @@
       overlays = [
         (final: prev: {
           helix = inputs.helix.packages.${prev.stdenv.hostPlatform.system}.default;
+          fish = prev.fish.overrideAttrs (prevAttrs: {
+            # Bust the cache key so fish is always built locally rather than
+            # substituted from the binary cache where the signature may be stale.
+            NIX_FORCE_LOCAL_REBUILD = "darwin-codesign-fix";
+          });
         })
         (final: prev: { steel = inputs.steel.packages.${prev.stdenv.hostPlatform.system}.default; })
         (final: prev: { ghostty = inputs.ghostty.packages.${prev.stdenv.hostPlatform.system}.default; })

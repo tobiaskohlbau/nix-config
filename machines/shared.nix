@@ -45,11 +45,9 @@
     };
   };
 
-  services.displayManager = lib.mkIf (config.specialisation != { }) {
-    defaultSession = "none+i3";
-  };
+  services.displayManager.defaultSession = lib.mkDefault "none+i3";
 
-  services.xserver = lib.mkIf (config.specialisation != { }) {
+  services.xserver = lib.mkDefault {
     enable = true;
 
     xkb = {

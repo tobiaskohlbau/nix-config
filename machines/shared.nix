@@ -106,6 +106,10 @@
   };
 
   specialisation = {
+    latestKernel.configuration = {
+      boot.kernelPackages = pkgs.linuxPackages_latest;
+    };
+
     wayland.configuration = {
       services.xserver = {
         enable = false;

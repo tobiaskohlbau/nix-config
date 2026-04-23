@@ -216,11 +216,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1776152435,
-        "narHash": "sha256-r9xMdfq9Y4adBiRiPRptCGdZZBx0I0bos3b6RZekmZs=",
+        "lastModified": 1776929115,
+        "narHash": "sha256-plI8JfbIHOd24t3VUlEonX7vXnJ2Da3cY6FBNqK+d7k=",
         "ref": "refs/heads/main",
-        "rev": "7988a236376f0ef52595218ce4975f07a35a3eb4",
-        "revCount": 31,
+        "rev": "67ffec963c51176ac3fd286b3a01d580cf08f333",
+        "revCount": 32,
         "type": "git",
         "url": "https://github.com/tobiaskohlbau/nix-config-private"
       },
@@ -375,13 +375,10 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1776923121,
-        "narHash": "sha256-GGFPZMlHFljRMiPBvX4FuUP+5QOWGrVa2XpVyEhWrwY=",
         "lastModified": 1776927401,
         "narHash": "sha256-TLKBwAqnDoonXx10ug47TetmscDJ6dN5RfhJYcUFSXQ=",
         "owner": "anomalyco",
         "repo": "opencode",
-        "rev": "871789ce64f179d5efa3031afbce3789e27e99b5",
         "rev": "a419f1c50f4efaf2119991eee1d9bc2eef78cb8f",
         "type": "github"
       },

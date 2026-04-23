@@ -46,6 +46,12 @@ in
       example = "(require module.scm)";
       description = "additional configuration appended to default helix.scm";
     };
+
+    withTools = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Install steel tools";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -58,9 +64,8 @@ in
       });
 
       extraPackages = with pkgs; [
-        steel
         schemat
-      ];
+      ] ++ lib.optional cfg.withTools steel;
 
       languages = {
         language-server.steel = {

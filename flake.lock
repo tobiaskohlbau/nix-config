@@ -216,11 +216,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1777029788,
-        "narHash": "sha256-fsFwZYkdZZCC6MxIqUK4ahZHvOTxhhe4icuQ7gL4QuM=",
+        "lastModified": 1778047676,
+        "narHash": "sha256-APaKERrlYPoLsydvF0NWiqsPa7cgfFEbELD6OBzcnAU=",
         "ref": "refs/heads/main",
-        "rev": "ad629b08aa6bd85df1dd6335e3ddd8f098103495",
-        "revCount": 33,
+        "rev": "c3706fd6bd2ba488d82cb534a3e52ce6349e4946",
+        "revCount": 34,
         "type": "git",
         "url": "https://github.com/tobiaskohlbau/nix-config-private"
       },

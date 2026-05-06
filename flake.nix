@@ -12,7 +12,7 @@
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    helix.url = "github:mattwparas/helix?rev=cba44fdf36d1c728468da73a5373348c7d831fb7";
+    helix.url = "github:mattwparas/helix?rev=2368ed6010f4eea1f86cfc3e443b150edc3a03dd";
     steel.url = "github:mattwparas/steel?rev=605d490c07ae6937d532d5a994920b4dab3016ad";
 
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";

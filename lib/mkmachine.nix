@@ -32,7 +32,7 @@ libSystem rec {
       home-manager.useUserPackages = true;
       home-manager.backupFileExtension = "backup";
       home-manager.users.${user} = import ../users/tobiaskohlbau/home-manager.nix {
-        inherit isNative;
+        inherit isNative inputs;
         machineName = name;
       };
     }

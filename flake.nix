@@ -22,6 +22,10 @@
     };
     zig.url = "github:mitchellh/zig-overlay";
     opencode.url = "github:anomalyco/opencode";
+    hunk = {
+      url = "github:modem-dev/hunk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

@@ -1,6 +1,7 @@
 {
   isNative,
   machineName,
+  inputs,
   ...
 }:
 
@@ -22,6 +23,7 @@ in
 {
   imports = [
     ./helix-steel.nix
+    inputs.hunk.homeManagerModules.default
   ];
 
   # Homemanager needs this in order to work. Otherwise errors are thrown.
@@ -251,6 +253,11 @@ in
         "closest_bookmark(to)" = "heads(::to & bookmarks())";
         "mutable_roots()" = "roots(trunk()..) & mutable()";
       };
+
+      ui = {
+        pager = ["hunk" "pager"];
+        diff-formatter = ":git";
+      };
     };
   };
 
@@ -375,6 +382,13 @@ in
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
+  };
+
+  programs.hunk = {
+    enable = true;
+    settings = {
+      theme = "paper";
+    };
   };
 
   xdg.configFile = {

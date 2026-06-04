@@ -26,6 +26,7 @@
       url = "github:modem-dev/hunk";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs =
@@ -58,6 +59,26 @@
         (final: prev: import ./pkgs { pkgs = nixpkgs.legacyPackages.${prev.stdenv.hostPlatform.system}; })
         inputs.zig.overlays.default
         (final: prev: { opencode = inputs.opencode.packages.${prev.stdenv.hostPlatform.system}.default; })
+        inputs.llm-agents.overlays.default
+        (final: prev: {
+          llama-cpp = prev.llama-cpp.overrideAttrs (
+            finalAttrs: prevAttrs: {
+              version = "9500";
+              src = prev.fetchFromGitHub {
+                owner = "ggml-org";
+                repo = "llama.cpp";
+                tag = "b${finalAttrs.version}";
+                hash = "sha256-F0if7ydy5VN5hZ4lCSZbKXEcChr8HxbSPiYrQZ4/OE0=";
+                leaveDotGit = true;
+                postFetch = ''
+                  git -C "$out" rev-parse --short HEAD > $out/COMMIT
+                  find "$out" -name .git -print0 | xargs -0 rm -rf
+                '';
+              };
+              npmDepsHash = "sha256-1iM0LGeI9e+gZEHk46lkBe51DxIhiimfAm9o3Z3m9Ik=";
+            }
+          );
+        })
       ];
     in
     {

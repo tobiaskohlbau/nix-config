@@ -11,6 +11,8 @@
 
     home.packages = with pkgs; [
       gnused
+      llama-cpp
+      llm-agents.pi
     ];
 
     programs.fish.functions = {

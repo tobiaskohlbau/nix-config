@@ -255,7 +255,10 @@ in
       };
 
       ui = {
-        pager = ["hunk" "pager"];
+        pager = [
+          "hunk"
+          "pager"
+        ];
         diff-formatter = ":git";
       };
     };

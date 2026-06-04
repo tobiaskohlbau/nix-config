@@ -27,8 +27,8 @@
   };
 
   environment.variables = {
-    GDK_SCALE = "2";          # GTK3 integer scaling
-    GDK_DPI_SCALE = "0.5";    # Compensate for doubled text
+    GDK_SCALE = "2"; # GTK3 integer scaling
+    GDK_DPI_SCALE = "0.5"; # Compensate for doubled text
     QT_AUTO_SCREEN_SCALE_FACTOR = "1"; # Qt auto-detect
   };
 }

@@ -28,9 +28,9 @@ in
 
     settings = mkOption {
       type = types.attrs;
-      default = {};
+      default = { };
       example = [ ];
-      description = ''additional settings only applied if steel is enabled'';
+      description = "additional settings only applied if steel is enabled";
     };
 
     extraInit = mkOption {
@@ -63,9 +63,12 @@ in
         ];
       });
 
-      extraPackages = with pkgs; [
-        schemat
-      ] ++ lib.optional cfg.withTools steel;
+      extraPackages =
+        with pkgs;
+        [
+          schemat
+        ]
+        ++ lib.optional cfg.withTools steel;
 
       languages = {
         language-server.steel = {

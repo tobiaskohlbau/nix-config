@@ -16,7 +16,7 @@
   networking.hostName = "llm";
   networking.enableIPv6 = lib.mkDefault false;
 
-    nix = {
+  nix = {
     package = pkgs.nixVersions.latest;
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -37,7 +37,7 @@
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = true;
   services.openssh.settings.PermitRootLogin = "yes";
-	users.users.root.initialPassword = "root";
+  users.users.root.initialPassword = "root";
 
   networking.firewall.enable = lib.mkDefault false;
 
@@ -54,5 +54,4 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnsupportedSystem = true;
 
-  
 }

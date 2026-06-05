@@ -87,7 +87,6 @@
   environment.systemPackages = with pkgs; [
     gnumake
     xclip
-    nixfmt-rfc-style
   ];
 
   environment.pathsToLink = [

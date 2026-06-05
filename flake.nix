@@ -106,6 +106,13 @@
             inputs.nix-config-private.nixosModules.syseleven
           ];
         };
+        vm-aarch64-utm-work = mkMachine "vm-aarch64-utm" {
+          system = "aarch64-linux";
+          user = "tobiaskohlbau";
+          extraModules = [
+            inputs.nix-config-private.nixosModules.syseleven
+          ];
+        };
         pc-x86_64 = mkMachine "pc-x86_64" {
           system = "x86_64-linux";
           user = "tobiaskohlbau";

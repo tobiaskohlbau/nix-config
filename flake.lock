@@ -258,11 +258,11 @@
         "zon2nix": "zon2nix"
       },
       "locked": {
-        "lastModified": 1780514803,
-        "narHash": "sha256-J4kTytv1QK5/Gst/PdjhKvUTNe5xiL7iNJCYn6Fbvv4=",
+        "lastModified": 1780598390,
+        "narHash": "sha256-kU6kI70mN+16tb7rOf0l/u3lU8pH/sdZ9EaSOa0evLI=",
         "owner": "ghostty-org",
         "repo": "ghostty",
-        "rev": "bfe633a9487892ff3d27ed727db540267f22ef90",
+        "rev": "42fcd58dba54c2a0404c1c3d73c7d44081fac836",
         "type": "github"
       },
       "original": {
@@ -277,17 +277,17 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1777915615,
-        "narHash": "sha256-QKCDKSK/E4HLIUrgB2p+a5BNpVpv6cXjVCC2iTrdZPQ=",
+        "lastModified": 1779375398,
+        "narHash": "sha256-qAUODNxHM9K6CrRCFgfBcbqzRd+YHiWn9fEfmIzrohA=",
         "owner": "mattwparas",
         "repo": "helix",
-        "rev": "2368ed6010f4eea1f86cfc3e443b150edc3a03dd",
+        "rev": "4d86612df48447088ef4190bf503fd54a7562aa9",
         "type": "github"
       },
       "original": {
         "owner": "mattwparas",
         "repo": "helix",
-        "rev": "2368ed6010f4eea1f86cfc3e443b150edc3a03dd",
+        "rev": "4d86612df48447088ef4190bf503fd54a7562aa9",
         "type": "github"
       }
     },
@@ -379,11 +379,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1780556826,
-        "narHash": "sha256-jIIa+5nPnhny882wYeq8SOa2WRMjhDU0ls6cgyC1D7k=",
+        "lastModified": 1780640554,
+        "narHash": "sha256-dgnL2gTgRoO1D4z6wkARGCO/gimq3/UE/mVFcQcWBn8=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "d0a147485f849ab4f20c1a61a6ea1c312cd0a229",
+        "rev": "f764eba1fdd162a1f2bc923f7e7034b894a22b4a",
         "type": "github"
       },
       "original": {
@@ -397,11 +397,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1780383703,
-        "narHash": "sha256-V8twtpxTThLDX+ik5dhy6tw0RGkVnm9xCk1+hUIx5f0=",
+        "lastModified": 1780642397,
+        "narHash": "sha256-NCG94r2ZyFaFk1SrEC5XdX1pJyndRPl7RbQjNpgKPOU=",
         "ref": "refs/heads/main",
-        "rev": "d218157b934034939d4fc4d41869c01c4776933e",
-        "revCount": 36,
+        "rev": "00892532084f9b7f0fd1f4a7d3af23954a206860",
+        "revCount": 37,
         "type": "git",
         "url": "https://github.com/tobiaskohlbau/nix-config-private"
       },
@@ -587,11 +587,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1780556757,
-        "narHash": "sha256-Fcl4Eh305qraY7lMoqsyicljy7fcwDYDlzhJHgBkDgE=",
+        "lastModified": 1780641097,
+        "narHash": "sha256-Z8Zv5OdVmYF/XO1bH82i631TRA3iosCiUz6/IX7Bp5o=",
         "owner": "anomalyco",
         "repo": "opencode",
-        "rev": "69cfc44dba32b37aeadd13c5f4cf243967d9f346",
+        "rev": "f6197cefe1745eef29ea6afae26be5a56c7a79ee",
         "type": "github"
       },
       "original": {
@@ -647,17 +647,17 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1775533673,
-        "narHash": "sha256-lqtx1q/AHntbZvF3rpWbicvxE3NGZU+VPMueECaVdSA=",
+        "lastModified": 1778201275,
+        "narHash": "sha256-qPDz0ax290E7UEFTDfrmLmsn1r9dIuOxMiRmNrDkfZo=",
         "owner": "mattwparas",
         "repo": "steel",
-        "rev": "605d490c07ae6937d532d5a994920b4dab3016ad",
+        "rev": "b67efd5c262962226424148bb87abefaf4109c5a",
         "type": "github"
       },
       "original": {
         "owner": "mattwparas",
         "repo": "steel",
-        "rev": "605d490c07ae6937d532d5a994920b4dab3016ad",
+        "rev": "b67efd5c262962226424148bb87abefaf4109c5a",
         "type": "github"
       }
     },
@@ -875,11 +875,11 @@
         "systems": "systems_6"
       },
       "locked": {
-        "lastModified": 1780536269,
-        "narHash": "sha256-zg5xwYxFU6qMkZ+Sbgaut24Bb+GXfA8QndNlPggvQiI=",
+        "lastModified": 1780622124,
+        "narHash": "sha256-VHbsmamVkdrskMjpl+xnMqBi8t1lL+V4EWr1T25TXFQ=",
         "owner": "mitchellh",
         "repo": "zig-overlay",
-        "rev": "71c0e07037115906981da3ce2bbfa55584332ac5",
+        "rev": "ca4aa7366d41c6a5e265cab8dcd56a90770d8c65",
         "type": "github"
       },
       "original": {

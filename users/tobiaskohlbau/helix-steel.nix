@@ -49,7 +49,7 @@ in
 
     withTools = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
       description = "Install steel tools";
     };
   };

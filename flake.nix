@@ -16,7 +16,11 @@
     steel.url = "github:mattwparas/steel?rev=b67efd5c262962226424148bb87abefaf4109c5a";
 
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
-    nix-config-private.url = "git+https://github.com/tobiaskohlbau/nix-config-private";
+    nixpkgs-helm-unittests.url = "github:jonstacks/nixpkgs/helm-unittest-fix";
+    nix-config-private = {
+     url = "git+https://github.com/tobiaskohlbau/nix-config-private";
+     inputs.nixpkgs.follows = "nixpkgs";
+    };
     ghostty = {
       url = "github:ghostty-org/ghostty";
     };
@@ -78,6 +82,11 @@
               npmDepsHash = "sha256-1iM0LGeI9e+gZEHk46lkBe51DxIhiimfAm9o3Z3m9Ik=";
             }
           );
+        })
+        (final: prev: {
+          kubernetes-helmPlugins = prev.kubernetes-helmPlugins // {
+            helm-unittest = inputs.nixpkgs-helm-unittests.legacyPackages.${prev.stdenv.hostPlatform.system}.kubernetes-helmPlugins.helm-unittest;
+          };
         })
       ];
     in

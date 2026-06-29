@@ -18,18 +18,14 @@
     fonts.url = "git+https://github.com/tobiaskohlbau/fonts-nix";
     nixpkgs-helm-unittests.url = "github:jonstacks/nixpkgs/helm-unittest-fix";
     nix-config-private = {
-     url = "git+https://github.com/tobiaskohlbau/nix-config-private";
-     inputs.nixpkgs.follows = "nixpkgs";
+      url = "git+https://github.com/tobiaskohlbau/nix-config-private";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     ghostty = {
       url = "github:ghostty-org/ghostty";
     };
     zig.url = "github:mitchellh/zig-overlay";
     opencode.url = "github:anomalyco/opencode";
-    hunk = {
-      url = "github:modem-dev/hunk";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
@@ -85,7 +81,8 @@
         })
         (final: prev: {
           kubernetes-helmPlugins = prev.kubernetes-helmPlugins // {
-            helm-unittest = inputs.nixpkgs-helm-unittests.legacyPackages.${prev.stdenv.hostPlatform.system}.kubernetes-helmPlugins.helm-unittest;
+            helm-unittest =
+              inputs.nixpkgs-helm-unittests.legacyPackages.${prev.stdenv.hostPlatform.system}.kubernetes-helmPlugins.helm-unittest;
           };
         })
       ];

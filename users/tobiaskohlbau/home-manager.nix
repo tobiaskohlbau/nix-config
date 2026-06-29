@@ -23,7 +23,6 @@ in
 {
   imports = [
     ./helix-steel.nix
-    inputs.hunk.homeManagerModules.default
   ];
 
   # Homemanager needs this in order to work. Otherwise errors are thrown.
@@ -47,6 +46,8 @@ in
       zigpkgs."0.15.2"
       delve
       gotools
+      difftastic
+      mergiraf
     ]
     ++ lib.optionals isLinux [
       meld
@@ -255,11 +256,12 @@ in
       };
 
       ui = {
-        pager = [
-          "hunk"
-          "pager"
+        diff-formatter = [
+          "difft"
+          "--color=always"
+          "$left"
+          "$right"
         ];
-        diff-formatter = ":git";
       };
     };
   };
@@ -385,13 +387,6 @@ in
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
-  };
-
-  programs.hunk = {
-    enable = true;
-    settings = {
-      theme = "paper";
-    };
   };
 
   xdg.configFile = {

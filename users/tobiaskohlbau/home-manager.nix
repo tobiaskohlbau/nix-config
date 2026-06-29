@@ -139,9 +139,9 @@ in
       };
 
       cdr = {
-        wraps = "cd (git rev-parse --show-toplevel)";
+        wraps = "cd (git rev-parse --show-toplevel 2> /dev/null || jj workspace root)";
         body = ''
-          cd (git rev-parse --show-toplevel) $argv;
+          cd (git rev-parse --show-toplevel 2> /dev/null || jj workspace root) $argv;
         '';
       };
 

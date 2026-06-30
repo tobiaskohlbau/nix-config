@@ -234,17 +234,17 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1779375398,
-        "narHash": "sha256-qAUODNxHM9K6CrRCFgfBcbqzRd+YHiWn9fEfmIzrohA=",
+        "lastModified": 1782088553,
+        "narHash": "sha256-bGfByNnjuzENdvTW97s4UhwglYY7ydBk54gOZmnaM4Q=",
         "owner": "mattwparas",
         "repo": "helix",
-        "rev": "4d86612df48447088ef4190bf503fd54a7562aa9",
+        "rev": "0522d519fd5227f77ecef387a87e51b732907562",
         "type": "github"
       },
       "original": {
         "owner": "mattwparas",
         "repo": "helix",
-        "rev": "4d86612df48447088ef4190bf503fd54a7562aa9",
+        "rev": "0522d519fd5227f77ecef387a87e51b732907562",
         "type": "github"
       }
     },
@@ -590,17 +590,17 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1778201275,
-        "narHash": "sha256-qPDz0ax290E7UEFTDfrmLmsn1r9dIuOxMiRmNrDkfZo=",
+        "lastModified": 1781985802,
+        "narHash": "sha256-TP1hmlju7h7ce0dnSKuIMk7XK5kcloqiyR+sxumNsQk=",
         "owner": "mattwparas",
         "repo": "steel",
-        "rev": "b67efd5c262962226424148bb87abefaf4109c5a",
+        "rev": "dec633b908afeafeaf62bab457a92e2bf873745a",
         "type": "github"
       },
       "original": {
         "owner": "mattwparas",
         "repo": "steel",
-        "rev": "b67efd5c262962226424148bb87abefaf4109c5a",
+        "rev": "dec633b908afeafeaf62bab457a92e2bf873745a",
         "type": "github"
       }
     },

@@ -321,11 +321,11 @@
         "opencode": "opencode"
       },
       "locked": {
-        "lastModified": 1782717081,
-        "narHash": "sha256-YZ7MGEnp9kFm/few6QOMbatKKBmXELAgd3lDr6CdURQ=",
+        "lastModified": 1782800651,
+        "narHash": "sha256-Kr0X5hS/3AGTGMkXRfMjJVu0kWBflBIRWWaLnfQTxeQ=",
         "ref": "refs/heads/main",
-        "rev": "2bbcaaa1b81687c80557972703426f14d27ee158",
-        "revCount": 44,
+        "rev": "aafcf80a7dd921c07cd219e69209f887e8a7fad3",
+        "revCount": 45,
         "type": "git",
         "url": "https://github.com/tobiaskohlbau/nix-config-private"
       },

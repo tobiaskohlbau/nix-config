@@ -31,6 +31,7 @@ libSystem rec {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.backupFileExtension = "backup";
+      home-manager.sharedModules = [ inputs.rex.homeManagerModules.default ];
       home-manager.users.${user} = import ../users/tobiaskohlbau/home-manager.nix {
         inherit isNative inputs;
         machineName = name;

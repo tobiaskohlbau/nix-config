@@ -25,6 +25,7 @@
       url = "github:ghostty-org/ghostty";
     };
     zig.url = "github:mitchellh/zig-overlay";
+    rex.url = "https://pkgs.superlogical.com/rex/nix/snapshot.tar.gz";
     opencode.url = "github:anomalyco/opencode";
   };
 
@@ -84,6 +85,7 @@
           };
         })
       ];
+      system = "aarch64-darwin";
     in
     {
       formatter = {

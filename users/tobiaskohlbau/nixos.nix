@@ -24,6 +24,10 @@
     };
   };
 
+  programs.rex.enable = true;
+  services.rex.enable = true;
+  programs.ssh.enable = true;
+
   programs.fish.enable = true;
   users.users.tobiaskohlbau = {
     shell = pkgs.fish;

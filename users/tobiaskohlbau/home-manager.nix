@@ -114,6 +114,9 @@ in
       end
       fish_add_path $HOME/go/bin
       jj util completion fish | source
+      if set -q REX_BIN_DIR
+        fish_add_path --path --prepend --move $REX_BIN_DIR
+      end
     '';
 
     shellAbbrs = {

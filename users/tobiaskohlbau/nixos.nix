@@ -29,8 +29,9 @@
   programs.ssh.enable = true;
 
   programs.fish.enable = true;
+  environment.shells = [ pkgs.nushell ];
   users.users.tobiaskohlbau = {
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
     isNormalUser = true;
     home = "/home/tobiaskohlbau";
     extraGroups = [

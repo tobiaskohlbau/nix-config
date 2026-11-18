@@ -4,6 +4,6 @@ gtk-titlebar = false
 
 keybind = super+c=copy_to_clipboard
 keybind = super+v=paste_from_clipboard
-shell-integration = fish
+shell-integration = nushell
 
 custom-shader-animation = false

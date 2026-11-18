@@ -1,4 +1,15 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+
+let
+  home = config.users.users.tobias.home;
+  expand = builtins.replaceStrings [ "$HOME" "$USER" ] [ home "tobias" ];
+in
 
 {
   system.primaryUser = "tobias";
@@ -13,6 +24,19 @@
       gnused
       llama-cpp
     ];
+
+    programs.nushell.configDir = "Library/Application Support/nushell";
+
+    programs.nushell.extraEnv = lib.mkBefore ''
+      load-env (r#'${
+        builtins.toJSON (lib.mapAttrs (_: expand) config.environment.variables)
+      }'# | from json)
+      $env.PATH = (
+        "${expand config.environment.systemPath}" | split row (char esep)
+        | append ($env.PATH? | default [])
+        | uniq
+      )
+    '';
 
     programs.fish.functions = {
       nightmode = {
@@ -42,7 +66,7 @@
   # what our home directory is (https://github.com/LnL7/nix-darwin/issues/423).
   users.users.tobias = {
     home = "/Users/tobias";
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
   };
 
   launchd.user.agents.yubikey-agent = {

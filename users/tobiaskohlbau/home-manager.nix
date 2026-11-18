@@ -100,6 +100,73 @@ in
     };
   };
 
+  programs.nushell = {
+    enable = true;
+
+    environmentVariables = lib.filterAttrs (
+      _: v: builtins.isString v && !(lib.hasInfix "$" v)
+    ) config.home.sessionVariables;
+
+    settings = {
+      show_banner = false;
+      buffer_editor = "hx";
+      history = {
+        file_format = "sqlite";
+        isolation = true;
+      };
+      completions.algorithm = "fuzzy";
+    };
+
+    plugins = with pkgs.nushellPlugins; [
+      formats
+      polars
+    ];
+
+    shellAliases = {
+      xclip = "^xclip -selection c";
+      jf = "jj git fetch";
+    };
+
+    extraEnv = ''
+      use std/util "path add"
+
+      path add ($env.HOME | path join "go" "bin")
+      if ($env.REX_BIN_DIR? | is-not-empty) {
+        path add $env.REX_BIN_DIR
+      }
+
+      # When sshing in with agent forwarding, point a stable symlink at the
+      # forwarded socket so later local sessions (e.g. the VM's own terminal)
+      # can keep using the host's yubikey-agent.
+      let stable_agent_sock = ($env.HOME | path join ".ssh" "agent.sock")
+      if ($env.SSH_CONNECTION? | is-not-empty) and ($env.SSH_AUTH_SOCK? | is-not-empty) and ($env.SSH_AUTH_SOCK != $stable_agent_sock) {
+        mkdir ($stable_agent_sock | path dirname)
+        ^ln -sfn $env.SSH_AUTH_SOCK $stable_agent_sock
+      }
+      # `path exists` follows the link, so a dead forwarded socket is ignored.
+      if ($stable_agent_sock | path exists) {
+        $env.SSH_AUTH_SOCK = $stable_agent_sock
+      }
+    '';
+
+    extraConfig = ''
+      # cd to the root of the current git repository or jj workspace.
+      def --env cdr [subdir: string = ""] {
+        let git = (^git rev-parse --show-toplevel | complete)
+        let root = if $git.exit_code == 0 {
+          $git.stdout | str trim
+        } else {
+          ^jj workspace root | str trim
+        }
+        cd ($root | path join $subdir)
+      }
+    '';
+  };
+
+  programs.carapace = {
+    enable = true;
+  };
+
   programs.fish = {
     enable = true;
     package = pkgs.fish;

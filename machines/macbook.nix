@@ -34,6 +34,7 @@
     bashInteractive
     zsh
     fish
+    nushell
   ];
   environment.systemPackages = with pkgs; [
   ];

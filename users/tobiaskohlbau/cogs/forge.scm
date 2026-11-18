@@ -5,7 +5,9 @@
 
 ;;@doc
 ; Open blame of current line, on upstream forge.
-; On linux assumes VM and copies to system clipboard instead.
+; Inside a rex terminal copies to the local clipboard of the rex client
+; (OSC 52). Otherwise opens it on darwin, or copies to the system clipboard
+; on linux (assumed VM).
 (define (forge-blame . args)
   (define remote-name (if (null? args) "origin" (car args)))
   (define branch (if (= (length args) 2) (last args) (default-branch remote-name)))
@@ -17,7 +19,9 @@
 
 ;;@doc
 ; Open url of current line, on upstream forge.
-; On linux assumes VM and copies to system clipboard instead.
+; Inside a rex terminal copies to the local clipboard of the rex client
+; (OSC 52). Otherwise opens it on darwin, or copies to the system clipboard
+; on linux (assumed VM).
 (define (forge-open . args)
   (define remote-name (if (null? args) "origin" (car args)))
   (define branch (if (= (length args) 2) (last args) (default-branch remote-name)))
@@ -28,13 +32,29 @@
   (open-or-copy url))
 
 (define (open-or-copy url)
-  (cond [(string=? (operating-system) "darwin") (~> (command "open"
-                                                     (list url))
-                                                 (spawn-process)
-                                                 (Ok->value)
-                                                 (wait)
-                                                 (Ok->value))]
+  (cond [(rex-copy url) (set-status! (string-append "Copied to local clipboard via rex: " url))]
+    [(string=? (operating-system) "darwin") (~> (command "open"
+                                                 (list url))
+                                             (spawn-process)
+                                             (Ok->value)
+                                             (wait)
+                                             (Ok->value))]
     [(string=? (operating-system) "linux") (set-register! #\+ (list url))]))
+
+(define rex-osc52-script
+  "[ -n \"$REX_SESSION\" ] || exit 0
+printf '\\033]52;c;%s\\a' \"$(printf %s \"$1\" | base64 | tr -d '\\n')\" > /dev/tty && echo rex")
+
+(define (rex-copy url)
+  (string=? "rex"
+            (~> (command "sh"
+                 (list "-c" rex-osc52-script "rex-copy" url))
+             (with-stdout-piped)
+             (spawn-process)
+             (Ok->value)
+             (wait->stdout)
+             (Ok->value)
+             (trim))))
 
 (define (operating-system)
   (define uname (~> (command "uname"

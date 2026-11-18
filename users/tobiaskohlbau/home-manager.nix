@@ -336,7 +336,6 @@ in
             g = ":toggle-option file-picker.git-ignore";
             h = ":toggle-option file-picker.hidden";
           };
-          c = ":insert-output ~/tmp/commitgenerator/commitgenerator";
         };
         normal."space" = {
           F = "file_picker_in_current_buffer_directory";
@@ -364,12 +363,14 @@ in
       cogs = {
         forge = builtins.readFile ./cogs/forge.scm;
         notes = builtins.readFile ./cogs/notes.scm;
+        jj = builtins.readFile ./cogs/jj.scm;
       };
 
       settings = {
         keys = {
           normal."+" = {
-            b = ":forge-blame";
+            B = ":forge-blame";
+            b = ":jj-annotate";
             o = ":forge-open";
           };
         };

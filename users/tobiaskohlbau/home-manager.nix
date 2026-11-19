@@ -102,6 +102,7 @@ in
 
   programs.nushell = {
     enable = true;
+    package = pkgs.nushell;
 
     environmentVariables = lib.filterAttrs (
       _: v: builtins.isString v && !(lib.hasInfix "$" v)
@@ -150,6 +151,8 @@ in
     '';
 
     extraConfig = ''
+      use std/clip
+
       # cd to the root of the current git repository or jj workspace.
       def --env cdr [subdir: string = ""] {
         let git = (^git rev-parse --show-toplevel | complete)
@@ -160,6 +163,8 @@ in
         }
         cd ($root | path join $subdir)
       }
+
+      $env.config.edit_mode = 'helix'
     '';
   };
 

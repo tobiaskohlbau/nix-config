@@ -22,11 +22,11 @@
       systemd.enable = true;
       package = pkgs.ghostty;
     };
-  };
 
-  programs.rex.enable = true;
-  services.rex.enable = true;
-  programs.ssh.enable = true;
+    programs.rex.enable = true;
+    services.rex.enable = true;
+    programs.ssh.enable = true;
+  };
 
   programs.fish.enable = true;
   environment.shells = [ pkgs.nushell ];

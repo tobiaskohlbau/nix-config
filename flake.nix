@@ -83,6 +83,10 @@
               inputs.nixpkgs-helm-unittests.legacyPackages.${prev.stdenv.hostPlatform.system}.kubernetes-helmPlugins.helm-unittest;
           };
         })
+        (final: prev: {
+          nushell = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.nushell;
+          nushellPlugins = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.nushellPlugins;
+        })
       ];
       system = "aarch64-darwin";
     in
